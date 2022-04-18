@@ -2,19 +2,17 @@ package com.birdhousereminder;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.ui.overlay.infobox.InfoBox;
 
-class BirdHouseReminderInfoBox extends InfoBox
-{
-    BirdHouseReminderInfoBox(Plugin plugin, BufferedImage image)
-    {
+class BirdHouseReminderInfoBox extends InfoBox {
+    BirdHouseReminderInfoBox(Plugin plugin, BufferedImage image) {
         super(image, plugin);
     }
 
     @Override
-    public String getText()
-    {
+    public String getText() {
         return "";
     }
 
@@ -24,8 +22,7 @@ class BirdHouseReminderInfoBox extends InfoBox
     }
 
     @Override
-    public String getTooltip()
-    {
+    public String getTooltip() {
         return "Your bird houses are ready.";
     }
 }
