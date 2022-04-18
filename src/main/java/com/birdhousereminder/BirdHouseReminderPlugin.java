@@ -40,7 +40,6 @@ public class BirdHouseReminderPlugin extends Plugin {
     @Override
     protected void startUp() throws Exception {
         log.info("Bird House Reminder started!");
-        this.showInfoBox();
     }
 
     @Override
