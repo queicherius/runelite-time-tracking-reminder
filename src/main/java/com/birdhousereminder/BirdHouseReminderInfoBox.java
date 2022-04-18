@@ -13,12 +13,12 @@ class BirdHouseReminderInfoBox extends InfoBox {
 
     @Override
     public String getText() {
-        return "";
+        return "READY";
     }
 
     @Override
     public Color getTextColor() {
-        return Color.WHITE;
+        return Color.YELLOW;
     }
 
     @Override

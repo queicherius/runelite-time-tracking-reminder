@@ -2,9 +2,15 @@ package com.birdhousereminder;
 
 import com.google.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
+import net.runelite.api.Client;
+import net.runelite.api.GameState;
+import net.runelite.api.events.GameTick;
+import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
+import net.runelite.client.plugins.timetracking.SummaryState;
+import net.runelite.client.plugins.timetracking.hunter.BirdHouseTracker;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 
 import java.awt.image.BufferedImage;
@@ -15,10 +21,16 @@ import java.awt.image.BufferedImage;
 )
 public class BirdHouseReminderPlugin extends Plugin {
     @Inject
+    private Client client;
+
+    @Inject
     private ItemManager itemManager;
 
     @Inject
     private InfoBoxManager infoBoxManager;
+
+    @Inject
+    private BirdHouseTracker birdHouseTracker;
 
     private BirdHouseReminderInfoBox infoBox;
 
@@ -34,13 +46,37 @@ public class BirdHouseReminderPlugin extends Plugin {
         this.hideInfoBox();
     }
 
+    @Subscribe
+    public void onGameTick(GameTick t) {
+        if (client.getGameState() != GameState.LOGGED_IN) {
+            return;
+        }
+
+        SummaryState summary = birdHouseTracker.getSummary();
+
+        if (summary == SummaryState.IN_PROGRESS) {
+            hideInfoBox();
+        } else {
+            showInfoBox();
+        }
+    }
+
     private void showInfoBox() {
+        if (infoBox != null) {
+            return;
+        }
+
         final BufferedImage image = itemManager.getImage(22201);
         infoBox = new BirdHouseReminderInfoBox(this, image);
         infoBoxManager.addInfoBox(infoBox);
     }
 
     private void hideInfoBox() {
+        if (infoBox == null) {
+            return;
+        }
+
         infoBoxManager.removeInfoBox(infoBox);
+        infoBox = null;
     }
 }
