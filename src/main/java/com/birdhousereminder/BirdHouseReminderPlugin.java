@@ -19,9 +19,7 @@ import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import java.awt.image.BufferedImage;
 
 @Slf4j
-@PluginDescriptor(
-        name = "Bird House Reminder"
-)
+@PluginDescriptor(name = "Bird House Reminder")
 public class BirdHouseReminderPlugin extends Plugin {
     @Inject
     private Client client;
@@ -82,13 +80,9 @@ public class BirdHouseReminderPlugin extends Plugin {
         infoBox = null;
     }
 
-    @Provides
-    BirdHouseReminderConfig provideConfig(ConfigManager configManager) {
-        return configManager.getConfig(BirdHouseReminderConfig.class);
-    }
-
     // HACK No idea if this is how you're supposed to do it, but this is needed
-    // so we can @Inject the BirdHouseTracker singleton.
+    // so we can @Inject the BirdHouseTracker singleton. The downside is that
+    // we now show the config of the "Time Tracking" plugin.
     @Provides
     TimeTrackingConfig provideTimeTrackingConfig(ConfigManager configManager) {
         return configManager.getConfig(TimeTrackingConfig.class);
