@@ -66,7 +66,7 @@ public class BirdHouseReminderPlugin extends Plugin {
             return;
         }
 
-        final BufferedImage image = itemManager.getImage(22201);
+        final BufferedImage image = itemManager.getImage(22192);
         infoBox = new BirdHouseReminderInfoBox(this, image);
         infoBoxManager.addInfoBox(infoBox);
     }
