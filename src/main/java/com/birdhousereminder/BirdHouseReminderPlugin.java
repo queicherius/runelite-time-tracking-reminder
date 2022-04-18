@@ -83,6 +83,11 @@ public class BirdHouseReminderPlugin extends Plugin {
         infoBox = null;
     }
 
+    @Provides
+    BirdHouseReminderConfig provideConfig(ConfigManager configManager) {
+        return configManager.getConfig(BirdHouseReminderConfig.class);
+    }
+
     // HACK No idea if this is how you're supposed to do it, but this is needed
     // so we can @Inject the BirdHouseTracker singleton.
     @Provides
