@@ -2,7 +2,6 @@ package com.birdhousereminder;
 
 import com.google.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.Client;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
@@ -35,7 +34,7 @@ public class BirdHouseReminderPlugin extends Plugin {
     }
 
     private void showInfoBox() {
-        final BufferedImage image = itemManager.getImage(21521);
+        final BufferedImage image = itemManager.getImage(22201);
         infoBox = new BirdHouseReminderInfoBox(this, image);
         infoBoxManager.addInfoBox(infoBox);
     }
