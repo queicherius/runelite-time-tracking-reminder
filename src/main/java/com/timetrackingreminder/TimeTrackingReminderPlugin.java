@@ -13,6 +13,7 @@ import net.runelite.client.game.ItemManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.plugins.timetracking.SummaryState;
+import net.runelite.client.plugins.timetracking.farming.FarmingTracker;
 import net.runelite.client.plugins.timetracking.hunter.BirdHouseTracker;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import net.runelite.client.plugins.PluginManager;
@@ -44,6 +45,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
     private InfoBoxManager infoBoxManager;
 
     private BirdHouseTracker birdHouseTracker;
+    private FarmingTracker farmingTracker;
 
     private TimeTrackingReminderInfoBox birdHousesInfoBox;
 
@@ -82,6 +84,17 @@ public class TimeTrackingReminderPlugin extends Plugin {
             log.error("Could not find field 'birdHouseTracker' via reflection");
         } catch (IllegalAccessException e) {
             log.error("Could not access field 'birdHouseTracker' via reflection");
+        }
+
+        try {
+            Field field = timeTrackingPlugin.getClass().getDeclaredField("farmingTracker");
+            field.setAccessible(true);
+            farmingTracker = (FarmingTracker) field.get(timeTrackingPlugin);
+            log.debug("Injected 'farmingTracker' via reflection");
+        } catch (NoSuchFieldException e) {
+            log.error("Could not find field 'farmingTracker' via reflection");
+        } catch (IllegalAccessException e) {
+            log.error("Could not access field 'farmingTracker' via reflection");
         }
     }
 
