@@ -7,11 +7,19 @@ import net.runelite.client.plugins.Plugin;
 import net.runelite.client.ui.overlay.infobox.InfoBox;
 
 class TimeTrackingReminderInfoBox extends InfoBox {
-    private final String type;
+    private final Plugin plugin;
+    private final String name;
 
-    TimeTrackingReminderInfoBox(Plugin plugin, BufferedImage image, String type) {
+    TimeTrackingReminderInfoBox(Plugin plugin, BufferedImage image, String name) {
         super(image, plugin);
-        this.type = type;
+        this.plugin = plugin;
+        this.name = name;
+    }
+
+    @Override
+    public String getName() {
+        String nameSlug = name.toLowerCase().replaceAll("\\s+", "_");
+        return plugin.getClass().getSimpleName() + "_" + getClass().getSimpleName() + "_" + nameSlug;
     }
 
     @Override
@@ -26,6 +34,6 @@ class TimeTrackingReminderInfoBox extends InfoBox {
 
     @Override
     public String getTooltip() {
-        return "Your " + type + " are ready.";
+        return "Your " + name + " are ready.";
     }
 }
