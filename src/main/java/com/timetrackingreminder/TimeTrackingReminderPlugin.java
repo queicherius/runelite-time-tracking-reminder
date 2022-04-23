@@ -1,11 +1,13 @@
 package com.timetrackingreminder;
 
 import com.google.inject.Inject;
+import com.google.inject.Provides;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
 import net.runelite.api.events.GameTick;
+import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.plugins.Plugin;
@@ -30,6 +32,9 @@ public class TimeTrackingReminderPlugin extends Plugin {
     private Client client;
 
     @Inject
+    private TimeTrackingReminderConfig config;
+
+    @Inject
     private ItemManager itemManager;
 
     @Inject
@@ -41,6 +46,11 @@ public class TimeTrackingReminderPlugin extends Plugin {
     private BirdHouseTracker birdHouseTracker;
 
     private TimeTrackingReminderInfoBox birdHousesInfoBox;
+
+    @Provides
+    TimeTrackingReminderConfig provideConfig(ConfigManager configManager) {
+        return configManager.getConfig(TimeTrackingReminderConfig.class);
+    }
 
     @Override
     protected void startUp() throws Exception {
@@ -99,10 +109,10 @@ public class TimeTrackingReminderPlugin extends Plugin {
 
         SummaryState summary = birdHouseTracker.getSummary();
 
-        if (summary == SummaryState.IN_PROGRESS) {
-            hideBirdHousesInfoBox();
-        } else {
+        if (config.birdhouses() && summary != SummaryState.IN_PROGRESS) {
             showBirdHousesInfoBox();
+        } else {
+            hideBirdHousesInfoBox();
         }
     }
 
