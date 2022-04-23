@@ -122,7 +122,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
 
         SummaryState summary = birdHouseTracker.getSummary();
 
-        if (config.birdhouses() && summary != SummaryState.IN_PROGRESS) {
+        if (config.birdHouses() && summary != SummaryState.IN_PROGRESS) {
             showBirdHousesInfoBox();
         } else {
             hideBirdHousesInfoBox();
