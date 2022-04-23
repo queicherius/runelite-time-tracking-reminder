@@ -1,4 +1,4 @@
-package com.birdhousereminder;
+package com.timetrackingreminder;
 
 import com.google.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +25,7 @@ import java.awt.image.BufferedImage;
         name = "Bird House Reminder",
         description = "Show an infobox when bird houses are ready."
 )
-public class BirdHouseReminderPlugin extends Plugin {
+public class TimeTrackingReminderPlugin extends Plugin {
     @Inject
     private Client client;
 
@@ -40,15 +40,15 @@ public class BirdHouseReminderPlugin extends Plugin {
 
     private BirdHouseTracker birdHouseTracker;
 
-    private BirdHouseReminderInfoBox infoBox;
+    private TimeTrackingReminderInfoBox birdHousesInfoBox;
 
     @Override
     protected void startUp() throws Exception {
-        log.info("Bird House Reminder started!");
-        injectBirdHouseTrackerInstance();
+        log.info("Time Tracking Reminder started!");
+        injectTimeTrackingPluginFields();
     }
 
-    private void injectBirdHouseTrackerInstance() {
+    private void injectTimeTrackingPluginFields() {
         TimeTrackingPlugin timeTrackingPlugin = null;
 
         for (Plugin plugin : pluginManager.getPlugins()) {
@@ -58,7 +58,8 @@ public class BirdHouseReminderPlugin extends Plugin {
         }
 
         if (timeTrackingPlugin == null) {
-            client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", "'Bird House Reminder' plugin could not find instance of 'Time Tracking' plugin. Maybe it's not enabled?", null);
+            String message = "[Time Tracking Reminder] Could not find 'Time Tracking' plugin. Maybe it's not enabled?";
+            client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", message, null);
             return;
         }
 
@@ -66,7 +67,7 @@ public class BirdHouseReminderPlugin extends Plugin {
             Field field = timeTrackingPlugin.getClass().getDeclaredField("birdHouseTracker");
             field.setAccessible(true);
             birdHouseTracker = (BirdHouseTracker) field.get(timeTrackingPlugin);
-            log.info("Injected 'birdHouseTracker' via reflection");
+            log.debug("Injected 'birdHouseTracker' via reflection");
         } catch (NoSuchFieldException e) {
             log.error("Could not find field 'birdHouseTracker' via reflection");
         } catch (IllegalAccessException e) {
@@ -76,8 +77,8 @@ public class BirdHouseReminderPlugin extends Plugin {
 
     @Override
     protected void shutDown() throws Exception {
-        log.info("Bird House Reminder stopped!");
-        hideInfoBox();
+        log.info("Time Tracking Reminder stopped!");
+        hideBirdHousesInfoBox();
     }
 
     @Subscribe
@@ -86,6 +87,12 @@ public class BirdHouseReminderPlugin extends Plugin {
             return;
         }
 
+        onGameTickBirdHouses();
+    }
+
+    // --- Bird Houses ---
+
+    private void onGameTickBirdHouses () {
         if (birdHouseTracker == null) {
             return;
         }
@@ -93,28 +100,28 @@ public class BirdHouseReminderPlugin extends Plugin {
         SummaryState summary = birdHouseTracker.getSummary();
 
         if (summary == SummaryState.IN_PROGRESS) {
-            hideInfoBox();
+            hideBirdHousesInfoBox();
         } else {
-            showInfoBox();
+            showBirdHousesInfoBox();
         }
     }
 
-    private void showInfoBox() {
-        if (infoBox != null) {
+    private void showBirdHousesInfoBox() {
+        if (birdHousesInfoBox != null) {
             return;
         }
 
-        final BufferedImage image = itemManager.getImage(22192);
-        infoBox = new BirdHouseReminderInfoBox(this, image);
-        infoBoxManager.addInfoBox(infoBox);
+        final BufferedImage image = itemManager.getImage(21515); // Oak bird house
+        birdHousesInfoBox = new TimeTrackingReminderInfoBox(this, image, "Bird Houses");
+        infoBoxManager.addInfoBox(birdHousesInfoBox);
     }
 
-    private void hideInfoBox() {
-        if (infoBox == null) {
+    private void hideBirdHousesInfoBox() {
+        if (birdHousesInfoBox == null) {
             return;
         }
 
-        infoBoxManager.removeInfoBox(infoBox);
-        infoBox = null;
+        infoBoxManager.removeInfoBox(birdHousesInfoBox);
+        birdHousesInfoBox = null;
     }
 }
