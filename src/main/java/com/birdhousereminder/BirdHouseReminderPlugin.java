@@ -19,7 +19,10 @@ import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 import java.awt.image.BufferedImage;
 
 @Slf4j
-@PluginDescriptor(name = "Bird House Reminder")
+@PluginDescriptor(
+        name = "Bird House Reminder",
+        description = "Show an infobox when bird houses are ready."
+)
 public class BirdHouseReminderPlugin extends Plugin {
     @Inject
     private Client client;
