@@ -1,6 +1,6 @@
 package com.timetrackingreminder;
 
-import java.awt.*;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 import net.runelite.client.plugins.Plugin;

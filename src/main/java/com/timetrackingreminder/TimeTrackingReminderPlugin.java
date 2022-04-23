@@ -22,8 +22,8 @@ import java.awt.image.BufferedImage;
 
 @Slf4j
 @PluginDescriptor(
-        name = "Bird House Reminder",
-        description = "Show an infobox when bird houses are ready."
+        name = "Time Tracking Reminder",
+        description = "Extend the \"Time Tracking\" plugin to show an infobox when bird houses or farming patches are ready."
 )
 public class TimeTrackingReminderPlugin extends Plugin {
     @Inject
@@ -58,7 +58,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
         }
 
         if (timeTrackingPlugin == null) {
-            String message = "[Time Tracking Reminder] Could not find 'Time Tracking' plugin. Maybe it's not enabled?";
+            String message = "[Time Tracking Reminder] Could not find \"Time Tracking\" plugin. Maybe it's not enabled?";
             client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", message, null);
             return;
         }
@@ -92,7 +92,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
 
     // --- Bird Houses ---
 
-    private void onGameTickBirdHouses () {
+    private void onGameTickBirdHouses() {
         if (birdHouseTracker == null) {
             return;
         }
