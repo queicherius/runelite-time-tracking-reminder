@@ -18,7 +18,7 @@ class BirdHouseReminderInfoBox extends InfoBox {
 
     @Override
     public Color getTextColor() {
-        return Color.YELLOW;
+        return Color.GREEN;
     }
 
     @Override
