@@ -13,6 +13,7 @@ import net.runelite.client.game.ItemManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.plugins.timetracking.SummaryState;
+import net.runelite.client.plugins.timetracking.Tab;
 import net.runelite.client.plugins.timetracking.farming.FarmingTracker;
 import net.runelite.client.plugins.timetracking.hunter.BirdHouseTracker;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
@@ -20,8 +21,6 @@ import net.runelite.client.plugins.PluginManager;
 import net.runelite.client.plugins.timetracking.TimeTrackingPlugin;
 
 import java.lang.reflect.Field;
-
-import java.awt.image.BufferedImage;
 
 @Slf4j
 @PluginDescriptor(
@@ -47,7 +46,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
     private BirdHouseTracker birdHouseTracker;
     private FarmingTracker farmingTracker;
 
-    private TimeTrackingReminderInfoBox birdHousesInfoBox;
+    private TimeTrackingReminderGroup[] reminderGroups;
 
     @Provides
     TimeTrackingReminderConfig provideConfig(ConfigManager configManager) {
@@ -58,6 +57,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
     protected void startUp() throws Exception {
         log.info("Time Tracking Reminder started!");
         injectTimeTrackingPluginFields();
+        initializeReminderGroups();
     }
 
     private void injectTimeTrackingPluginFields() {
@@ -98,10 +98,50 @@ public class TimeTrackingReminderPlugin extends Plugin {
         }
     }
 
+    private void initializeReminderGroups() {
+        reminderGroups = new TimeTrackingReminderGroup[]{
+                new TimeTrackingReminderGroup(
+                        this,
+                        infoBoxManager,
+                        itemManager,
+                        "Bird Houses",
+                        21515, // Oak bird house
+                        () -> config.birdHouses() && birdHouseTracker.getSummary() != SummaryState.IN_PROGRESS
+                ),
+                new TimeTrackingReminderGroup(
+                        this,
+                        infoBoxManager,
+                        itemManager,
+                        "Herb Patches",
+                        207, // Grimy ranarr weed
+                        () -> config.herbPatches() && farmingTracker.getSummary(Tab.HERB) != SummaryState.IN_PROGRESS
+                ),
+                new TimeTrackingReminderGroup(
+                        this,
+                        infoBoxManager,
+                        itemManager,
+                        "Tree Patches",
+                        1515, // Yew logs
+                        () -> config.treePatches() && farmingTracker.getSummary(Tab.TREE) != SummaryState.IN_PROGRESS
+                ),
+                new TimeTrackingReminderGroup(
+                        this,
+                        infoBoxManager,
+                        itemManager,
+                        "Fruit Tree Patches",
+                        2114, // Pineapple
+                        () -> config.fruitTreePatches() && farmingTracker.getSummary(Tab.FRUIT_TREE) != SummaryState.IN_PROGRESS
+                )
+        };
+    }
+
     @Override
     protected void shutDown() throws Exception {
         log.info("Time Tracking Reminder stopped!");
-        hideBirdHousesInfoBox();
+
+        for (TimeTrackingReminderGroup reminderGroup : reminderGroups) {
+            reminderGroup.hideInfoBox();
+        }
     }
 
     @Subscribe
@@ -110,41 +150,8 @@ public class TimeTrackingReminderPlugin extends Plugin {
             return;
         }
 
-        onGameTickBirdHouses();
-    }
-
-    // --- Bird Houses ---
-
-    private void onGameTickBirdHouses() {
-        if (birdHouseTracker == null) {
-            return;
+        for (TimeTrackingReminderGroup reminderGroup : reminderGroups) {
+            reminderGroup.onGameTick();
         }
-
-        SummaryState summary = birdHouseTracker.getSummary();
-
-        if (config.birdHouses() && summary != SummaryState.IN_PROGRESS) {
-            showBirdHousesInfoBox();
-        } else {
-            hideBirdHousesInfoBox();
-        }
-    }
-
-    private void showBirdHousesInfoBox() {
-        if (birdHousesInfoBox != null) {
-            return;
-        }
-
-        final BufferedImage image = itemManager.getImage(21515); // Oak bird house
-        birdHousesInfoBox = new TimeTrackingReminderInfoBox(this, image, "Bird Houses");
-        infoBoxManager.addInfoBox(birdHousesInfoBox);
-    }
-
-    private void hideBirdHousesInfoBox() {
-        if (birdHousesInfoBox == null) {
-            return;
-        }
-
-        infoBoxManager.removeInfoBox(birdHousesInfoBox);
-        birdHousesInfoBox = null;
     }
 }
