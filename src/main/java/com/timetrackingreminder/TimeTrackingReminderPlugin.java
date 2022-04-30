@@ -2,25 +2,25 @@ package com.timetrackingreminder;
 
 import com.google.inject.Inject;
 import com.google.inject.Provides;
+import com.timetrackingreminder.runelite.farming.FarmingWorld;
+import com.timetrackingreminder.runelite.hunter.BirdHouseTracker;
+import com.timetrackingreminder.runelite.farming.FarmingTracker;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
+import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.GameTick;
+import net.runelite.client.Notifier;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
+import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.plugins.timetracking.SummaryState;
 import net.runelite.client.plugins.timetracking.Tab;
-import net.runelite.client.plugins.timetracking.farming.FarmingTracker;
-import net.runelite.client.plugins.timetracking.hunter.BirdHouseTracker;
+import net.runelite.client.plugins.timetracking.TimeTrackingConfig;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
-import net.runelite.client.plugins.PluginManager;
-import net.runelite.client.plugins.timetracking.TimeTrackingPlugin;
-
-import java.lang.reflect.Field;
 
 @Slf4j
 @PluginDescriptor(
@@ -35,10 +35,13 @@ public class TimeTrackingReminderPlugin extends Plugin {
     private TimeTrackingReminderConfig config;
 
     @Inject
-    private ItemManager itemManager;
+    private ConfigManager configManager;
 
     @Inject
-    private PluginManager pluginManager;
+    private Notifier notifier;
+
+    @Inject
+    private ItemManager itemManager;
 
     @Inject
     private InfoBoxManager infoBoxManager;
@@ -56,46 +59,29 @@ public class TimeTrackingReminderPlugin extends Plugin {
     @Override
     protected void startUp() throws Exception {
         log.info("Time Tracking Reminder started!");
-        injectTimeTrackingPluginFields();
+        initializeTrackers();
         initializeReminderGroups();
     }
 
-    private void injectTimeTrackingPluginFields() {
-        TimeTrackingPlugin timeTrackingPlugin = null;
+    private void initializeTrackers() {
+        TimeTrackingConfig timeTrackingConfig = configManager.getConfig(TimeTrackingConfig.class);
 
-        for (Plugin plugin : pluginManager.getPlugins()) {
-            if (plugin.getName().equals("Time Tracking")) {
-                timeTrackingPlugin = (TimeTrackingPlugin) plugin;
-            }
-        }
+        birdHouseTracker = new BirdHouseTracker(
+                client,
+                itemManager,
+                configManager,
+                timeTrackingConfig,
+                notifier
+        );
 
-        if (timeTrackingPlugin == null) {
-            String message = "[Time Tracking Reminder] Could not find \"Time Tracking\" plugin. Maybe it's not enabled?";
-            client.addChatMessage(ChatMessageType.GAMEMESSAGE, "", message, null);
-            return;
-        }
-
-        try {
-            Field field = timeTrackingPlugin.getClass().getDeclaredField("birdHouseTracker");
-            field.setAccessible(true);
-            birdHouseTracker = (BirdHouseTracker) field.get(timeTrackingPlugin);
-            log.debug("Injected 'birdHouseTracker' via reflection");
-        } catch (NoSuchFieldException e) {
-            log.error("Could not find field 'birdHouseTracker' via reflection");
-        } catch (IllegalAccessException e) {
-            log.error("Could not access field 'birdHouseTracker' via reflection");
-        }
-
-        try {
-            Field field = timeTrackingPlugin.getClass().getDeclaredField("farmingTracker");
-            field.setAccessible(true);
-            farmingTracker = (FarmingTracker) field.get(timeTrackingPlugin);
-            log.debug("Injected 'farmingTracker' via reflection");
-        } catch (NoSuchFieldException e) {
-            log.error("Could not find field 'farmingTracker' via reflection");
-        } catch (IllegalAccessException e) {
-            log.error("Could not access field 'farmingTracker' via reflection");
-        }
+        farmingTracker = new FarmingTracker(
+                client,
+                itemManager,
+                configManager,
+                timeTrackingConfig,
+                new FarmingWorld(),
+                notifier
+        );
     }
 
     private void initializeReminderGroups() {
@@ -145,10 +131,33 @@ public class TimeTrackingReminderPlugin extends Plugin {
     }
 
     @Subscribe
+    public void onGameStateChanged(GameStateChanged gameStateChanged) {
+        if (gameStateChanged.getGameState() != GameState.LOGGED_IN) {
+            return;
+        }
+
+        birdHouseTracker.loadFromConfig();
+        farmingTracker.loadCompletionTimes();
+    }
+
+    @Subscribe
+    public void onConfigChanged(ConfigChanged event) {
+        if (!event.getGroup().equals(TimeTrackingConfig.CONFIG_GROUP)) {
+            return;
+        }
+
+        birdHouseTracker.loadFromConfig();
+        farmingTracker.loadCompletionTimes();
+    }
+
+    @Subscribe
     public void onGameTick(GameTick t) {
         if (client.getGameState() != GameState.LOGGED_IN) {
             return;
         }
+
+        birdHouseTracker.updateCompletionTime();
+        farmingTracker.updateCompletionTime();
 
         for (TimeTrackingReminderGroup reminderGroup : reminderGroups) {
             reminderGroup.onGameTick();
