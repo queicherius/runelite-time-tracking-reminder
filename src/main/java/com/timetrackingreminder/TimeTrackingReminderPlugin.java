@@ -63,15 +63,13 @@ public class TimeTrackingReminderPlugin extends Plugin {
     }
 
     private void initializeTrackers() {
-        // This config is never actually used.
-        TimeTrackingConfig fakeConfig = t -> {
-        };
+        TimeTrackingConfig timeTrackingConfig = configManager.getConfig(TimeTrackingConfig.class);
 
         birdHouseTracker = new BirdHouseTracker(
                 client,
                 itemManager,
                 configManager,
-                fakeConfig,
+                timeTrackingConfig,
                 notifier
         );
         birdHouseTracker.loadFromConfig();
@@ -80,7 +78,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 client,
                 itemManager,
                 configManager,
-                fakeConfig,
+                timeTrackingConfig,
                 new FarmingWorld(),
                 notifier
         );
