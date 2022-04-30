@@ -2,8 +2,8 @@
 const fs = require('fs-extra')
 const path = require('path')
 
-const RUNELITE_PLUGINS_PATH =
-  '../runelite/runelite-client/src/main/java/net/runelite/client/plugins'
+const RUNELITE_PLUGIN_PATH =
+  '../runelite/runelite-client/src/main/java/net/runelite/client/plugins/timetracking'
 const RUNELITE_COPY_PATH = 'src/main/java/com/timetrackingreminder/runelite/'
 
 function patchCopiedFiles(search, replace) {
@@ -31,19 +31,26 @@ function getDirectoryFiles(directory) {
 
 console.log('Creating RuneLite copy directories')
 fs.mkdirpSync(`${RUNELITE_COPY_PATH}/hunter/`, { recursive: true })
+fs.mkdirpSync(`${RUNELITE_COPY_PATH}/farming/`, { recursive: true })
 
 console.log('Copying files')
-fs.copySync(`${RUNELITE_PLUGINS_PATH}/timetracking/hunter/`, `${RUNELITE_COPY_PATH}/hunter/`)
+const copyOptions = { overwrite: true }
+fs.copySync(`${RUNELITE_PLUGIN_PATH}/hunter/`, `${RUNELITE_COPY_PATH}/hunter/`, copyOptions)
+fs.copySync(`${RUNELITE_PLUGIN_PATH}/farming/`, `${RUNELITE_COPY_PATH}/farming/`, copyOptions)
 
 console.log('Patching files: (1) Overwrite package')
 patchCopiedFiles(
-  'package net.runelite.client.plugins.timetracking.hunter;',
-  'package com.timetrackingreminder.runelite.hunter;'
+  'package net.runelite.client.plugins.timetracking.',
+  'package com.timetrackingreminder.runelite.'
 )
 
 console.log('Patching files: (2) Remove automatic injection')
-patchCopiedFiles(/\t+@Inject\n/g, '')
+patchCopiedFiles(/\t*@Inject\n/g, '')
+patchCopiedFiles(/\t*@Singleton\n/g, '')
 
 console.log('Patching files: (3) Overwrite visibility')
-patchCopiedFiles('private BirdHouseTracker', 'public BirdHouseTracker')
+patchCopiedFiles('private BirdHouseTracker(', 'public BirdHouseTracker(')
 patchCopiedFiles('private void updateCompletionTime', 'public void updateCompletionTime')
+patchCopiedFiles('private FarmingTracker(', 'public FarmingTracker(')
+patchCopiedFiles('class FarmingWorld', 'public class FarmingWorld')
+patchCopiedFiles('FarmingWorld(', 'public FarmingWorld(')

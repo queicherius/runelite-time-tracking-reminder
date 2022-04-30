@@ -44,7 +44,6 @@ import net.runelite.client.game.ItemManager;
 import net.runelite.client.plugins.timetracking.SummaryState;
 import net.runelite.client.plugins.timetracking.TimeTrackingConfig;
 
-@Singleton
 public class BirdHouseTracker
 {
 	// average time taken to harvest 10 birds, in seconds
