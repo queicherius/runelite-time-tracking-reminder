@@ -2,7 +2,9 @@ package com.timetrackingreminder;
 
 import com.google.inject.Inject;
 import com.google.inject.Provides;
+import com.timetrackingreminder.runelite.farming.FarmingWorld;
 import com.timetrackingreminder.runelite.hunter.BirdHouseTracker;
+import com.timetrackingreminder.runelite.farming.FarmingTracker;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
@@ -10,13 +12,13 @@ import net.runelite.api.events.GameTick;
 import net.runelite.client.Notifier;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
+import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.plugins.timetracking.SummaryState;
 import net.runelite.client.plugins.timetracking.Tab;
 import net.runelite.client.plugins.timetracking.TimeTrackingConfig;
-import net.runelite.client.plugins.timetracking.farming.FarmingTracker;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 
 @Slf4j
@@ -61,7 +63,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
     }
 
     private void initializeTrackers() {
-        // This config is never actually called.
+        // This config is never actually used.
         TimeTrackingConfig fakeConfig = t -> {
         };
 
@@ -72,6 +74,17 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 fakeConfig,
                 notifier
         );
+        birdHouseTracker.loadFromConfig();
+
+        farmingTracker = new FarmingTracker(
+                client,
+                itemManager,
+                configManager,
+                fakeConfig,
+                new FarmingWorld(),
+                notifier
+        );
+        farmingTracker.loadFromConfig();
     }
 
     private void initializeReminderGroups() {
@@ -121,10 +134,23 @@ public class TimeTrackingReminderPlugin extends Plugin {
     }
 
     @Subscribe
+    public void onConfigChanged(ConfigChanged event) {
+        if (!event.getGroup().equals(TimeTrackingConfig.CONFIG_GROUP)) {
+            return;
+        }
+
+        birdHouseTracker.loadFromConfig();
+        farmingTracker.loadFromConfig();
+    }
+
+    @Subscribe
     public void onGameTick(GameTick t) {
         if (client.getGameState() != GameState.LOGGED_IN) {
             return;
         }
+
+        birdHouseTracker.updateCompletionTime();
+        farmingTracker.updateCompletionTime();
 
         for (TimeTrackingReminderGroup reminderGroup : reminderGroups) {
             reminderGroup.onGameTick();

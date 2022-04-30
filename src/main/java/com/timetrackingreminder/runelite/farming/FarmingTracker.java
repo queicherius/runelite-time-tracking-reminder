@@ -397,7 +397,7 @@ public class FarmingTracker
 		return timeOfGoalTick - calculatedOffsetTime;
 	}
 
-	public void loadCompletionTimes()
+	public void loadFromConfig()
 	{
 		summaries.clear();
 		completionTimes.clear();
