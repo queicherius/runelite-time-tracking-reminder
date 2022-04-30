@@ -8,6 +8,7 @@ import com.timetrackingreminder.runelite.farming.FarmingTracker;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
+import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.GameTick;
 import net.runelite.client.Notifier;
 import net.runelite.client.config.ConfigManager;
@@ -72,7 +73,6 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 timeTrackingConfig,
                 notifier
         );
-        birdHouseTracker.loadFromConfig();
 
         farmingTracker = new FarmingTracker(
                 client,
@@ -82,7 +82,6 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 new FarmingWorld(),
                 notifier
         );
-        farmingTracker.loadFromConfig();
     }
 
     private void initializeReminderGroups() {
@@ -129,6 +128,16 @@ public class TimeTrackingReminderPlugin extends Plugin {
         for (TimeTrackingReminderGroup reminderGroup : reminderGroups) {
             reminderGroup.hideInfoBox();
         }
+    }
+
+    @Subscribe
+    public void onGameStateChanged(GameStateChanged gameStateChanged) {
+        if (gameStateChanged.getGameState() != GameState.LOGGED_IN) {
+            return;
+        }
+
+        birdHouseTracker.loadFromConfig();
+        farmingTracker.loadFromConfig();
     }
 
     @Subscribe
