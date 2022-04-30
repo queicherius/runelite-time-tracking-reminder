@@ -2,10 +2,12 @@ package com.timetrackingreminder;
 
 import com.google.inject.Inject;
 import com.google.inject.Provides;
+import com.timetrackingreminder.runelite.hunter.BirdHouseTracker;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
 import net.runelite.api.events.GameTick;
+import net.runelite.client.Notifier;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.game.ItemManager;
@@ -13,8 +15,8 @@ import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.plugins.timetracking.SummaryState;
 import net.runelite.client.plugins.timetracking.Tab;
+import net.runelite.client.plugins.timetracking.TimeTrackingConfig;
 import net.runelite.client.plugins.timetracking.farming.FarmingTracker;
-import net.runelite.client.plugins.timetracking.hunter.BirdHouseTracker;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 
 @Slf4j
@@ -28,6 +30,12 @@ public class TimeTrackingReminderPlugin extends Plugin {
 
     @Inject
     private TimeTrackingReminderConfig config;
+
+    @Inject
+    private ConfigManager configManager;
+
+    @Inject
+    private Notifier notifier;
 
     @Inject
     private ItemManager itemManager;
@@ -48,7 +56,22 @@ public class TimeTrackingReminderPlugin extends Plugin {
     @Override
     protected void startUp() throws Exception {
         log.info("Time Tracking Reminder started!");
+        initializeTrackers();
         initializeReminderGroups();
+    }
+
+    private void initializeTrackers() {
+        // This config is never actually called.
+        TimeTrackingConfig fakeConfig = t -> {
+        };
+
+        birdHouseTracker = new BirdHouseTracker(
+                client,
+                itemManager,
+                configManager,
+                fakeConfig,
+                notifier
+        );
     }
 
     private void initializeReminderGroups() {
