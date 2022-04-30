@@ -116,7 +116,7 @@ public class FarmingTabPanel extends TabContentPanel
 			{
 				if (configManager.getRSProfileKey() != null)
 				{
-					configManager.setRSProfileConfiguration(TimeTrackingConfig.CONFIG_GROUP, configKey, toggleNotify.isSelected());
+					// configManager.setRSProfileConfiguration call removed. This code path should never be executed, but just in case.
 				}
 			});
 

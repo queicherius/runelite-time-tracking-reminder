@@ -241,7 +241,7 @@ public class BirdHouseTracker
 		for (BirdHouseData data : updatedData.values())
 		{
 			String key = TimeTrackingConfig.BIRD_HOUSE + "." + data.getSpace().getVarp().getId();
-			configManager.setRSProfileConfiguration(TimeTrackingConfig.CONFIG_GROUP, key, data.getVarp() + ":" + data.getTimestamp());
+			// configManager.setRSProfileConfiguration call removed. This code path should never be executed, but just in case.
 		}
 	}
 }

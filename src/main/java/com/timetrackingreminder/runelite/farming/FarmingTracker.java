@@ -111,7 +111,7 @@ public class FarmingTracker
 			String autoweed = Integer.toString(client.getVarbitValue(Varbits.AUTOWEED));
 			if (!autoweed.equals(configManager.getRSProfileConfiguration(TimeTrackingConfig.CONFIG_GROUP, TimeTrackingConfig.AUTOWEED)))
 			{
-				configManager.setRSProfileConfiguration(TimeTrackingConfig.CONFIG_GROUP, TimeTrackingConfig.AUTOWEED, autoweed);
+				// configManager.setRSProfileConfiguration call removed. This code path should never be executed, but just in case.
 				changed = true;
 			}
 		}
@@ -120,7 +120,7 @@ public class FarmingTracker
 			boolean botanist = client.getVarbitValue(Varbits.LEAGUE_RELIC_5) == 1;
 			if (!Boolean.valueOf(botanist).equals(configManager.getRSProfileConfiguration(TimeTrackingConfig.CONFIG_GROUP, TimeTrackingConfig.BOTANIST, Boolean.class)))
 			{
-				configManager.setRSProfileConfiguration(TimeTrackingConfig.CONFIG_GROUP, TimeTrackingConfig.BOTANIST, botanist);
+				// configManager.setRSProfileConfiguration call removed. This code path should never be executed, but just in case.
 				changed = true;
 			}
 		}
@@ -197,8 +197,8 @@ public class FarmingTracker
 								{
 									log.debug("Found a longer growth tick {}, saving new offset", patchTickRate);
 
-									configManager.setRSProfileConfiguration(TimeTrackingConfig.CONFIG_GROUP, TimeTrackingConfig.FARM_TICK_OFFSET_PRECISION, patchTickRate);
-									configManager.setRSProfileConfiguration(TimeTrackingConfig.CONFIG_GROUP, TimeTrackingConfig.FARM_TICK_OFFSET, offsetMins);
+									// configManager.setRSProfileConfiguration call removed. This code path should never be executed, but just in case.
+									// configManager.setRSProfileConfiguration call removed. This code path should never be executed, but just in case.
 								}
 							}
 							if (currentPatchState.getTickRate() != 0
@@ -216,7 +216,7 @@ public class FarmingTracker
 				}
 
 				String value = strVarbit + ":" + unixNow;
-				configManager.setRSProfileConfiguration(TimeTrackingConfig.CONFIG_GROUP, key, value);
+				// configManager.setRSProfileConfiguration call removed. This code path should never be executed, but just in case.
 				changed = true;
 			}
 		}

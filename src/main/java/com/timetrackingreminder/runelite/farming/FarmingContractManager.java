@@ -336,7 +336,7 @@ public class FarmingContractManager
 	{
 		if (contract != null)
 		{
-			configManager.setRSProfileConfiguration(TimeTrackingConfig.CONFIG_GROUP, CONFIG_KEY_CONTRACT, String.valueOf(contract.getItemID()));
+			// configManager.setRSProfileConfiguration call removed. This code path should never be executed, but just in case.
 		}
 		else
 		{

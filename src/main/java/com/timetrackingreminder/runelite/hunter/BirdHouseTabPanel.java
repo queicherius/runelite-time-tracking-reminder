@@ -83,7 +83,7 @@ public class BirdHouseTabPanel extends TabContentPanel
 			{
 				if (configManager.getRSProfileKey() != null)
 				{
-					configManager.setRSProfileConfiguration(TimeTrackingConfig.CONFIG_GROUP, TimeTrackingConfig.BIRDHOUSE_NOTIFY, toggleNotify.isSelected());
+					// configManager.setRSProfileConfiguration call removed. This code path should never be executed, but just in case.
 				}
 				spacePanels.forEach(p -> p.getNotifyButton().setSelected(toggleNotify.isSelected()));
 			});

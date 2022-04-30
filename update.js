@@ -55,3 +55,9 @@ patchCopiedFiles('private FarmingTracker(', 'public FarmingTracker(')
 patchCopiedFiles('class FarmingWorld', 'public class FarmingWorld')
 patchCopiedFiles('FarmingWorld(', 'public FarmingWorld(')
 patchCopiedFiles('public void loadCompletionTimes', 'public void loadFromConfig')
+
+console.log('Patching files: (4) Remove config write calls')
+patchCopiedFiles(
+  /configManager\.setRSProfileConfiguration\(.*?\);/g,
+  '// configManager.setRSProfileConfiguration call removed. This code path should never be executed, but just in case.'
+)
