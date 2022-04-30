@@ -137,7 +137,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
         }
 
         birdHouseTracker.loadFromConfig();
-        farmingTracker.loadFromConfig();
+        farmingTracker.loadCompletionTimes();
     }
 
     @Subscribe
@@ -147,7 +147,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
         }
 
         birdHouseTracker.loadFromConfig();
-        farmingTracker.loadFromConfig();
+        farmingTracker.loadCompletionTimes();
     }
 
     @Subscribe
