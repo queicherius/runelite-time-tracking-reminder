@@ -1,3 +1,5 @@
+// THIS FILE WAS AUTOMATICALLY GENERATED. DO NOT EDIT IT MANUALLY. SEE README.
+
 /*
  * Copyright (c) 2019, Koekkruimels <https://github.com/koekkruimels>
  * Copyright (c) 2020, melky <https://github.com/melkypie>

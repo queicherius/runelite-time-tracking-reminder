@@ -61,3 +61,9 @@ patchCopiedFiles(
   /configManager\.setRSProfileConfiguration\(.*?\);/g,
   '// configManager.setRSProfileConfiguration call removed. This code path should never be executed, but just in case.'
 )
+
+console.log('Patching files: (5) Add auto-generation comment')
+patchCopiedFiles(
+  '/*\n * Copyright',
+  '// THIS FILE WAS AUTOMATICALLY GENERATED. DO NOT EDIT IT MANUALLY. SEE README.\n\n/*\n * Copyright'
+)

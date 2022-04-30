@@ -1,3 +1,5 @@
+// THIS FILE WAS AUTOMATICALLY GENERATED. DO NOT EDIT IT MANUALLY. SEE README.
+
 /*
  * Copyright (c) 2018, NotFoxtrot <https://github.com/NotFoxtrot>
  * Copyright (c) 2018 Abex

@@ -1,3 +1,5 @@
+// THIS FILE WAS AUTOMATICALLY GENERATED. DO NOT EDIT IT MANUALLY. SEE README.
+
 /*
  * Copyright (c) 2019 Abex
  * All rights reserved.
