@@ -54,6 +54,20 @@ patchCopiedFiles('private void updateCompletionTime', 'public void updateComplet
 patchCopiedFiles('private FarmingTracker(', 'public FarmingTracker(')
 patchCopiedFiles('class FarmingWorld', 'public class FarmingWorld')
 patchCopiedFiles('FarmingWorld(', 'public FarmingWorld(')
+patchCopiedFiles('private void handleContractState', 'public void handleContractState')
+
+const FarmingContractManagerConstructor = `	public FarmingContractManager(Client client, ItemManager itemManager, ConfigManager configManager, TimeTrackingConfig config, FarmingWorld farmingWorld, FarmingTracker farmingTracker)
+	{
+		this.client = client;
+		this.itemManager = itemManager;
+		this.configManager = configManager;
+		this.config = config;
+		this.farmingWorld = farmingWorld;
+		this.farmingTracker = farmingTracker;
+	}
+
+`
+patchCopiedFiles('	public void setContract', FarmingContractManagerConstructor + '	public void setContract')
 
 console.log('Patching files: (4) Remove config write calls')
 patchCopiedFiles(

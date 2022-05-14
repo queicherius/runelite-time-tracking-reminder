@@ -12,7 +12,7 @@ public class TimeTrackingReminderGroup {
     private final InfoBoxManager infoBoxManager;
     private final ItemManager itemManager;
 
-    private final String name;
+    private final String tooltip;
     private final Integer itemId;
     private final Callable<Boolean> shouldShowInfoBoxCallable;
 
@@ -22,7 +22,7 @@ public class TimeTrackingReminderGroup {
             Plugin plugin,
             InfoBoxManager infoBoxManager,
             ItemManager itemManager,
-            String name,
+            String tooltip,
             Integer itemId,
             Callable<Boolean> shouldShowInfoBoxCallable
     ) {
@@ -30,7 +30,7 @@ public class TimeTrackingReminderGroup {
         this.infoBoxManager = infoBoxManager;
         this.itemManager = itemManager;
 
-        this.name = name;
+        this.tooltip = tooltip;
         this.itemId = itemId;
         this.shouldShowInfoBoxCallable = shouldShowInfoBoxCallable;
     }
@@ -57,7 +57,7 @@ public class TimeTrackingReminderGroup {
         }
 
         final BufferedImage itemImage = itemManager.getImage(itemId);
-        infoBox = new TimeTrackingReminderInfoBox(plugin, itemImage, name);
+        infoBox = new TimeTrackingReminderInfoBox(plugin, itemImage, tooltip);
         infoBoxManager.addInfoBox(infoBox);
     }
 

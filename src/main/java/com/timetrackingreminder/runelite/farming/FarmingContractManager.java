@@ -90,6 +90,16 @@ public class FarmingContractManager
 	@Getter
 	private long completionTime;
 
+	public FarmingContractManager(Client client, ItemManager itemManager, ConfigManager configManager, TimeTrackingConfig config, FarmingWorld farmingWorld, FarmingTracker farmingTracker)
+	{
+		this.client = client;
+		this.itemManager = itemManager;
+		this.configManager = configManager;
+		this.config = config;
+		this.farmingWorld = farmingWorld;
+		this.farmingTracker = farmingTracker;
+	}
+
 	public void setContract(@Nullable Produce contract)
 	{
 		this.contract = contract;
@@ -216,7 +226,7 @@ public class FarmingContractManager
 		setContract(farmingContract);
 	}
 
-	private void handleContractState()
+	public void handleContractState()
 	{
 		if (contract == null)
 		{

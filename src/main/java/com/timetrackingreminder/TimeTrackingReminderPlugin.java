@@ -3,6 +3,7 @@ package com.timetrackingreminder;
 import com.google.inject.Inject;
 import com.google.inject.Provides;
 import com.timetrackingreminder.runelite.farming.CompostTracker;
+import com.timetrackingreminder.runelite.farming.FarmingContractManager;
 import com.timetrackingreminder.runelite.farming.FarmingWorld;
 import com.timetrackingreminder.runelite.hunter.BirdHouseTracker;
 import com.timetrackingreminder.runelite.farming.FarmingTracker;
@@ -49,6 +50,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
 
     private BirdHouseTracker birdHouseTracker;
     private FarmingTracker farmingTracker;
+    private FarmingContractManager farmingContractManager;
 
     private TimeTrackingReminderGroup[] reminderGroups;
 
@@ -91,6 +93,15 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 notifier,
                 compostTracker
         );
+
+        farmingContractManager = new FarmingContractManager(
+                client,
+                itemManager,
+                configManager,
+                timeTrackingConfig,
+                farmingWorld,
+                farmingTracker
+        );
     }
 
     private void initializeReminderGroups() {
@@ -99,7 +110,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         this,
                         infoBoxManager,
                         itemManager,
-                        "Bird Houses",
+                        "Your Bird Houses are ready.",
                         21515, // Oak bird house
                         () -> config.birdHouses() && birdHouseTracker.getSummary() != SummaryState.IN_PROGRESS
                 ),
@@ -107,7 +118,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         this,
                         infoBoxManager,
                         itemManager,
-                        "Herb Patches",
+                        "Your Herb Patches are ready.",
                         207, // Grimy ranarr weed
                         () -> config.herbPatches() && farmingTracker.getSummary(Tab.HERB) != SummaryState.IN_PROGRESS
                 ),
@@ -115,7 +126,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         this,
                         infoBoxManager,
                         itemManager,
-                        "Tree Patches",
+                        "Your Tree Patches are ready.",
                         1515, // Yew logs
                         () -> config.treePatches() && farmingTracker.getSummary(Tab.TREE) != SummaryState.IN_PROGRESS
                 ),
@@ -123,9 +134,17 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         this,
                         infoBoxManager,
                         itemManager,
-                        "Fruit Tree Patches",
+                        "Your Fruit Tree Patches are ready.",
                         2114, // Pineapple
                         () -> config.fruitTreePatches() && farmingTracker.getSummary(Tab.FRUIT_TREE) != SummaryState.IN_PROGRESS
+                ),
+                new TimeTrackingReminderGroup(
+                        this,
+                        infoBoxManager,
+                        itemManager,
+                        "Your Farming Contract is ready.",
+                        22993, // Seed pack
+                        () -> config.farmingContract() && farmingContractManager.getSummary() != SummaryState.IN_PROGRESS
                 )
         };
     }
@@ -147,6 +166,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
 
         birdHouseTracker.loadFromConfig();
         farmingTracker.loadCompletionTimes();
+        farmingContractManager.loadContractFromConfig();
     }
 
     @Subscribe
@@ -157,6 +177,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
 
         birdHouseTracker.loadFromConfig();
         farmingTracker.loadCompletionTimes();
+        farmingContractManager.loadContractFromConfig();
     }
 
     @Subscribe
@@ -167,6 +188,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
 
         birdHouseTracker.updateCompletionTime();
         farmingTracker.updateCompletionTime();
+        farmingContractManager.handleContractState();
 
         for (TimeTrackingReminderGroup reminderGroup : reminderGroups) {
             reminderGroup.onGameTick();
