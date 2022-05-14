@@ -5,5 +5,10 @@ bird houses or farming patches are ready.
 
 ![Screenshot](./screenshot.png)
 
-Currently supports bird houses, herb patches, tree patches and fruit tree patches.
-Each infobox can be individually enabled and disabled.
+Current supported infoboxes, can be individually enabled and disabled:
+
+- Bird Houses
+- Herb Patches
+- Tree Patches
+- Fruit Tree Patches
+- Farming Contract
