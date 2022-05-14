@@ -2,14 +2,12 @@ package com.timetrackingreminder;
 
 import com.google.inject.Inject;
 import com.google.inject.Provides;
-import com.timetrackingreminder.runelite.farming.CompostTracker;
-import com.timetrackingreminder.runelite.farming.FarmingContractManager;
-import com.timetrackingreminder.runelite.farming.FarmingWorld;
-import com.timetrackingreminder.runelite.hunter.BirdHouseTracker;
-import com.timetrackingreminder.runelite.farming.FarmingTracker;
+import com.timetrackingreminder.runelite.farming.*;
+import com.timetrackingreminder.runelite.hunter.*;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
+import net.runelite.api.Varbits;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.GameTick;
 import net.runelite.client.Notifier;
@@ -23,6 +21,8 @@ import net.runelite.client.plugins.timetracking.SummaryState;
 import net.runelite.client.plugins.timetracking.Tab;
 import net.runelite.client.plugins.timetracking.TimeTrackingConfig;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
+
+import java.time.Instant;
 
 @Slf4j
 @PluginDescriptor(
@@ -145,6 +145,14 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         "Your Farming Contract is ready.",
                         22993, // Seed pack
                         () -> config.farmingContract() && farmingContractManager.getSummary() != SummaryState.IN_PROGRESS
+                ),
+                new TimeTrackingReminderGroup(
+                        this,
+                        infoBoxManager,
+                        itemManager,
+                        "Your Hespori Patch is ready.",
+                        20661, // Tangleroot
+                        () -> config.hespori() && showHesporiInfoBox()
                 )
         };
     }
@@ -193,5 +201,29 @@ public class TimeTrackingReminderPlugin extends Plugin {
         for (TimeTrackingReminderGroup reminderGroup : reminderGroups) {
             reminderGroup.onGameTick();
         }
+    }
+
+    private boolean showHesporiInfoBox() {
+        FarmingRegion region = new FarmingRegion("Farming Guild", 5021, true,
+                new FarmingPatch("Hespori", Varbits.FARMING_7908, PatchImplementation.HESPORI)
+        );
+        FarmingPatch patch = region.getPatches()[0];
+        PatchPrediction prediction = farmingTracker.predictPatch(patch);
+
+        if (prediction == null) {
+            return false;
+        }
+
+        if (prediction.getProduce() != Produce.HESPORI) {
+            return true;
+        }
+
+        if (prediction.getCropState() != CropState.GROWING) {
+            return true;
+        }
+
+        // If the state is "GROWING" check if it should be done by now
+        long unixNow = Instant.now().getEpochSecond();
+        return prediction.getDoneEstimate() <= unixNow;
     }
 }

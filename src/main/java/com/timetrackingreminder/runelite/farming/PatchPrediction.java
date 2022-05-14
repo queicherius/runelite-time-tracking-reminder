@@ -29,7 +29,7 @@ package com.timetrackingreminder.runelite.farming;
 import lombok.Value;
 
 @Value
-class PatchPrediction
+public class PatchPrediction
 {
 	private final Produce produce;
 	private final CropState cropState;

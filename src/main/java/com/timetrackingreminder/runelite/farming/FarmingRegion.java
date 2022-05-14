@@ -37,7 +37,7 @@ public class FarmingRegion
 	private final boolean definite;
 	private final FarmingPatch[] patches;
 
-	FarmingRegion(String name, int regionID, boolean definite, FarmingPatch... patches)
+	public FarmingRegion(String name, int regionID, boolean definite, FarmingPatch... patches)
 	{
 		this.name = name;
 		this.regionID = regionID;
