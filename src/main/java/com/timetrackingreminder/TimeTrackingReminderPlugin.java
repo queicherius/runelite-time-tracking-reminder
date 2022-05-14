@@ -137,6 +137,14 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         "Your Fruit Tree Patches are ready.",
                         2114, // Pineapple
                         () -> config.fruitTreePatches() && farmingTracker.getSummary(Tab.FRUIT_TREE) != SummaryState.IN_PROGRESS
+                ),
+                new TimeTrackingReminderGroup(
+                        this,
+                        infoBoxManager,
+                        itemManager,
+                        "Your Farming Contract is ready.",
+                        22993, // Seed pack
+                        () -> config.farmingContract() && farmingContractManager.getSummary() != SummaryState.IN_PROGRESS
                 )
         };
     }

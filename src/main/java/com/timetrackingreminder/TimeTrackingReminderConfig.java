@@ -41,4 +41,13 @@ public interface TimeTrackingReminderConfig extends Config {
     default boolean fruitTreePatches() {
         return true;
     }
+
+    @ConfigItem(
+            keyName = "farmingcontract",
+            name = "Farming Contract",
+            description = "Show an infobox when your Farming Contract is ready."
+    )
+    default boolean farmingContract() {
+        return true;
+    }
 }
