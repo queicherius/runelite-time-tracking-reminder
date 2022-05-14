@@ -2,6 +2,7 @@ package com.timetrackingreminder;
 
 import com.google.inject.Inject;
 import com.google.inject.Provides;
+import com.timetrackingreminder.runelite.farming.CompostTracker;
 import com.timetrackingreminder.runelite.farming.FarmingWorld;
 import com.timetrackingreminder.runelite.hunter.BirdHouseTracker;
 import com.timetrackingreminder.runelite.farming.FarmingTracker;
@@ -65,6 +66,13 @@ public class TimeTrackingReminderPlugin extends Plugin {
 
     private void initializeTrackers() {
         TimeTrackingConfig timeTrackingConfig = configManager.getConfig(TimeTrackingConfig.class);
+        FarmingWorld farmingWorld = new FarmingWorld();
+
+        CompostTracker compostTracker = new CompostTracker(
+                client,
+                farmingWorld,
+                configManager
+        );
 
         birdHouseTracker = new BirdHouseTracker(
                 client,
@@ -79,8 +87,9 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 itemManager,
                 configManager,
                 timeTrackingConfig,
-                new FarmingWorld(),
-                notifier
+                farmingWorld,
+                notifier,
+                compostTracker
         );
     }
 
