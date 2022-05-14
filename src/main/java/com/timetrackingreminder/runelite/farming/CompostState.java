@@ -1,7 +1,7 @@
 // THIS FILE WAS AUTOMATICALLY GENERATED. DO NOT EDIT IT MANUALLY. SEE README.
 
 /*
- * Copyright (c) 2018 Abex
+ * Copyright (c) 2022 LlemonDuck
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,38 +26,20 @@
  */
 package com.timetrackingreminder.runelite.farming;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import net.runelite.api.annotations.Varbit;
-import net.runelite.client.plugins.timetracking.TimeTrackingConfig;
+import net.runelite.api.ItemID;
 
-@RequiredArgsConstructor(
-	access = AccessLevel.PACKAGE
-)
+@RequiredArgsConstructor
 @Getter
-@ToString(onlyExplicitlyIncluded = true)
-class FarmingPatch
+public enum CompostState
 {
-	@Setter(AccessLevel.PACKAGE)
-	@ToString.Include
-	private FarmingRegion region;
-	@ToString.Include
-	private final String name;
-	@Getter(onMethod_ = {@Varbit})
-	private final int varbit;
-	@ToString.Include
-	private final PatchImplementation implementation;
 
-	String configKey()
-	{
-		return region.getRegionID() + "." + varbit;
-	}
+	COMPOST(ItemID.COMPOST),
+	SUPERCOMPOST(ItemID.SUPERCOMPOST),
+	ULTRACOMPOST(ItemID.ULTRACOMPOST),
+	;
 
-	String notifyConfigKey()
-	{
-		return TimeTrackingConfig.NOTIFY + "." + region.getRegionID() + "." + varbit;
-	}
+	private final int itemId;
+
 }
