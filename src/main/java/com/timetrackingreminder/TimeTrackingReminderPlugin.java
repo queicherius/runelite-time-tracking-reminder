@@ -110,7 +110,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         this,
                         infoBoxManager,
                         itemManager,
-                        "Bird Houses",
+                        "Your Bird Houses are ready.",
                         21515, // Oak bird house
                         () -> config.birdHouses() && birdHouseTracker.getSummary() != SummaryState.IN_PROGRESS
                 ),
@@ -118,7 +118,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         this,
                         infoBoxManager,
                         itemManager,
-                        "Herb Patches",
+                        "Your Herb Patches are ready.",
                         207, // Grimy ranarr weed
                         () -> config.herbPatches() && farmingTracker.getSummary(Tab.HERB) != SummaryState.IN_PROGRESS
                 ),
@@ -126,7 +126,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         this,
                         infoBoxManager,
                         itemManager,
-                        "Tree Patches",
+                        "Your Tree Patches are ready.",
                         1515, // Yew logs
                         () -> config.treePatches() && farmingTracker.getSummary(Tab.TREE) != SummaryState.IN_PROGRESS
                 ),
@@ -134,7 +134,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         this,
                         infoBoxManager,
                         itemManager,
-                        "Fruit Tree Patches",
+                        "Your Fruit Tree Patches are ready.",
                         2114, // Pineapple
                         () -> config.fruitTreePatches() && farmingTracker.getSummary(Tab.FRUIT_TREE) != SummaryState.IN_PROGRESS
                 )
