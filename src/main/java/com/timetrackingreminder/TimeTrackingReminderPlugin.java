@@ -3,6 +3,7 @@ package com.timetrackingreminder;
 import com.google.inject.Inject;
 import com.google.inject.Provides;
 import com.timetrackingreminder.runelite.farming.CompostTracker;
+import com.timetrackingreminder.runelite.farming.FarmingContractManager;
 import com.timetrackingreminder.runelite.farming.FarmingWorld;
 import com.timetrackingreminder.runelite.hunter.BirdHouseTracker;
 import com.timetrackingreminder.runelite.farming.FarmingTracker;
@@ -49,6 +50,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
 
     private BirdHouseTracker birdHouseTracker;
     private FarmingTracker farmingTracker;
+    private FarmingContractManager farmingContractManager;
 
     private TimeTrackingReminderGroup[] reminderGroups;
 
@@ -90,6 +92,15 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 farmingWorld,
                 notifier,
                 compostTracker
+        );
+
+        farmingContractManager = new FarmingContractManager(
+                client,
+                itemManager,
+                configManager,
+                timeTrackingConfig,
+                farmingWorld,
+                farmingTracker
         );
     }
 
@@ -147,6 +158,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
 
         birdHouseTracker.loadFromConfig();
         farmingTracker.loadCompletionTimes();
+        farmingContractManager.loadContractFromConfig();
     }
 
     @Subscribe
@@ -157,6 +169,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
 
         birdHouseTracker.loadFromConfig();
         farmingTracker.loadCompletionTimes();
+        farmingContractManager.loadContractFromConfig();
     }
 
     @Subscribe
@@ -167,6 +180,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
 
         birdHouseTracker.updateCompletionTime();
         farmingTracker.updateCompletionTime();
+        farmingContractManager.handleContractState();
 
         for (TimeTrackingReminderGroup reminderGroup : reminderGroups) {
             reminderGroup.onGameTick();
