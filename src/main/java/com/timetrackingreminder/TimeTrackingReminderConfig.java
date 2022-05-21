@@ -50,4 +50,13 @@ public interface TimeTrackingReminderConfig extends Config {
     default boolean farmingContract() {
         return true;
     }
+
+    @ConfigItem(
+            keyName = "hespori",
+            name = "Hespori",
+            description = "Show an infobox when your Hespori Patch is ready."
+    )
+    default boolean hespori() {
+        return true;
+    }
 }

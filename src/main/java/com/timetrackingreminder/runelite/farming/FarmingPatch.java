@@ -35,11 +35,11 @@ import net.runelite.api.annotations.Varbit;
 import net.runelite.client.plugins.timetracking.TimeTrackingConfig;
 
 @RequiredArgsConstructor(
-	access = AccessLevel.PACKAGE
+	
 )
 @Getter
 @ToString(onlyExplicitlyIncluded = true)
-class FarmingPatch
+public class FarmingPatch
 {
 	@Setter(AccessLevel.PACKAGE)
 	@ToString.Include

@@ -49,12 +49,16 @@ patchCopiedFiles(/\t*@Inject\n/g, '')
 patchCopiedFiles(/\t*@Singleton\n/g, '')
 
 console.log('Patching files: (3) Overwrite visibility')
+patchCopiedFiles('access = AccessLevel.PACKAGE', '')
 patchCopiedFiles('private BirdHouseTracker(', 'public BirdHouseTracker(')
 patchCopiedFiles('private void updateCompletionTime', 'public void updateCompletionTime')
 patchCopiedFiles('private FarmingTracker(', 'public FarmingTracker(')
 patchCopiedFiles('class FarmingWorld', 'public class FarmingWorld')
 patchCopiedFiles('FarmingWorld(', 'public FarmingWorld(')
 patchCopiedFiles('private void handleContractState', 'public void handleContractState')
+patchCopiedFiles('class FarmingPatch', 'public class FarmingPatch')
+patchCopiedFiles('class PatchPrediction', 'public class PatchPrediction')
+patchCopiedFiles('\tFarmingRegion(', '\tpublic FarmingRegion(')
 
 const FarmingContractManagerConstructor = `	public FarmingContractManager(Client client, ItemManager itemManager, ConfigManager configManager, TimeTrackingConfig config, FarmingWorld farmingWorld, FarmingTracker farmingTracker)
 	{
