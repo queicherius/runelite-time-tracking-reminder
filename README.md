@@ -13,3 +13,10 @@ Current supported infoboxes, can be individually enabled and disabled:
 - Fruit Tree Patches
 - Farming Contract
 - Hespori Patch
+
+## Configuration
+
+This plugin inherits the "Prefer soonest completion" setting of the "Time Tracking" plugin:
+
+- **Checked:** Show an infobox when *any* patches of a specific type are ready
+- **Unchecked:** Show an infobox when *all* patches of a specific type are ready
