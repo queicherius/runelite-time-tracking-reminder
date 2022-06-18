@@ -11,6 +11,8 @@ Current supported infoboxes, can be individually enabled and disabled:
 - Herb Patches
 - Tree Patches
 - Fruit Tree Patches
+- Seaweed Patches
+- Bush Patches
 - Farming Contract
 - Hespori Patch
 
