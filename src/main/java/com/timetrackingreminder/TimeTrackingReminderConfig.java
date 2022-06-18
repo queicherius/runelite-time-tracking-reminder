@@ -43,6 +43,24 @@ public interface TimeTrackingReminderConfig extends Config {
     }
 
     @ConfigItem(
+            keyName = "seaweedpatches",
+            name = "Seaweed Patches",
+            description = "Show an infobox when your Seaweed Patches are ready."
+    )
+    default boolean seaweedPatches() {
+        return true;
+    }
+
+    @ConfigItem(
+            keyName = "bushpatches",
+            name = "Bush Patches",
+            description = "Show an infobox when your Bush Patches are ready."
+    )
+    default boolean bushPatches() {
+        return true;
+    }
+
+    @ConfigItem(
             keyName = "farmingcontract",
             name = "Farming Contract",
             description = "Show an infobox when your Farming Contract is ready."
@@ -56,28 +74,7 @@ public interface TimeTrackingReminderConfig extends Config {
             name = "Hespori",
             description = "Show an infobox when your Hespori Patch is ready."
     )
-
     default boolean hespori() {
-        return true;
-    }
-
-    @ConfigItem(
-            keyName = "seaweed",
-            name = "Seaweed",
-            description = "Show an infobox when your seaweed Patches are ready."
-    )
-
-    default boolean seaweed() {
-        return true;
-    }
-
-    @ConfigItem(
-            keyName = "bush",
-            name = "Bush",
-            description = "Show an infobox when your bush Patch is ready."
-    )
-
-    default boolean bush() {
         return true;
     }
 }

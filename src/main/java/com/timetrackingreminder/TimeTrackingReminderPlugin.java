@@ -142,9 +142,17 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         this,
                         infoBoxManager,
                         itemManager,
-                        "Your bush Patches are ready.",
-                        239, // whiteberry
-                        () -> config.bush() && farmingTracker.getSummary(Tab.BUSH) != SummaryState.IN_PROGRESS
+                        "Your Seaweed Patches are ready.",
+                        21504, // Giant seaweed
+                        () -> config.seaweedPatches() && showSeaweedInfoBox()
+                ),
+                new TimeTrackingReminderGroup(
+                        this,
+                        infoBoxManager,
+                        itemManager,
+                        "Your Bush Patches are ready.",
+                        239, // Whiteberry
+                        () -> config.bushPatches() && farmingTracker.getSummary(Tab.BUSH) != SummaryState.IN_PROGRESS
                 ),
                 new TimeTrackingReminderGroup(
                         this,
@@ -161,14 +169,6 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         "Your Hespori Patch is ready.",
                         20661, // Tangleroot
                         () -> config.hespori() && showHesporiInfoBox()
-                ),
-                new TimeTrackingReminderGroup(
-                        this,
-                        infoBoxManager,
-                        itemManager,
-                        "Your seaweed Patch is ready.",
-                        21504, // Giant seaweed
-                        () -> config.seaweed() && showSeaWeedInfoBox()
                 )
         };
     }
@@ -219,7 +219,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
         }
     }
 
-    private boolean showSeaWeedInfoBox() {
+    private boolean showSeaweedInfoBox() {
         FarmingRegion region = new FarmingRegion("Seaweed", 15008, true,
                 new FarmingPatch("North", Varbits.FARMING_4771, PatchImplementation.SEAWEED),
                 new FarmingPatch("South", Varbits.FARMING_4772, PatchImplementation.SEAWEED)
