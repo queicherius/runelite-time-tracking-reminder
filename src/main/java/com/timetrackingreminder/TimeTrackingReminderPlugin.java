@@ -142,6 +142,22 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         this,
                         infoBoxManager,
                         itemManager,
+                        "Your Seaweed Patches are ready.",
+                        21504, // Giant seaweed
+                        () -> config.seaweedPatches() && showSeaweedInfoBox()
+                ),
+                new TimeTrackingReminderGroup(
+                        this,
+                        infoBoxManager,
+                        itemManager,
+                        "Your Bush Patches are ready.",
+                        239, // Whiteberry
+                        () -> config.bushPatches() && farmingTracker.getSummary(Tab.BUSH) != SummaryState.IN_PROGRESS
+                ),
+                new TimeTrackingReminderGroup(
+                        this,
+                        infoBoxManager,
+                        itemManager,
                         "Your Farming Contract is ready.",
                         22993, // Seed pack
                         () -> config.farmingContract() && farmingContractManager.getSummary() != SummaryState.IN_PROGRESS
@@ -201,6 +217,31 @@ public class TimeTrackingReminderPlugin extends Plugin {
         for (TimeTrackingReminderGroup reminderGroup : reminderGroups) {
             reminderGroup.onGameTick();
         }
+    }
+
+    private boolean showSeaweedInfoBox() {
+        FarmingRegion region = new FarmingRegion("Seaweed", 15008, true,
+                new FarmingPatch("North", Varbits.FARMING_4771, PatchImplementation.SEAWEED),
+                new FarmingPatch("South", Varbits.FARMING_4772, PatchImplementation.SEAWEED)
+        );
+        FarmingPatch patch = region.getPatches()[0];
+        PatchPrediction prediction = farmingTracker.predictPatch(patch);
+
+        if (prediction == null) {
+            return false;
+        }
+
+        if (prediction.getProduce() != Produce.SEAWEED) {
+            return true;
+        }
+
+        if (prediction.getCropState() != CropState.GROWING) {
+            return true;
+        }
+
+        // If the state is "GROWING" check if it should be done by now
+        long unixNow = Instant.now().getEpochSecond();
+        return prediction.getDoneEstimate() <= unixNow;
     }
 
     private boolean showHesporiInfoBox() {
