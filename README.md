@@ -15,6 +15,7 @@ Current supported infoboxes, can be individually enabled and disabled:
 - Bush Patches
 - Farming Contract
 - Hespori Patch
+- Giant compost bin (super/ultra only)
 
 ## Configuration
 
