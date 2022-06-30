@@ -302,9 +302,9 @@ public class FarmingWorld
 			new FarmingPatch("", Varbits.FARMING_7912, PatchImplementation.GIANTCOMPOST),
 			new FarmingPatch("", Varbits.FARMING_7904, PatchImplementation.CACTUS),
 			new FarmingPatch("", Varbits.FARMING_4771, PatchImplementation.SPIRIT_TREE),
-			new FarmingPatch("", Varbits.FARMING_7909, PatchImplementation.FRUIT_TREE),
+			//new FarmingPatch("", Varbits.FARMING_7909, PatchImplementation.FRUIT_TREE),
 			new FarmingPatch("Anima", Varbits.FARMING_7911, PatchImplementation.ANIMA),
-			new FarmingPatch("", Varbits.FARMING_7910, PatchImplementation.CELASTRUS),
+			//new FarmingPatch("", Varbits.FARMING_7910, PatchImplementation.CELASTRUS),
 			new FarmingPatch("", Varbits.FARMING_7907, PatchImplementation.REDWOOD)
 		), 5177, 5178, 5179, 4921, 4923, 4665, 4666, 4667);
 
@@ -313,7 +313,7 @@ public class FarmingWorld
 				new FarmingPatch("North", Varbits.FARMING_4771, PatchImplementation.ALLOTMENT),
 				new FarmingPatch("South", Varbits.FARMING_4772, PatchImplementation.ALLOTMENT),
 				new FarmingPatch("", Varbits.FARMING_4773, PatchImplementation.FLOWER),
-				new FarmingPatch("", Varbits.FARMING_4775, PatchImplementation.CRYSTAL_TREE),
+				//new FarmingPatch("", Varbits.FARMING_4775, PatchImplementation.CRYSTAL_TREE),
 				new FarmingPatch("", Varbits.FARMING_4774, PatchImplementation.COMPOST) // TODO: Find correct varbit
 			), 12895, 12894, 13150,
 			/* Underground */ 12994, 12993, 12737, 12738, 12126, 12127, 13250);

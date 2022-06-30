@@ -87,4 +87,13 @@ public interface TimeTrackingReminderConfig extends Config {
     default boolean bush() {
         return true;
     }
+
+    @ConfigItem(
+            keyName = "calquat",
+            name = "calquat",
+            description = "Show an infobox when your calquat tree is ready."
+    )
+    default boolean calquat() {
+        return true;
+    }
 }

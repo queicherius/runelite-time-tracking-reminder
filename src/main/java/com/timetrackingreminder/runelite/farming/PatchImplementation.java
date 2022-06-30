@@ -2451,7 +2451,7 @@ public enum PatchImplementation
 				return null;
 			}
 		},
-	CALQUAT(Tab.FRUIT_TREE, "Calquat", true)
+	CALQUAT(Tab.CALQUAT, "Calquat", true)
 		{
 			@Override
 			PatchState forVarbitValue(int value)
@@ -2493,7 +2493,7 @@ public enum PatchImplementation
 				}
 				return null;
 			}
-		},
+		},/*
 	CELASTRUS(Tab.FRUIT_TREE, "Celastrus", true)
 		{
 			@Override
@@ -2551,7 +2551,7 @@ public enum PatchImplementation
 				}
 				return null;
 			}
-		},
+		},*/
 	GRAPES(Tab.GRAPE, "", true)
 		{
 			@Override
@@ -2576,7 +2576,7 @@ public enum PatchImplementation
 				}
 				return null;
 			}
-		},
+		},/*
 	CRYSTAL_TREE(Tab.FRUIT_TREE, "Crystal Tree", true)
 		{
 			@Override
@@ -2604,7 +2604,7 @@ public enum PatchImplementation
 				}
 				return null;
 			}
-		},
+		},*/
 	COMPOST(Tab.SPECIAL, "Compost Bin", true)
 		{
 			@Override
