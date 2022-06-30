@@ -18,7 +18,6 @@ import net.runelite.client.game.ItemManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.plugins.timetracking.SummaryState;
-import net.runelite.client.plugins.timetracking.Tab;
 import net.runelite.client.plugins.timetracking.TimeTrackingConfig;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 
@@ -136,23 +135,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         itemManager,
                         "Your Fruit Tree Patches are ready.",
                         2114, // Pineapple
-                        () -> config.fruitTreePatches() && farmingTracker.getSummary(Tab.FRUIT_TREE) != SummaryState.IN_PROGRESS
-                ),
-                new TimeTrackingReminderGroup(
-                        this,
-                        infoBoxManager,
-                        itemManager,
-                        "Your Seaweed Patches are ready.",
-                        21504, // Giant seaweed
-                        () -> config.seaweedPatches() && showSeaweedInfoBox()
-                ),
-                new TimeTrackingReminderGroup(
-                        this,
-                        infoBoxManager,
-                        itemManager,
-                        "Your Bush Patches are ready.",
-                        239, // Whiteberry
-                        () -> config.bushPatches() && farmingTracker.getSummary(Tab.BUSH) != SummaryState.IN_PROGRESS
+                        () -> config.fruitTreePatches() && farmingTracker.getSummary(Tab.SPECIAL) != SummaryState.IN_PROGRESS
                 ),
                 new TimeTrackingReminderGroup(
                         this,
@@ -169,6 +152,22 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         "Your Hespori Patch is ready.",
                         20661, // Tangleroot
                         () -> config.hespori() && showHesporiInfoBox()
+                ),
+                new TimeTrackingReminderGroup(
+                        this,
+                        infoBoxManager,
+                        itemManager,
+                        "Your compost bin is ready.",
+                        21483, // Ultracompost
+                        () -> config.compost() && farmingTracker.getSummary(Tab.COMPOST) != SummaryState.IN_PROGRESS
+                ),
+                new TimeTrackingReminderGroup(
+                        this,
+                        infoBoxManager,
+                        itemManager,
+                        "Your Giant seaweed Patch is ready.",
+                        21504, // Giant seaweed
+                        () -> config.seaweed() && farmingTracker.getSummary(Tab.SEAWEED) != SummaryState.IN_PROGRESS
                 )
         };
     }
@@ -216,40 +215,6 @@ public class TimeTrackingReminderPlugin extends Plugin {
 
         for (TimeTrackingReminderGroup reminderGroup : reminderGroups) {
             reminderGroup.onGameTick();
-        }
-    }
-
-    private boolean showSeaweedInfoBox() {
-        FarmingRegion region = new FarmingRegion("Seaweed", 15008, true,
-                new FarmingPatch("North", Varbits.FARMING_4771, PatchImplementation.SEAWEED),
-                new FarmingPatch("South", Varbits.FARMING_4772, PatchImplementation.SEAWEED)
-        );
-        FarmingPatch patch0 = region.getPatches()[0];
-        PatchPrediction prediction0 = farmingTracker.predictPatch(patch0);
-        FarmingPatch patch1 = region.getPatches()[1];
-        PatchPrediction prediction1 = farmingTracker.predictPatch(patch1);
-
-        if (prediction0 == null) {
-            return false;
-        }
-        if (prediction1 == null) {
-            return false;
-        }
-
-        if ((prediction0.getProduce() != Produce.SEAWEED) && (prediction1.getProduce() != Produce.SEAWEED)) {
-            return true;
-        }
-
-        if ((prediction0.getCropState() != CropState.GROWING) && (prediction1.getCropState() != CropState.GROWING)) {
-            return true;
-        }
-
-        // If the state is "GROWING" check if it should be done by now
-        long unixNow = Instant.now().getEpochSecond();
-        if (prediction0.getDoneEstimate() <= prediction1.getDoneEstimate()){
-            return prediction1.getDoneEstimate() <= unixNow;
-        }else{
-            return prediction0.getDoneEstimate() <= unixNow;
         }
     }
 
