@@ -168,6 +168,14 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         "Your Giant seaweed Patch is ready.",
                         21504, // Giant seaweed
                         () -> config.seaweed() && farmingTracker.getSummary(Tab.SEAWEED) != SummaryState.IN_PROGRESS
+                ),
+                new TimeTrackingReminderGroup(
+                        this,
+                        infoBoxManager,
+                        itemManager,
+                        "Your Giant seaweed Patch is ready.",
+                        239, // White berries
+                        () -> config.bush() && farmingTracker.getSummary(Tab.BUSH) != SummaryState.IN_PROGRESS
                 )
         };
     }

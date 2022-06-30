@@ -78,4 +78,13 @@ public interface TimeTrackingReminderConfig extends Config {
     default boolean seaweed() {
         return true;
     }
+
+    @ConfigItem(
+            keyName = "bush",
+            name = "bush",
+            description = "Show an infobox when your bush patches is ready."
+    )
+    default boolean bush() {
+        return true;
+    }
 }
