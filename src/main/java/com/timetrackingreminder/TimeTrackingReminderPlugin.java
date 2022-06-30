@@ -135,7 +135,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         itemManager,
                         "Your Fruit Tree Patches are ready.",
                         2114, // Pineapple
-                        () -> config.fruitTreePatches() && farmingTracker.getSummary(Tab.SPECIAL) != SummaryState.IN_PROGRESS
+                        () -> config.fruitTreePatches() && farmingTracker.getSummary(Tab.FRUIT_TREE) != SummaryState.IN_PROGRESS
                 ),
                 new TimeTrackingReminderGroup(
                         this,
@@ -165,7 +165,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         this,
                         infoBoxManager,
                         itemManager,
-                        "Your Giant seaweed Patch is ready.",
+                        "Your Giant seaweed Patches are ready.",
                         21504, // Giant seaweed
                         () -> config.seaweed() && farmingTracker.getSummary(Tab.SEAWEED) != SummaryState.IN_PROGRESS
                 ),
@@ -173,9 +173,17 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         this,
                         infoBoxManager,
                         itemManager,
-                        "Your Giant seaweed Patch is ready.",
+                        "Your berries  are ready.",
                         239, // White berries
                         () -> config.bush() && farmingTracker.getSummary(Tab.BUSH) != SummaryState.IN_PROGRESS
+                ),
+                new TimeTrackingReminderGroup(
+                        this,
+                        infoBoxManager,
+                        itemManager,
+                        "Your Calquat Patche is ready.",
+                        5980, // Calquat fruit
+                        () -> config.calquat() && farmingTracker.getSummary(Tab.CALQUAT) != SummaryState.IN_PROGRESS
                 )
         };
     }

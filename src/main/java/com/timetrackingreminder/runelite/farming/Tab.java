@@ -22,6 +22,7 @@ public enum Tab
     SPECIAL("Special Patches", ItemID.MUSHROOM),
     COMPOST("Giant compost", ItemID.ULTRACOMPOST),
     SEAWEED("Sea weed", ItemID.GIANT_SEAWEED),
+    CALQUAT("Sea weed", ItemID.CALQUAT_FRUIT),
     TIME_OFFSET("", ItemID.WATERING_CAN);
 
     public static final Tab[] FARMING_TABS = {HERB, TREE, FRUIT_TREE, SPECIAL, FLOWER, ALLOTMENT, BUSH, GRAPE, HOPS};
