@@ -119,7 +119,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         itemManager,
                         "Your Herb Patches are ready.",
                         207, // Grimy ranarr weed
-                        () -> config.herbPatches() && farmingTracker.getSummary(Tab.HERB) != SummaryState.IN_PROGRESS && instanseCheck()
+                        () -> config.herbPatches() && farmingTracker.getSummary(Tab.HERB1) != SummaryState.IN_PROGRESS && instanseCheck()
                 ),
                 new TimeTrackingReminderGroup(
                         this,
@@ -127,7 +127,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         itemManager,
                         "Your Tree Patches are ready.",
                         1515, // Yew logs
-                        () -> config.treePatches() && farmingTracker.getSummary(Tab.TREE) != SummaryState.IN_PROGRESS && instanseCheck()
+                        () -> config.treePatches() && farmingTracker.getSummary(Tab.TREE1) != SummaryState.IN_PROGRESS && instanseCheck()
                 ),
                 new TimeTrackingReminderGroup(
                         this,
@@ -135,7 +135,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         itemManager,
                         "Your Fruit Tree Patches are ready.",
                         2114, // Pineapple
-                        () -> config.fruitTreePatches() && farmingTracker.getSummary(Tab.FRUIT_TREE) != SummaryState.IN_PROGRESS && instanseCheck()
+                        () -> config.fruitTreePatches() && farmingTracker.getSummary(Tab.FRUIT_TREE1) != SummaryState.IN_PROGRESS && instanseCheck()
                 ),
                 new TimeTrackingReminderGroup(
                         this,
@@ -175,7 +175,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         itemManager,
                         "Your berries  are ready.",
                         239, // White berries
-                        () -> config.bush() && farmingTracker.getSummary(Tab.BUSH) != SummaryState.IN_PROGRESS && instanseCheck()
+                        () -> config.bush() && farmingTracker.getSummary(Tab.BUSH1) != SummaryState.IN_PROGRESS && instanseCheck()
                 ),
                 new TimeTrackingReminderGroup(
                         this,
@@ -207,7 +207,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         itemManager,
                         "Your Cactus Patch is ready.",
                         3138, // Potato cactus
-                        () -> config.hops() && farmingTracker.getSummary(Tab.CACTUS) != SummaryState.IN_PROGRESS && instanseCheck()
+                        () -> config.cactus() && farmingTracker.getSummary(Tab.CACTUS) != SummaryState.IN_PROGRESS && instanseCheck()
                 )
         };
     }
