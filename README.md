@@ -16,6 +16,11 @@ Current supported infoboxes, can be individually enabled and disabled:
 - Farming Contract
 - Hespori Patch
 - Giant compost bin
+- Hop Patches
+- Al kharid cactus Patch
+- Hardwood Patches
+- Redwood Patch
+- Calquat Patch
 
 ## Configuration
 
