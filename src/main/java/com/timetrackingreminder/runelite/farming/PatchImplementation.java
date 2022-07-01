@@ -2340,7 +2340,7 @@ public enum PatchImplementation
 				return null;
 			}
 		},
-	CACTUS(Tab.SPECIAL, "Cactus", true)
+	CACTUS(Tab.CACTUS, "Cactus", true)
 		{
 			@Override
 			PatchState forVarbitValue(int value)

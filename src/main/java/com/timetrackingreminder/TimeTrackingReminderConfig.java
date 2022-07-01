@@ -105,4 +105,40 @@ public interface TimeTrackingReminderConfig extends Config {
     default boolean redwood() {
         return true;
     }
+
+    @ConfigItem(
+            keyName = "hardwood",
+            name = "hardwood",
+            description = "Show an infobox when your hardwood trees is ready."
+    )
+    default boolean hardwood() {
+        return true;
+    }
+
+    @ConfigItem(
+            keyName = "hops",
+            name = "hops",
+            description = "Show an infobox when your hops patches are ready."
+    )
+    default boolean hops() {
+        return true;
+    }
+
+    @ConfigItem(
+            keyName = "instanse",
+            name = "instanse",
+            description = "dont show/show in instanses."
+    )
+    default boolean instanse() {
+        return true;
+    }
+
+    @ConfigItem(
+            keyName = "cactus",
+            name = "cactus",
+            description = "Show an infobox when your cactus us ready."
+    )
+    default boolean cactus() {
+        return true;
+    }
 }
