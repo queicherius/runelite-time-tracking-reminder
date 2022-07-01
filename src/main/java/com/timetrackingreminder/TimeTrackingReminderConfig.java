@@ -73,7 +73,7 @@ public interface TimeTrackingReminderConfig extends Config {
     @ConfigItem(
             keyName = "seaweed",
             name = "seaweed",
-            description = "Show an infobox when your seaweed patches is ready."
+            description = "Show an infobox when your seaweed patches are ready."
     )
     default boolean seaweed() {
         return true;
@@ -82,7 +82,7 @@ public interface TimeTrackingReminderConfig extends Config {
     @ConfigItem(
             keyName = "bush",
             name = "bush",
-            description = "Show an infobox when your bush patches is ready."
+            description = "Show an infobox when your bush patches are ready."
     )
     default boolean bush() {
         return true;
@@ -103,13 +103,13 @@ public interface TimeTrackingReminderConfig extends Config {
             description = "Show an infobox when your redwood tree is ready."
     )
     default boolean redwood() {
-        return true;
+        return false;
     }
 
     @ConfigItem(
             keyName = "hardwood",
             name = "hardwood",
-            description = "Show an infobox when your hardwood trees is ready."
+            description = "Show an infobox when your hardwood trees are ready."
     )
     default boolean hardwood() {
         return true;
@@ -127,7 +127,7 @@ public interface TimeTrackingReminderConfig extends Config {
     @ConfigItem(
             keyName = "instanse",
             name = "instanse",
-            description = "dont show/show in instanses."
+            description = "Enable/disable infoboxes in instanses."
     )
     default boolean instanse() {
         return true;
@@ -136,7 +136,7 @@ public interface TimeTrackingReminderConfig extends Config {
     @ConfigItem(
             keyName = "cactus",
             name = "cactus",
-            description = "Show an infobox when your cactus us ready."
+            description = "Show an infobox when your cactus is ready."
     )
     default boolean cactus() {
         return true;
