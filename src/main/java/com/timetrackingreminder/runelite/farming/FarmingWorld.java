@@ -80,8 +80,8 @@ public class FarmingWorld
 		));
 
 		add(new FarmingRegion("Brimhaven", 11058, false,
-			new FarmingPatch("", Varbits.FARMING_4771, PatchImplementation.FRUIT_TREE),
-			new FarmingPatch("", Varbits.FARMING_4772, PatchImplementation.SPIRIT_TREE)
+			new FarmingPatch("", Varbits.FARMING_4771, PatchImplementation.FRUIT_TREE)
+			//new FarmingPatch("", Varbits.FARMING_4772, PatchImplementation.SPIRIT_TREE)
 		), 11057);
 
 		add(new FarmingRegion("Catherby", 11062, false,
@@ -128,8 +128,8 @@ public class FarmingWorld
 		), 11316);
 
 		add(new FarmingRegion("Etceteria", 10300, false,
-			new FarmingPatch("", Varbits.FARMING_4771, PatchImplementation.BUSH),
-			new FarmingPatch("", Varbits.FARMING_4772, PatchImplementation.SPIRIT_TREE)
+			new FarmingPatch("", Varbits.FARMING_4771, PatchImplementation.BUSH)
+			//new FarmingPatch("", Varbits.FARMING_4772, PatchImplementation.SPIRIT_TREE)
 		));
 
 		add(new FarmingRegion("Falador", 11828, false,
@@ -199,8 +199,8 @@ public class FarmingWorld
 			new FarmingPatch("South West", Varbits.FARMING_4772, PatchImplementation.ALLOTMENT),
 			new FarmingPatch("", Varbits.FARMING_4773, PatchImplementation.FLOWER),
 			new FarmingPatch("", Varbits.FARMING_4774, PatchImplementation.HERB),
-			new FarmingPatch("", Varbits.FARMING_4775, PatchImplementation.COMPOST),
-			new FarmingPatch("", Varbits.FARMING_7904, PatchImplementation.SPIRIT_TREE)
+			new FarmingPatch("", Varbits.FARMING_4775, PatchImplementation.COMPOST)
+			//new FarmingPatch("", Varbits.FARMING_7904, PatchImplementation.SPIRIT_TREE)
 		), 6711);
 		add(new FarmingRegion("Kourend", 7223, false,
 			new FarmingPatch("East 1", Varbits.GRAPES_4953, PatchImplementation.GRAPES),
@@ -238,7 +238,7 @@ public class FarmingWorld
 			new FarmingPatch("", Varbits.FARMING_4774, PatchImplementation.HERB),
 			new FarmingPatch("", Varbits.FARMING_4775, PatchImplementation.COMPOST)
 		), 14390);
-
+		/*
 		add(new FarmingRegion("Port Sarim", 12082, false,
 			new FarmingPatch("", Varbits.FARMING_4771, PatchImplementation.SPIRIT_TREE)
 		)
@@ -248,7 +248,7 @@ public class FarmingWorld
 			{
 				return loc.getY() < 3272;
 			}
-		}, 12083);
+		}, 12083);*/
 
 		add(new FarmingRegion("Rimmington", 11570, false,
 			new FarmingPatch("", Varbits.FARMING_4771, PatchImplementation.BUSH)
@@ -301,7 +301,7 @@ public class FarmingWorld
 			new FarmingPatch("", Varbits.FARMING_7912, PatchImplementation.GIANT_COMPOST),
 			new FarmingPatch("", Varbits.FARMING_7912, PatchImplementation.GIANTCOMPOST),
 			new FarmingPatch("", Varbits.FARMING_7904, PatchImplementation.CACTUS),
-			new FarmingPatch("", Varbits.FARMING_4771, PatchImplementation.SPIRIT_TREE),
+			//new FarmingPatch("", Varbits.FARMING_4771, PatchImplementation.SPIRIT_TREE),
 			//new FarmingPatch("", Varbits.FARMING_7909, PatchImplementation.FRUIT_TREE),
 			new FarmingPatch("Anima", Varbits.FARMING_7911, PatchImplementation.ANIMA),
 			//new FarmingPatch("", Varbits.FARMING_7910, PatchImplementation.CELASTRUS),

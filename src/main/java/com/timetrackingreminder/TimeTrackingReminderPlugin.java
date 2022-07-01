@@ -181,9 +181,17 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         this,
                         infoBoxManager,
                         itemManager,
-                        "Your Calquat Patche is ready.",
+                        "Your Calquat Patch is ready.",
                         5980, // Calquat fruit
                         () -> config.calquat() && farmingTracker.getSummary(Tab.CALQUAT) != SummaryState.IN_PROGRESS
+                ),
+                new TimeTrackingReminderGroup(
+                        this,
+                        infoBoxManager,
+                        itemManager,
+                        "Your redwood Patch is ready.",
+                        19669, // Redwood log
+                        () -> config.redwood() && farmingTracker.getSummary(Tab.REDWOOD) != SummaryState.IN_PROGRESS
                 )
         };
     }

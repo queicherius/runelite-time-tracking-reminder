@@ -129,7 +129,7 @@ public enum Produce
 	MUSHROOM("Mushroom", PatchImplementation.MUSHROOM, ItemID.MUSHROOM, 40, 7, 0, 7),
 	BELLADONNA("Belladonna", PatchImplementation.BELLADONNA, ItemID.CAVE_NIGHTSHADE, 80, 5),
 	CALQUAT("Calquat", PatchImplementation.CALQUAT, ItemID.CALQUAT_FRUIT, 160, 9, 0, 7),
-	SPIRIT_TREE("Spirit tree", PatchImplementation.SPIRIT_TREE, ItemID.SPIRIT_TREE, 320, 13),
+	//SPIRIT_TREE("Spirit tree", PatchImplementation.SPIRIT_TREE, ItemID.SPIRIT_TREE, 320, 13),
 	//CELASTRUS("Celastrus", "Celastrus tree", PatchImplementation.CELASTRUS, ItemID.BATTLESTAFF, 160, 6, 0, 4),
 	REDWOOD("Redwood", "Redwood tree", PatchImplementation.REDWOOD, ItemID.REDWOOD_LOGS, 640, 11),
 	HESPORI("Hespori", PatchImplementation.HESPORI, NullItemID.NULL_23044, 640, 4, 0, 2),
