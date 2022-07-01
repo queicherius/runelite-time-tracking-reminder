@@ -19,7 +19,6 @@ Current supported infoboxes, can be individually enabled and disabled:
 - Hop Patches
 - Al kharid cactus Patch
 - Hardwood Patches
-- Redwood Patch
 - Calquat Patch
 
 ## Configuration
