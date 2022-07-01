@@ -2114,7 +2114,7 @@ public enum PatchImplementation
 				return null;
 			}
 		},
-	HARDWOOD_TREE(Tab.TREE, "Hardwood Trees", true)
+	HARDWOOD_TREE(Tab.HARDWOOD, "Hardwood Trees", true)
 		{
 			@Override
 			PatchState forVarbitValue(int value)
@@ -2197,7 +2197,7 @@ public enum PatchImplementation
 				return null;
 			}
 		},
-	REDWOOD(Tab.TREE, "Redwood Trees", true)
+	REDWOOD(Tab.REDWOOD, "Redwood Trees", true)
 		{
 			@Override
 			PatchState forVarbitValue(int value)
@@ -2244,7 +2244,7 @@ public enum PatchImplementation
 				}
 				return null;
 			}
-		},
+		},/*
 	SPIRIT_TREE(Tab.TREE, "Spirit Trees", true)
 		{
 			@Override
@@ -2292,7 +2292,7 @@ public enum PatchImplementation
 				}
 				return null;
 			}
-		},
+		},*/
 	ANIMA(Tab.SPECIAL, "", false)
 		{
 			@Override

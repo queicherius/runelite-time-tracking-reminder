@@ -96,4 +96,13 @@ public interface TimeTrackingReminderConfig extends Config {
     default boolean calquat() {
         return true;
     }
+
+    @ConfigItem(
+            keyName = "redwood",
+            name = "redwood",
+            description = "Show an infobox when your redwood tree is ready."
+    )
+    default boolean redwood() {
+        return true;
+    }
 }
