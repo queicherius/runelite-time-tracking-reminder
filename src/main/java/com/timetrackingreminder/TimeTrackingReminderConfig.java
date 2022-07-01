@@ -98,15 +98,6 @@ public interface TimeTrackingReminderConfig extends Config {
     }
 
     @ConfigItem(
-            keyName = "redwood",
-            name = "redwood",
-            description = "Show an infobox when your redwood tree is ready."
-    )
-    default boolean redwood() {
-        return false;
-    }
-
-    @ConfigItem(
             keyName = "hardwood",
             name = "hardwood",
             description = "Show an infobox when your hardwood trees are ready."

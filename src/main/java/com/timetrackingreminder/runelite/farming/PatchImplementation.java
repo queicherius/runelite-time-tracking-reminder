@@ -2197,54 +2197,55 @@ public enum PatchImplementation
 				return null;
 			}
 		},
-	REDWOOD(Tab.REDWOOD, "Redwood Trees", true)
-		{
-			@Override
-			PatchState forVarbitValue(int value)
+	REDWOOD(Tab.SPECIAL, "Redwood Trees", true)
 			{
-				if (value >= 0 && value <= 3)
+				@Override
+				PatchState forVarbitValue(int value)
 				{
-					// Redwood tree patch[Rake,Inspect,Guide] 34050,34049,34048,34047
-					return new PatchState(Produce.WEEDS, CropState.GROWING, 3 - value);
+					if (value >= 0 && value <= 3)
+					{
+						// Redwood tree patch[Rake,Inspect,Guide] 34050,34049,34048,34047
+						return new PatchState(Produce.WEEDS, CropState.GROWING, 3 - value);
+					}
+					if (value >= 4 && value <= 7)
+					{
+						// Redwood tree patch[Rake,Inspect,Guide] 34050,34050,34050,34050
+						return new PatchState(Produce.WEEDS, CropState.GROWING, 3);
+					}
+					if (value >= 8 && value <= 17)
+					{
+						// Redwood tree[Inspect,Guide] 34205,34206,34207,34208,34209,34210,34215,34224,34242,34260
+						return new PatchState(Produce.REDWOOD, CropState.GROWING, value - 8);
+					}
+					if (value == 18)
+					{
+						// Redwood tree[Clear,Inspect,Guide] 34278
+						return new PatchState(Produce.REDWOOD, CropState.HARVESTABLE, 0);
+					}
+					if (value >= 19 && value <= 27)
+					{
+						// Diseased Redwood tree[Prune,Inspect,Guide] 34130,34131,34132,34133,34134,34139,34148,34166,34184
+						return new PatchState(Produce.REDWOOD, CropState.DISEASED, value - 18);
+					}
+					if (value >= 28 && value <= 36)
+					{
+						// Dead Redwood tree[Clear,Inspect,Guide] 34061,34062,34063,34064,34065,34070,34079,34097,34115
+						return new PatchState(Produce.REDWOOD, CropState.DEAD, value - 27);
+					}
+					if (value == 37)
+					{
+						// Redwood tree[Check-health,Inspect,Guide] 34297
+						return new PatchState(Produce.REDWOOD, CropState.GROWING, Produce.REDWOOD.getStages() - 1);
+					}
+					if (value >= 41 && value <= 55)
+					{
+						// Redwood tree[Clear,Inspect,Guide] 34278,34278,34278,34278,34278,34278,34278,34278,34278,34278,34278,34278,34278,34278,34278
+						return new PatchState(Produce.REDWOOD, CropState.HARVESTABLE, 0);
+					}
+					return null;
 				}
-				if (value >= 4 && value <= 7)
-				{
-					// Redwood tree patch[Rake,Inspect,Guide] 34050,34050,34050,34050
-					return new PatchState(Produce.WEEDS, CropState.GROWING, 3);
-				}
-				if (value >= 8 && value <= 17)
-				{
-					// Redwood tree[Inspect,Guide] 34205,34206,34207,34208,34209,34210,34215,34224,34242,34260
-					return new PatchState(Produce.REDWOOD, CropState.GROWING, value - 8);
-				}
-				if (value == 18)
-				{
-					// Redwood tree[Clear,Inspect,Guide] 34278
-					return new PatchState(Produce.REDWOOD, CropState.HARVESTABLE, 0);
-				}
-				if (value >= 19 && value <= 27)
-				{
-					// Diseased Redwood tree[Prune,Inspect,Guide] 34130,34131,34132,34133,34134,34139,34148,34166,34184
-					return new PatchState(Produce.REDWOOD, CropState.DISEASED, value - 18);
-				}
-				if (value >= 28 && value <= 36)
-				{
-					// Dead Redwood tree[Clear,Inspect,Guide] 34061,34062,34063,34064,34065,34070,34079,34097,34115
-					return new PatchState(Produce.REDWOOD, CropState.DEAD, value - 27);
-				}
-				if (value == 37)
-				{
-					// Redwood tree[Check-health,Inspect,Guide] 34297
-					return new PatchState(Produce.REDWOOD, CropState.GROWING, Produce.REDWOOD.getStages() - 1);
-				}
-				if (value >= 41 && value <= 55)
-				{
-					// Redwood tree[Clear,Inspect,Guide] 34278,34278,34278,34278,34278,34278,34278,34278,34278,34278,34278,34278,34278,34278,34278
-					return new PatchState(Produce.REDWOOD, CropState.HARVESTABLE, 0);
-				}
-				return null;
-			}
-		},/*
+			},
+	/*
 	SPIRIT_TREE(Tab.TREE, "Spirit Trees", true)
 		{
 			@Override
@@ -2493,7 +2494,7 @@ public enum PatchImplementation
 				}
 				return null;
 			}
-		},/*
+		},
 	CELASTRUS(Tab.FRUIT_TREE, "Celastrus", true)
 		{
 			@Override
@@ -2551,7 +2552,7 @@ public enum PatchImplementation
 				}
 				return null;
 			}
-		},*/
+		},
 	GRAPES(Tab.GRAPE, "", true)
 		{
 			@Override

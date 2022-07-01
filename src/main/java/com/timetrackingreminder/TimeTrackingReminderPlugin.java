@@ -189,14 +189,6 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         this,
                         infoBoxManager,
                         itemManager,
-                        "Your redwood Patch is ready.",
-                        19669, // Redwood log
-                        () -> config.redwood() && farmingTracker.getSummary(Tab.REDWOOD) != SummaryState.IN_PROGRESS && instanseCheck()
-                ),
-                new TimeTrackingReminderGroup(
-                        this,
-                        infoBoxManager,
-                        itemManager,
                         "Your hardwood Patch is ready.",
                         6333, // Teak log
                         () -> config.hardwood() && farmingTracker.getSummary(Tab.HARDWOOD) != SummaryState.IN_PROGRESS && instanseCheck()
