@@ -77,4 +77,13 @@ public interface TimeTrackingReminderConfig extends Config {
     default boolean hespori() {
         return true;
     }
+
+    @ConfigItem(
+            keyName = "showininstances",
+            name = "Show in instances",
+            description = "Show/hide infoboxes in instances (such as raids)."
+    )
+    default boolean showInInstances() {
+        return true;
+    }
 }

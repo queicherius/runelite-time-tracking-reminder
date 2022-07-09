@@ -112,7 +112,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         itemManager,
                         "Your Bird Houses are ready.",
                         21515, // Oak bird house
-                        () -> config.birdHouses() && birdHouseTracker.getSummary() != SummaryState.IN_PROGRESS
+                        () -> config.birdHouses() && showInfoboxInInstance() && birdHouseTracker.getSummary() != SummaryState.IN_PROGRESS
                 ),
                 new TimeTrackingReminderGroup(
                         this,
@@ -120,7 +120,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         itemManager,
                         "Your Herb Patches are ready.",
                         207, // Grimy ranarr weed
-                        () -> config.herbPatches() && farmingTracker.getSummary(Tab.HERB) != SummaryState.IN_PROGRESS
+                        () -> config.herbPatches() && showInfoboxInInstance() && farmingTracker.getSummary(Tab.HERB) != SummaryState.IN_PROGRESS
                 ),
                 new TimeTrackingReminderGroup(
                         this,
@@ -128,7 +128,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         itemManager,
                         "Your Tree Patches are ready.",
                         1515, // Yew logs
-                        () -> config.treePatches() && farmingTracker.getSummary(Tab.TREE) != SummaryState.IN_PROGRESS
+                        () -> config.treePatches() && showInfoboxInInstance() && farmingTracker.getSummary(Tab.TREE) != SummaryState.IN_PROGRESS
                 ),
                 new TimeTrackingReminderGroup(
                         this,
@@ -136,7 +136,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         itemManager,
                         "Your Fruit Tree Patches are ready.",
                         2114, // Pineapple
-                        () -> config.fruitTreePatches() && farmingTracker.getSummary(Tab.FRUIT_TREE) != SummaryState.IN_PROGRESS
+                        () -> config.fruitTreePatches() && showInfoboxInInstance() && farmingTracker.getSummary(Tab.FRUIT_TREE) != SummaryState.IN_PROGRESS
                 ),
                 new TimeTrackingReminderGroup(
                         this,
@@ -144,7 +144,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         itemManager,
                         "Your Seaweed Patches are ready.",
                         21504, // Giant seaweed
-                        () -> config.seaweedPatches() && showSeaweedInfoBox()
+                        () -> config.seaweedPatches() && showInfoboxInInstance() && showSeaweedInfoBox()
                 ),
                 new TimeTrackingReminderGroup(
                         this,
@@ -152,7 +152,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         itemManager,
                         "Your Bush Patches are ready.",
                         239, // Whiteberry
-                        () -> config.bushPatches() && farmingTracker.getSummary(Tab.BUSH) != SummaryState.IN_PROGRESS
+                        () -> config.bushPatches() && showInfoboxInInstance() && farmingTracker.getSummary(Tab.BUSH) != SummaryState.IN_PROGRESS
                 ),
                 new TimeTrackingReminderGroup(
                         this,
@@ -160,7 +160,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         itemManager,
                         "Your Farming Contract is ready.",
                         22993, // Seed pack
-                        () -> config.farmingContract() && farmingContractManager.getSummary() != SummaryState.IN_PROGRESS
+                        () -> config.farmingContract() && showInfoboxInInstance() && farmingContractManager.getSummary() != SummaryState.IN_PROGRESS
                 ),
                 new TimeTrackingReminderGroup(
                         this,
@@ -168,7 +168,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         itemManager,
                         "Your Hespori Patch is ready.",
                         20661, // Tangleroot
-                        () -> config.hespori() && showHesporiInfoBox()
+                        () -> config.hespori() && showInfoboxInInstance() && showHesporiInfoBox()
                 )
         };
     }
@@ -217,6 +217,14 @@ public class TimeTrackingReminderPlugin extends Plugin {
         for (TimeTrackingReminderGroup reminderGroup : reminderGroups) {
             reminderGroup.onGameTick();
         }
+    }
+
+    private boolean showInfoboxInInstance() {
+        if (!config.showInInstances() && client.isInInstancedRegion()){
+            return false;
+        }
+
+        return true;
     }
 
     private boolean showSeaweedInfoBox() {
