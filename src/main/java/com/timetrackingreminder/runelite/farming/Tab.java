@@ -24,8 +24,9 @@ public enum Tab
 	SEAWEED("Seaweed", ItemID.GIANT_SEAWEED),
 	CALQUAT("Calquat Patch", ItemID.CALQUAT_FRUIT),
 	HARDWOOD("Hardwood Patches", ItemID.TEAK_LOGS),
+  REDWOOD("Redwood Patch", ItemID.REDWOOD_LOGS),
 	CACTUS("Cactus Patch", ItemID.POTATO_CACTUS),
-	HESPORI("Hespori Patch", ItemID.TANGLEROOT)
+	HESPORI("Hespori Patch", ItemID.TANGLEROOT),
 	TIME_OFFSET("Farming Tick Offset", ItemID.WATERING_CAN);
 
 	public static final Tab[] FARMING_TABS = {HERB, TREE, FRUIT_TREE, SPECIAL, FLOWER, ALLOTMENT, BUSH, GRAPE, HOPS};

@@ -131,4 +131,13 @@ public interface TimeTrackingReminderConfig extends Config {
     default boolean cactusPatch() {
         return true;
     }
+
+    @ConfigItem(
+            keyName = "redwoodpatch",
+            name = "Redwood patch",
+            description = "Show an infobox when your redwood patch is ready."
+    )
+    default boolean redwoodPatch() {
+        return true;
+    }
 }

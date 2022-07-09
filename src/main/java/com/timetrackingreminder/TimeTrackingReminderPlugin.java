@@ -190,7 +190,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         infoBoxManager,
                         itemManager,
                         "Your hardwood patches are ready.",
-                        6333, // Teak log
+                        6333, // Teak logs
                         () -> config.hardwoodPatches() && showInfoboxInInstance() && farmingTracker.getSummary(Tab.HARDWOOD) != SummaryState.IN_PROGRESS
                 ),
                 new TimeTrackingReminderGroup(
@@ -208,6 +208,14 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         "Your cactus patch is ready.",
                         3138, // Potato cactus
                         () -> config.cactusPatch() && showInfoboxInInstance() && farmingTracker.getSummary(Tab.CACTUS) != SummaryState.IN_PROGRESS
+                ),
+                new TimeTrackingReminderGroup(
+                        this,
+                        infoBoxManager,
+                        itemManager,
+                        "Your redwood patch is ready.",
+                        19669, // Redwood log
+                        () -> config.redwoodPatch() && showInfoboxInInstance() && farmingTracker.getSummary(Tab.REDWOOD) != SummaryState.IN_PROGRESS
                 )
         };
     }

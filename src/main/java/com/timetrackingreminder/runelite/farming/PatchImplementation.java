@@ -29,7 +29,6 @@ package com.timetrackingreminder.runelite.farming;
 import javax.annotation.Nullable;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.runelite.client.plugins.timetracking.Tab;
 
 @RequiredArgsConstructor
 @Getter
@@ -111,7 +110,7 @@ public enum PatchImplementation
 				return null;
 			}
 		},
-	HESPORI(Tab.SPECIAL, "", true)
+	HESPORI(Tab.HESPORI, "", true)
 		{
 			@Override
 			PatchState forVarbitValue(int value)
@@ -2115,7 +2114,7 @@ public enum PatchImplementation
 				return null;
 			}
 		},
-	HARDWOOD_TREE(Tab.TREE, "Hardwood Trees", true)
+	HARDWOOD_TREE(Tab.HARDWOOD, "Hardwood Trees", true)
 		{
 			@Override
 			PatchState forVarbitValue(int value)
@@ -2198,7 +2197,7 @@ public enum PatchImplementation
 				return null;
 			}
 		},
-	REDWOOD(Tab.TREE, "Redwood Trees", true)
+	REDWOOD(Tab.REDWOOD, "Redwood Trees", true)
 		{
 			@Override
 			PatchState forVarbitValue(int value)
@@ -2246,7 +2245,7 @@ public enum PatchImplementation
 				return null;
 			}
 		},
-	SPIRIT_TREE(Tab.TREE, "Spirit Trees", true)
+	SPIRIT_TREE(Tab.SPECIAL, "Spirit Trees", true)
 		{
 			@Override
 			PatchState forVarbitValue(int value)
@@ -2341,7 +2340,7 @@ public enum PatchImplementation
 				return null;
 			}
 		},
-	CACTUS(Tab.SPECIAL, "Cactus", true)
+	CACTUS(Tab.CACTUS, "Cactus", true)
 		{
 			@Override
 			PatchState forVarbitValue(int value)
@@ -2414,7 +2413,7 @@ public enum PatchImplementation
 				return null;
 			}
 		},
-	SEAWEED(Tab.SPECIAL, "Seaweed", false)
+	SEAWEED(Tab.SEAWEED, "Seaweed", false)
 		{
 			@Override
 			PatchState forVarbitValue(int value)
@@ -2452,7 +2451,7 @@ public enum PatchImplementation
 				return null;
 			}
 		},
-	CALQUAT(Tab.FRUIT_TREE, "Calquat", true)
+	CALQUAT(Tab.CALQUAT, "Calquat", true)
 		{
 			@Override
 			PatchState forVarbitValue(int value)
@@ -2578,7 +2577,7 @@ public enum PatchImplementation
 				return null;
 			}
 		},
-	CRYSTAL_TREE(Tab.FRUIT_TREE, "Crystal Tree", true)
+	CRYSTAL_TREE(Tab.SPECIAL, "Crystal Tree", true)
 		{
 			@Override
 			PatchState forVarbitValue(int value)
@@ -2679,7 +2678,7 @@ public enum PatchImplementation
 				return null;
 			}
 		},
-	GIANT_COMPOST(Tab.SPECIAL, "Giant Compost Bin", true)
+	GIANT_COMPOST(Tab.GIANT_COMPOST, "Giant Compost Bin", true)
 		{
 			@Override
 			PatchState forVarbitValue(int value)
