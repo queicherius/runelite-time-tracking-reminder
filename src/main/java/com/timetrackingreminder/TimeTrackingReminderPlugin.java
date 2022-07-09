@@ -18,7 +18,6 @@ import net.runelite.client.game.ItemManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.plugins.timetracking.SummaryState;
-import net.runelite.client.plugins.timetracking.Tab;
 import net.runelite.client.plugins.timetracking.TimeTrackingConfig;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 
@@ -144,14 +143,14 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         itemManager,
                         "Your seaweed patches are ready.",
                         21504, // Giant seaweed
-                        () -> config.seaweedPatches() && showInfoboxInInstance() && showSeaweedInfoBox()
+                        () -> config.seaweedPatches() && showInfoboxInInstance() && farmingTracker.getSummary(Tab.SEAWEED) != SummaryState.IN_PROGRESS
                 ),
                 new TimeTrackingReminderGroup(
                         this,
                         infoBoxManager,
                         itemManager,
                         "Your bush patches are ready.",
-                        239, // Whiteberry
+                        239, // White berries
                         () -> config.bushPatches() && showInfoboxInInstance() && farmingTracker.getSummary(Tab.BUSH) != SummaryState.IN_PROGRESS
                 ),
                 new TimeTrackingReminderGroup(
@@ -168,7 +167,47 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         itemManager,
                         "Your Hespori patch is ready.",
                         20661, // Tangleroot
-                        () -> config.hespori() && showInfoboxInInstance() && showHesporiInfoBox()
+                        () -> config.hespori() && showInfoboxInInstance() && farmingTracker.getSummary(Tab.HESPORI) != SummaryState.IN_PROGRESS
+                ),
+                new TimeTrackingReminderGroup(
+                        this,
+                        infoBoxManager,
+                        itemManager,
+                        "Your giant compost bin is ready.",
+                        21483, // Ultracompost
+                        () -> config.giantCompostBin() && showInfoboxInInstance() && farmingTracker.getSummary(Tab.GIANT_COMPOST) != SummaryState.IN_PROGRESS
+                ),
+                new TimeTrackingReminderGroup(
+                        this,
+                        infoBoxManager,
+                        itemManager,
+                        "Your calquat patch is ready.",
+                        5980, // Calquat fruit
+                        () -> config.calquatPatch() && showInfoboxInInstance() && farmingTracker.getSummary(Tab.CALQUAT) != SummaryState.IN_PROGRESS
+                ),
+                new TimeTrackingReminderGroup(
+                        this,
+                        infoBoxManager,
+                        itemManager,
+                        "Your hardwood patches are ready.",
+                        6333, // Teak log
+                        () -> config.hardwoodPatches() && showInfoboxInInstance() && farmingTracker.getSummary(Tab.HARDWOOD) != SummaryState.IN_PROGRESS
+                ),
+                new TimeTrackingReminderGroup(
+                        this,
+                        infoBoxManager,
+                        itemManager,
+                        "Your hops patches are ready.",
+                        6006, // Barley
+                        () -> config.hopsPatches() && showInfoboxInInstance() && farmingTracker.getSummary(Tab.HOPS) != SummaryState.IN_PROGRESS
+                ),
+                new TimeTrackingReminderGroup(
+                        this,
+                        infoBoxManager,
+                        itemManager,
+                        "Your cactus patch is ready.",
+                        3138, // Potato cactus
+                        () -> config.cactusPatch() && showInfoboxInInstance() && farmingTracker.getSummary(Tab.CACTUS) != SummaryState.IN_PROGRESS
                 )
         };
     }
@@ -225,54 +264,5 @@ public class TimeTrackingReminderPlugin extends Plugin {
         }
 
         return true;
-    }
-
-    private boolean showSeaweedInfoBox() {
-        FarmingRegion region = new FarmingRegion("Seaweed", 15008, true,
-                new FarmingPatch("North", Varbits.FARMING_4771, PatchImplementation.SEAWEED),
-                new FarmingPatch("South", Varbits.FARMING_4772, PatchImplementation.SEAWEED)
-        );
-        FarmingPatch patch = region.getPatches()[0];
-        PatchPrediction prediction = farmingTracker.predictPatch(patch);
-
-        if (prediction == null) {
-            return false;
-        }
-
-        if (prediction.getProduce() != Produce.SEAWEED) {
-            return true;
-        }
-
-        if (prediction.getCropState() != CropState.GROWING) {
-            return true;
-        }
-
-        // If the state is "GROWING" check if it should be done by now
-        long unixNow = Instant.now().getEpochSecond();
-        return prediction.getDoneEstimate() <= unixNow;
-    }
-
-    private boolean showHesporiInfoBox() {
-        FarmingRegion region = new FarmingRegion("Farming Guild", 5021, true,
-                new FarmingPatch("Hespori", Varbits.FARMING_7908, PatchImplementation.HESPORI)
-        );
-        FarmingPatch patch = region.getPatches()[0];
-        PatchPrediction prediction = farmingTracker.predictPatch(patch);
-
-        if (prediction == null) {
-            return false;
-        }
-
-        if (prediction.getProduce() != Produce.HESPORI) {
-            return true;
-        }
-
-        if (prediction.getCropState() != CropState.GROWING) {
-            return true;
-        }
-
-        // If the state is "GROWING" check if it should be done by now
-        long unixNow = Instant.now().getEpochSecond();
-        return prediction.getDoneEstimate() <= unixNow;
     }
 }
