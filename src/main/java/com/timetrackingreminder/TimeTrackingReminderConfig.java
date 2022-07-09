@@ -8,8 +8,8 @@ import net.runelite.client.config.ConfigItem;
 public interface TimeTrackingReminderConfig extends Config {
     @ConfigItem(
             keyName = "birdhouses",
-            name = "Bird Houses",
-            description = "Show an infobox when your Bird Houses are ready."
+            name = "Bird houses",
+            description = "Show an infobox when your bird houses are ready."
     )
     default boolean birdHouses() {
         return true;
@@ -17,8 +17,8 @@ public interface TimeTrackingReminderConfig extends Config {
 
     @ConfigItem(
             keyName = "herbpatches",
-            name = "Herb Patches",
-            description = "Show an infobox when your Herb Patches are ready."
+            name = "Herb patches",
+            description = "Show an infobox when your herb patches are ready."
     )
     default boolean herbPatches() {
         return true;
@@ -26,8 +26,8 @@ public interface TimeTrackingReminderConfig extends Config {
 
     @ConfigItem(
             keyName = "treepatches",
-            name = "Tree Patches",
-            description = "Show an infobox when your Tree Patches are ready."
+            name = "Tree patches",
+            description = "Show an infobox when your tree patches are ready."
     )
     default boolean treePatches() {
         return true;
@@ -35,8 +35,8 @@ public interface TimeTrackingReminderConfig extends Config {
 
     @ConfigItem(
             keyName = "fruittreepatches",
-            name = "Fruit Tree Patches",
-            description = "Show an infobox when your Fruit Tree Patches are ready."
+            name = "Fruit tree patches",
+            description = "Show an infobox when your fruit tree patches are ready."
     )
     default boolean fruitTreePatches() {
         return true;
@@ -44,8 +44,8 @@ public interface TimeTrackingReminderConfig extends Config {
 
     @ConfigItem(
             keyName = "seaweedpatches",
-            name = "Seaweed Patches",
-            description = "Show an infobox when your Seaweed Patches are ready."
+            name = "Seaweed patches",
+            description = "Show an infobox when your seaweed patches are ready."
     )
     default boolean seaweedPatches() {
         return true;
@@ -53,8 +53,8 @@ public interface TimeTrackingReminderConfig extends Config {
 
     @ConfigItem(
             keyName = "bushpatches",
-            name = "Bush Patches",
-            description = "Show an infobox when your Bush Patches are ready."
+            name = "Bush patches",
+            description = "Show an infobox when your bush patches are ready."
     )
     default boolean bushPatches() {
         return true;
@@ -62,8 +62,8 @@ public interface TimeTrackingReminderConfig extends Config {
 
     @ConfigItem(
             keyName = "farmingcontract",
-            name = "Farming Contract",
-            description = "Show an infobox when your Farming Contract is ready."
+            name = "Farming contract",
+            description = "Show an infobox when your farming contract is ready."
     )
     default boolean farmingContract() {
         return true;
@@ -71,8 +71,8 @@ public interface TimeTrackingReminderConfig extends Config {
 
     @ConfigItem(
             keyName = "hespori",
-            name = "Hespori",
-            description = "Show an infobox when your Hespori Patch is ready."
+            name = "hespori",
+            description = "Show an infobox when your Hespori patch is ready."
     )
     default boolean hespori() {
         return true;
