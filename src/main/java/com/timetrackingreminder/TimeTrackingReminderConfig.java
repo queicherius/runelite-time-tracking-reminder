@@ -71,7 +71,7 @@ public interface TimeTrackingReminderConfig extends Config {
 
     @ConfigItem(
             keyName = "hespori",
-            name = "hespori",
+            name = "Hespori",
             description = "Show an infobox when your Hespori patch is ready."
     )
     default boolean hespori() {
@@ -84,6 +84,51 @@ public interface TimeTrackingReminderConfig extends Config {
             description = "Show/hide infoboxes in instances (such as raids)."
     )
     default boolean showInInstances() {
+        return true;
+    }
+
+    @ConfigItem(
+            keyName = "giantcompostbin",
+            name = "Giant compost bin",
+            description = "Show an infobox when your giant compost bin is ready."
+    )
+    default boolean giantCompostBin() {
+        return true;
+    }
+
+    @ConfigItem(
+            keyName = "calquatpatch",
+            name = "Calquat patch",
+            description = "Show an infobox when your calquat patch is ready."
+    )
+    default boolean calquatPatch() {
+        return true;
+    }
+
+    @ConfigItem(
+            keyName = "hardwoodpatches",
+            name = "Hardwood patches",
+            description = "Show an infobox when your hardwood patches are ready."
+    )
+    default boolean hardwoodPatches() {
+        return true;
+    }
+
+    @ConfigItem(
+            keyName = "hopspatches",
+            name = "Hops patches",
+            description = "Show an infobox when your hops patches are ready."
+    )
+    default boolean hopsPatches() {
+        return true;
+    }
+
+    @ConfigItem(
+            keyName = "cactuspatch",
+            name = "Cactus patch",
+            description = "Show an infobox when your cactus patch is ready."
+    )
+    default boolean cactusPatch() {
         return true;
     }
 }
