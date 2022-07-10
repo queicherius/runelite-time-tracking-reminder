@@ -21,7 +21,7 @@ public enum Tab
 	GRAPE("Grape Patches", ItemID.GRAPES),
 	SPECIAL("Special Patches", ItemID.MUSHROOM),
 	GIANT_COMPOST("Giant Compost Bin", ItemID.ULTRACOMPOST),
-	SEAWEED("Seaweed", ItemID.GIANT_SEAWEED),
+	SEAWEED("Seaweed Patches", ItemID.GIANT_SEAWEED),
 	CALQUAT("Calquat Patch", ItemID.CALQUAT_FRUIT),
 	HARDWOOD("Hardwood Patches", ItemID.TEAK_LOGS),
 	REDWOOD("Redwood Patch", ItemID.REDWOOD_LOGS),
