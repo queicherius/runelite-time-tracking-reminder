@@ -205,9 +205,9 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         this,
                         infoBoxManager,
                         itemManager,
-                        "Your cactus patch is ready.",
+                        "Your cactus patches are ready.",
                         3138, // Potato cactus
-                        () -> config.cactusPatch() && showInfoboxInInstance() && farmingTracker.getSummary(Tab.CACTUS) != SummaryState.IN_PROGRESS
+                        () -> config.cactusPatches() && showInfoboxInInstance() && farmingTracker.getSummary(Tab.CACTUS) != SummaryState.IN_PROGRESS
                 ),
                 new TimeTrackingReminderGroup(
                         this,

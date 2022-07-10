@@ -124,11 +124,11 @@ public interface TimeTrackingReminderConfig extends Config {
     }
 
     @ConfigItem(
-            keyName = "cactuspatch",
-            name = "Cactus patch",
-            description = "Show an infobox when your cactus patch is ready."
+            keyName = "cactuspatches",
+            name = "Cactus patches",
+            description = "Show an infobox when your cactus patches are ready."
     )
-    default boolean cactusPatch() {
+    default boolean cactusPatches() {
         return true;
     }
 

@@ -25,7 +25,7 @@ public enum Tab
 	CALQUAT("Calquat Patch", ItemID.CALQUAT_FRUIT),
 	HARDWOOD("Hardwood Patches", ItemID.TEAK_LOGS),
 	REDWOOD("Redwood Patch", ItemID.REDWOOD_LOGS),
-	CACTUS("Cactus Patch", ItemID.POTATO_CACTUS),
+	CACTUS("Cactus Patches", ItemID.POTATO_CACTUS),
 	HESPORI("Hespori Patch", ItemID.TANGLEROOT),
 	TIME_OFFSET("Farming Tick Offset", ItemID.WATERING_CAN);
 

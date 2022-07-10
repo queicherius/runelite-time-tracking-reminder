@@ -17,7 +17,7 @@ Current supported infoboxes, can be individually enabled and disabled:
 - Hespori patch
 - Giant compost bin
 - Hops patches
-- Cactus patch (Al Kharid)
+- Cactus patches
 - Hardwood patches
 - Calquat patch
 
