@@ -44,7 +44,6 @@ import net.runelite.api.widgets.WidgetInfo;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.plugins.timetracking.SummaryState;
-import net.runelite.client.plugins.timetracking.Tab;
 import net.runelite.client.plugins.timetracking.TimeTrackingConfig;
 import net.runelite.client.plugins.timetracking.TimeTrackingPlugin;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;

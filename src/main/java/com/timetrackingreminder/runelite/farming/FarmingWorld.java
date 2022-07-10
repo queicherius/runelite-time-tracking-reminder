@@ -43,7 +43,6 @@ import java.util.stream.Collectors;
 import lombok.Getter;
 import net.runelite.api.Varbits;
 import net.runelite.api.coords.WorldPoint;
-import net.runelite.client.plugins.timetracking.Tab;
 
 public class FarmingWorld
 {

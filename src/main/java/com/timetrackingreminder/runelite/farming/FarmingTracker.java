@@ -51,7 +51,6 @@ import net.runelite.client.config.RuneScapeProfile;
 import net.runelite.client.config.RuneScapeProfileType;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.plugins.timetracking.SummaryState;
-import net.runelite.client.plugins.timetracking.Tab;
 import net.runelite.client.plugins.timetracking.TimeTrackingConfig;
 import net.runelite.client.util.Text;
 

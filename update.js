@@ -38,17 +38,18 @@ const copyOptions = { overwrite: true }
 fs.copySync(`${RUNELITE_PLUGIN_PATH}/hunter/`, `${RUNELITE_COPY_PATH}/hunter/`, copyOptions)
 fs.copySync(`${RUNELITE_PLUGIN_PATH}/farming/`, `${RUNELITE_COPY_PATH}/farming/`, copyOptions)
 
-console.log('Patching files: (1) Overwrite package')
+console.log('Patching files: Overwrite package')
 patchCopiedFiles(
   'package net.runelite.client.plugins.timetracking.',
   'package com.timetrackingreminder.runelite.'
 )
+patchCopiedFiles('import net.runelite.client.plugins.timetracking.Tab;\n', '')
 
-console.log('Patching files: (2) Remove automatic injection')
+console.log('Patching files: Remove automatic injection')
 patchCopiedFiles(/\t*@Inject\n/g, '')
 patchCopiedFiles(/\t*@Singleton\n/g, '')
 
-console.log('Patching files: (3) Overwrite visibility')
+console.log('Patching files: Overwrite visibility')
 patchCopiedFiles('access = AccessLevel.PACKAGE', '')
 patchCopiedFiles('private BirdHouseTracker(', 'public BirdHouseTracker(')
 patchCopiedFiles('private void updateCompletionTime', 'public void updateCompletionTime')
@@ -71,15 +72,29 @@ const FarmingContractManagerConstructor = `	public FarmingContractManager(Client
 	}
 
 `
-patchCopiedFiles('	public void setContract', FarmingContractManagerConstructor + '	public void setContract')
+patchCopiedFiles(
+  '	public void setContract',
+  FarmingContractManagerConstructor + '	public void setContract'
+)
 
-console.log('Patching files: (4) Remove config write calls')
+console.log('Patching files: Update patch implementation')
+patchCopiedFiles('HESPORI(Tab.SPECIAL,', 'HESPORI(Tab.HESPORI,')
+patchCopiedFiles('HARDWOOD_TREE(Tab.TREE,', 'HARDWOOD_TREE(Tab.HARDWOOD,')
+patchCopiedFiles('REDWOOD(Tab.TREE,','REDWOOD(Tab.REDWOOD,')
+patchCopiedFiles('SPIRIT_TREE(Tab.TREE, ','SPIRIT_TREE(Tab.SPECIAL, ')
+patchCopiedFiles('CACTUS(Tab.SPECIAL, ','CACTUS(Tab.CACTUS, ')
+patchCopiedFiles('SEAWEED(Tab.SPECIAL,','SEAWEED(Tab.SEAWEED,')
+patchCopiedFiles('CALQUAT(Tab.FRUIT_TREE,','CALQUAT(Tab.CALQUAT,')
+patchCopiedFiles('CRYSTAL_TREE(Tab.FRUIT_TREE, ','CRYSTAL_TREE(Tab.SPECIAL, ')
+patchCopiedFiles('GIANT_COMPOST(Tab.SPECIAL,','GIANT_COMPOST(Tab.GIANT_COMPOST,')
+
+console.log('Patching files: Remove config write calls')
 patchCopiedFiles(
   /configManager\.setRSProfileConfiguration\(.*?\);/g,
   '// configManager.setRSProfileConfiguration call removed. This code path should never be executed, but just in case.'
 )
 
-console.log('Patching files: (5) Add auto-generation comment')
+console.log('Patching files: Add auto-generation comment')
 patchCopiedFiles(
   '/*\n * Copyright',
   '// THIS FILE WAS AUTOMATICALLY GENERATED. DO NOT EDIT IT MANUALLY. SEE README.\n\n/*\n * Copyright'
