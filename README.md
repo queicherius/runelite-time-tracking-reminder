@@ -7,19 +7,22 @@ bird houses or farming patches are ready.
 
 Current supported infoboxes, can be individually enabled and disabled:
 
-- Bird houses
-- Herb patches
-- Tree patches
-- Fruit tree patches
-- Seaweed patches
-- Bush patches
-- Farming contract
-- Hespori patch
-- Giant compost bin
-- Hops patches
-- Cactus patches
-- Hardwood patches
-- Calquat patch
+- **Miscellaneous**
+  - Bird houses
+  - Farming contract
+  - Hespori
+  - Giant compost bin
+- **Farming patches**
+  - Herb patches
+  - Tree patches
+  - Fruit tree patches
+  - Hardwood patches
+  - Calquat patch
+  - Redwood patch
+  - Seaweed patches
+  - Hops patches
+  - Bush patches
+  - Cactus patches
 
 ## Configuration
 
