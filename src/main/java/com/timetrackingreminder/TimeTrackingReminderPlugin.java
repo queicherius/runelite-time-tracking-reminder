@@ -159,7 +159,13 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         itemManager,
                         "Your farming contract is ready.",
                         22993, // Seed pack
-                        () -> config.farmingContract() && showInfoboxInInstance() && farmingContractManager.getSummary() != SummaryState.IN_PROGRESS
+                        () -> {
+                            boolean isInProgress = farmingContractManager.getSummary() == SummaryState.IN_PROGRESS;
+                            boolean isOccupiedWrongSeed = farmingContractManager.getSummary() == SummaryState.OCCUPIED && farmingContractManager.getContractCropState() == null;
+                            boolean farmingContractReady = !isInProgress && !isOccupiedWrongSeed;
+
+                            return config.farmingContract() && showInfoboxInInstance() && farmingContractReady;
+                        }
                 ),
                 new TimeTrackingReminderGroup(
                         this,
@@ -267,7 +273,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
     }
 
     private boolean showInfoboxInInstance() {
-        if (!config.showInInstances() && client.isInInstancedRegion()){
+        if (!config.showInInstances() && client.isInInstancedRegion()) {
             return false;
         }
 
