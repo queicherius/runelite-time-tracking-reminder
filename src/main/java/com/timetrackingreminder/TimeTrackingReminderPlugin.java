@@ -75,6 +75,12 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 configManager
         );
 
+        PaymentTracker paymentTracker = new PaymentTracker(
+                client,
+                configManager,
+                farmingWorld
+        );
+
         birdHouseTracker = new BirdHouseTracker(
                 client,
                 itemManager,
@@ -90,7 +96,8 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 timeTrackingConfig,
                 farmingWorld,
                 notifier,
-                compostTracker
+                compostTracker,
+                paymentTracker
         );
 
         farmingContractManager = new FarmingContractManager(

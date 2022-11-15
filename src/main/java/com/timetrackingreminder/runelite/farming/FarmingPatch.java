@@ -50,6 +50,13 @@ public class FarmingPatch
 	private final int varbit;
 	@ToString.Include
 	private final PatchImplementation implementation;
+	private int farmer = -1;
+
+	FarmingPatch(String name, @Varbit int varbit, PatchImplementation implementation, int farmer)
+	{
+		this(name, varbit, implementation);
+		this.farmer = farmer;
+	}
 
 	String configKey()
 	{
