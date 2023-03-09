@@ -190,4 +190,22 @@ public interface TimeTrackingReminderConfig extends Config {
     default boolean cactusPatches() {
         return true;
     }
+
+	@ConfigItem(
+		keyName = "mushroompatch",
+		name = "Mushroom patch",
+		description = "Show an infobox when your mushroom patch is ready.",
+		section = farmingPatchesSection,
+		position = 211
+	)
+	default boolean mushroomPatch() { return true; }
+
+	@ConfigItem(
+		keyName = "belladonnapatch",
+		name = "Belladonna patch",
+		description = "Show an infobox when your belladonna patch is ready.",
+		section = farmingPatchesSection,
+		position = 212
+	)
+	default boolean belladonnaPatch() { return true; }
 }

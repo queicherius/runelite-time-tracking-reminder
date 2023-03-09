@@ -20,6 +20,8 @@ public enum Tab
 	BUSH("Bush Patches", ItemID.POISON_IVY_BERRIES),
 	GRAPE("Grape Patches", ItemID.GRAPES),
 	SPECIAL("Special Patches", ItemID.MUSHROOM),
+	MUSHROOM("Mushroom Patch", ItemID.MUSHROOM),
+	BELLADONNA("Belladonna Patch", ItemID.NIGHTSHADE),
 	GIANT_COMPOST("Giant Compost Bin", ItemID.ULTRACOMPOST),
 	SEAWEED("Seaweed Patches", ItemID.GIANT_SEAWEED),
 	CALQUAT("Calquat Patch", ItemID.CALQUAT_FRUIT),
