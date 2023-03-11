@@ -34,7 +34,7 @@ import lombok.RequiredArgsConstructor;
 @Getter
 public enum PatchImplementation
 {
-	BELLADONNA(Tab.SPECIAL, "", false)
+	BELLADONNA(Tab.BELLADONNA, "", false)
 		{
 			@Override
 			PatchState forVarbitValue(int value)
@@ -72,7 +72,7 @@ public enum PatchImplementation
 				return null;
 			}
 		},
-	MUSHROOM(Tab.SPECIAL, "", false)
+	MUSHROOM(Tab.MUSHROOM, "", false)
 		{
 			@Override
 			PatchState forVarbitValue(int value)
