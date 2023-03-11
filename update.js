@@ -88,6 +88,8 @@ patchCopiedFiles('SEAWEED(Tab.SPECIAL,','SEAWEED(Tab.SEAWEED,')
 patchCopiedFiles('CALQUAT(Tab.FRUIT_TREE,','CALQUAT(Tab.CALQUAT,')
 patchCopiedFiles('CRYSTAL_TREE(Tab.FRUIT_TREE, ','CRYSTAL_TREE(Tab.SPECIAL, ')
 patchCopiedFiles('GIANT_COMPOST(Tab.SPECIAL,','GIANT_COMPOST(Tab.GIANT_COMPOST,')
+patchCopiedFiles('BELLADONNA(Tab.SPECIAL,','BELLADONNA(Tab.BELLADONNA,')
+patchCopiedFiles('MUSHROOM(Tab.SPECIAL,','MUSHROOM(Tab.MUSHROOM,')
 
 console.log('Patching files: Remove config write calls')
 patchCopiedFiles(
