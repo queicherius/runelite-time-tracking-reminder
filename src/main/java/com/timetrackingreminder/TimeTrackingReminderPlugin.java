@@ -230,22 +230,22 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         19669, // Redwood log
                         () -> config.redwoodPatch() && showInfoboxInInstance() && farmingTracker.getSummary(Tab.REDWOOD) != SummaryState.IN_PROGRESS
                 ),
-				new TimeTrackingReminderGroup(
-					this,
-					infoBoxManager,
-					itemManager,
-					"Your mushroom patch is ready.",
-					6004, // Mushroom
-					() -> config.mushroomPatch() && showInfoboxInInstance() && farmingTracker.getSummary(Tab.MUSHROOM) != SummaryState.IN_PROGRESS
-				),
-				new TimeTrackingReminderGroup(
-					this,
-					infoBoxManager,
-					itemManager,
-					"Your belladonna patch is ready.",
-					27790, // Nightshade
-					() -> config.belladonnaPatch() && showInfoboxInInstance() && farmingTracker.getSummary(Tab.BELLADONNA) != SummaryState.IN_PROGRESS
-				)
+                new TimeTrackingReminderGroup(
+                        this,
+                        infoBoxManager,
+                        itemManager,
+                        "Your mushroom patch is ready.",
+                        6004, // Mushroom
+                        () -> config.mushroomPatch() && showInfoboxInInstance() && farmingTracker.getSummary(Tab.MUSHROOM) != SummaryState.IN_PROGRESS
+                ),
+                new TimeTrackingReminderGroup(
+                        this,
+                        infoBoxManager,
+                        itemManager,
+                        "Your belladonna patch is ready.",
+                        27790, // Nightshade
+                        () -> config.belladonnaPatch() && showInfoboxInInstance() && farmingTracker.getSummary(Tab.BELLADONNA) != SummaryState.IN_PROGRESS
+                )
         };
     }
 

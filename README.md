@@ -23,6 +23,8 @@ Current supported infoboxes, can be individually enabled and disabled:
   - Hops patches
   - Bush patches
   - Cactus patches
+  - Mushroom patch
+  - Belladonna patch
 
 ## Configuration
 
