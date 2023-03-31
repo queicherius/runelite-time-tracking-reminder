@@ -245,6 +245,14 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         "Your belladonna patch is ready.",
                         27790, // Nightshade
                         () -> config.belladonnaPatch() && showInfoboxInInstance() && farmingTracker.getSummary(Tab.BELLADONNA) != SummaryState.IN_PROGRESS
+                ),
+                new TimeTrackingReminderGroup(
+                        this,
+                        infoBoxManager,
+                        itemManager,
+                        "Your Crystal patch is ready.",
+                        23962, // Crystal shard
+                        () -> config.crystalPatch() && showInfoboxInInstance() && farmingTracker.getSummary(Tab.CRYSTAL) != SummaryState.IN_PROGRESS
                 )
         };
     }

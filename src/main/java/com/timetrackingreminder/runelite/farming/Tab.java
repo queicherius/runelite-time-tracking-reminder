@@ -29,9 +29,10 @@ public enum Tab
 	REDWOOD("Redwood Patch", ItemID.REDWOOD_LOGS),
 	CACTUS("Cactus Patches", ItemID.POTATO_CACTUS),
 	HESPORI("Hespori Patch", ItemID.TANGLEROOT),
+	CRYSTAL("Crystal Patch", ItemID.CRYSTAL_SHARD),
 	TIME_OFFSET("Farming Tick Offset", ItemID.WATERING_CAN);
 
-	public static final Tab[] FARMING_TABS = {HERB, TREE, FRUIT_TREE, SPECIAL, FLOWER, ALLOTMENT, BUSH, GRAPE, HOPS};
+	public static final Tab[] FARMING_TABS = {HERB, TREE, FRUIT_TREE, SPECIAL, FLOWER, ALLOTMENT, BUSH, GRAPE, HOPS, CRYSTAL};
 
 	private final String name;
 	private final int itemID;

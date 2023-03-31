@@ -2577,7 +2577,7 @@ public enum PatchImplementation
 				return null;
 			}
 		},
-	CRYSTAL_TREE(Tab.SPECIAL, "Crystal Tree", true)
+	CRYSTAL_TREE(Tab.CRYSTAL, "Crystal Tree", true)
 		{
 			@Override
 			PatchState forVarbitValue(int value)
