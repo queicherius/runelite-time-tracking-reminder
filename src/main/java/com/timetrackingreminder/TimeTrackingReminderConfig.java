@@ -212,4 +212,15 @@ public interface TimeTrackingReminderConfig extends Config {
     default boolean belladonnaPatch() {
         return true;
     }
+
+    @ConfigItem(
+            keyName = "crystalpatch",
+            name = "Crystal patch",
+            description = "Show an infobox when your crystal patch is ready.",
+            section = farmingPatchesSection,
+            position = 213
+    )
+    default boolean crystalPatch() {
+        return true;
+    }
 }
