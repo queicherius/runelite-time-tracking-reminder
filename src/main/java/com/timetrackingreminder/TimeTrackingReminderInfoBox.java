@@ -8,11 +8,13 @@ import net.runelite.client.ui.overlay.infobox.InfoBox;
 
 class TimeTrackingReminderInfoBox extends InfoBox {
     private final Plugin plugin;
+	private final TimeTrackingReminderConfig config;
     private final String tooltip;
 
-    TimeTrackingReminderInfoBox(Plugin plugin, BufferedImage image, String tooltip) {
+    TimeTrackingReminderInfoBox(Plugin plugin, TimeTrackingReminderConfig config, BufferedImage image, String tooltip) {
         super(image, plugin);
         this.plugin = plugin;
+        this.config = config;
         this.tooltip = tooltip;
     }
 
@@ -24,7 +26,7 @@ class TimeTrackingReminderInfoBox extends InfoBox {
 
     @Override
     public String getText() {
-        return "Ready";
+    	return config.customMessage();
     }
 
     @Override

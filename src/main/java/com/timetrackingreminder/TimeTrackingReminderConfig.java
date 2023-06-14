@@ -33,6 +33,14 @@ public interface TimeTrackingReminderConfig extends Config {
         return true;
     }
 
+	@ConfigItem(
+		keyName = "customOverlayMessage",
+		name = "Custom Overlay Message",
+		description = "Use a custom overlay message instead of the default 'Ready'",
+		position = 2
+	)
+	default String customMessage() { return "Ready"; }
+
     // -- Miscellaneous infoboxes ---
 
     @ConfigItem(

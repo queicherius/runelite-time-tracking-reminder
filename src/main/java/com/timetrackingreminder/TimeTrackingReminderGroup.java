@@ -9,6 +9,7 @@ import java.util.concurrent.Callable;
 
 public class TimeTrackingReminderGroup {
     private final Plugin plugin;
+    private final TimeTrackingReminderConfig config;
     private final InfoBoxManager infoBoxManager;
     private final ItemManager itemManager;
 
@@ -20,6 +21,7 @@ public class TimeTrackingReminderGroup {
 
     TimeTrackingReminderGroup(
             Plugin plugin,
+            TimeTrackingReminderConfig config,
             InfoBoxManager infoBoxManager,
             ItemManager itemManager,
             String tooltip,
@@ -27,6 +29,7 @@ public class TimeTrackingReminderGroup {
             Callable<Boolean> shouldShowInfoBoxCallable
     ) {
         this.plugin = plugin;
+        this.config = config;
         this.infoBoxManager = infoBoxManager;
         this.itemManager = itemManager;
 
@@ -57,7 +60,7 @@ public class TimeTrackingReminderGroup {
         }
 
         final BufferedImage itemImage = itemManager.getImage(itemId);
-        infoBox = new TimeTrackingReminderInfoBox(plugin, itemImage, tooltip);
+        infoBox = new TimeTrackingReminderInfoBox(plugin, config, itemImage, tooltip);
         infoBoxManager.addInfoBox(infoBox);
     }
 
