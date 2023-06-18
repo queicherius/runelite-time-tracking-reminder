@@ -24,8 +24,8 @@ dependencies {
 }
 
 group = 'com.timetrackingreminder'
-version = '1.6.0'
-sourceCompatibility = '1.9'
+version = '1.7.0'
+sourceCompatibility = '1.10'
 
 tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
