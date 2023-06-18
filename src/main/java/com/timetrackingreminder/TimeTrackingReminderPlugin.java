@@ -114,6 +114,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
         reminderGroups = new TimeTrackingReminderGroup[]{
                 new TimeTrackingReminderGroup(
                         this,
+                        config,
                         infoBoxManager,
                         itemManager,
                         "Your bird houses are ready.",
@@ -122,6 +123,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 ),
                 new TimeTrackingReminderGroup(
                         this,
+                        config,
                         infoBoxManager,
                         itemManager,
                         "Your herb patches are ready.",
@@ -130,6 +132,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 ),
                 new TimeTrackingReminderGroup(
                         this,
+                        config,
                         infoBoxManager,
                         itemManager,
                         "Your tree patches are ready.",
@@ -138,6 +141,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 ),
                 new TimeTrackingReminderGroup(
                         this,
+                        config,
                         infoBoxManager,
                         itemManager,
                         "Your fruit tree patches are ready.",
@@ -146,6 +150,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 ),
                 new TimeTrackingReminderGroup(
                         this,
+                        config,
                         infoBoxManager,
                         itemManager,
                         "Your seaweed patches are ready.",
@@ -154,6 +159,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 ),
                 new TimeTrackingReminderGroup(
                         this,
+                        config,
                         infoBoxManager,
                         itemManager,
                         "Your bush patches are ready.",
@@ -162,6 +168,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 ),
                 new TimeTrackingReminderGroup(
                         this,
+                        config,
                         infoBoxManager,
                         itemManager,
                         "Your farming contract is ready.",
@@ -176,6 +183,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 ),
                 new TimeTrackingReminderGroup(
                         this,
+                        config,
                         infoBoxManager,
                         itemManager,
                         "Your Hespori patch is ready.",
@@ -184,6 +192,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 ),
                 new TimeTrackingReminderGroup(
                         this,
+                        config,
                         infoBoxManager,
                         itemManager,
                         "Your giant compost bin is ready.",
@@ -192,6 +201,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 ),
                 new TimeTrackingReminderGroup(
                         this,
+                        config,
                         infoBoxManager,
                         itemManager,
                         "Your calquat patch is ready.",
@@ -200,6 +210,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 ),
                 new TimeTrackingReminderGroup(
                         this,
+                        config,
                         infoBoxManager,
                         itemManager,
                         "Your hardwood patches are ready.",
@@ -208,6 +219,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 ),
                 new TimeTrackingReminderGroup(
                         this,
+                        config,
                         infoBoxManager,
                         itemManager,
                         "Your hops patches are ready.",
@@ -216,6 +228,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 ),
                 new TimeTrackingReminderGroup(
                         this,
+                        config,
                         infoBoxManager,
                         itemManager,
                         "Your cactus patches are ready.",
@@ -224,6 +237,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 ),
                 new TimeTrackingReminderGroup(
                         this,
+                        config,
                         infoBoxManager,
                         itemManager,
                         "Your redwood patch is ready.",
@@ -232,6 +246,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 ),
                 new TimeTrackingReminderGroup(
                         this,
+                        config,
                         infoBoxManager,
                         itemManager,
                         "Your mushroom patch is ready.",
@@ -240,6 +255,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 ),
                 new TimeTrackingReminderGroup(
                         this,
+                        config,
                         infoBoxManager,
                         itemManager,
                         "Your belladonna patch is ready.",
@@ -248,6 +264,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 ),
                 new TimeTrackingReminderGroup(
                         this,
+                        config,
                         infoBoxManager,
                         itemManager,
                         "Your Crystal patch is ready.",
