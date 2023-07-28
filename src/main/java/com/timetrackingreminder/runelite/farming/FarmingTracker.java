@@ -58,7 +58,7 @@ import net.runelite.client.util.Text;
 
 @Slf4j
 @RequiredArgsConstructor(
-	
+
 	onConstructor = @__({@Inject})
 )
 public class FarmingTracker
@@ -73,6 +73,7 @@ public class FarmingTracker
 	private final PaymentTracker paymentTracker;
 
 	private final Map<Tab, SummaryState> summaries = new EnumMap<>(Tab.class);
+	private final Map<Tab, Boolean> harvestable = new EnumMap<>(Tab.class);
 
 	/**
 	 * The time at which all patches of a particular type will be ready to be harvested,
@@ -412,6 +413,7 @@ public class FarmingTracker
 	public void loadCompletionTimes()
 	{
 		summaries.clear();
+		harvestable.clear();
 		completionTimes.clear();
 		lastRegions = null;
 		updateCompletionTime();
@@ -421,6 +423,12 @@ public class FarmingTracker
 	{
 		SummaryState summary = summaries.get(patchType);
 		return summary == null ? SummaryState.UNKNOWN : summary;
+	}
+
+	public Boolean getHarvestable(Tab patchType)
+	{
+		Boolean isHarvestable = harvestable.get(patchType);
+		return isHarvestable != null && isHarvestable;
 	}
 
 	/**
@@ -446,6 +454,8 @@ public class FarmingTracker
 			long extremumCompletionTime = config.preferSoonest() ? Long.MAX_VALUE : 0;
 			boolean allUnknown = true;
 			boolean allEmpty = true;
+			boolean anyHarvestable = false;
+			boolean allHarvestable = true;
 
 			for (FarmingPatch patch : tab.getValue())
 			{
@@ -470,9 +480,39 @@ public class FarmingTracker
 					{
 						extremumCompletionTime = Math.max(extremumCompletionTime, prediction.getDoneEstimate());
 					}
+					boolean isHarvestable = false;
+					if (prediction.getCropState() == CropState.GROWING)
+					{
+						isHarvestable = prediction.getStage() == (prediction.getStages() - 1);
+					}
+					else if (prediction.getCropState() == CropState.HARVESTABLE)
+					{
+						PatchImplementation patchImplementation = prediction.getProduce().getPatchImplementation();
+						if (patchImplementation.equals(PatchImplementation.BUSH)
+							|| patchImplementation.equals(PatchImplementation.HERB)
+							|| patchImplementation.equals(PatchImplementation.ALLOTMENT)
+							|| patchImplementation.equals(PatchImplementation.BELLADONNA)
+							|| patchImplementation.equals(PatchImplementation.FLOWER)
+							|| patchImplementation.equals(PatchImplementation.SEAWEED)
+							|| patchImplementation.equals(PatchImplementation.HOPS)
+							|| patchImplementation.equals(PatchImplementation.MUSHROOM)
+							|| patchImplementation.equals(PatchImplementation.GRAPES)
+							|| patchImplementation.equals(PatchImplementation.HESPORI)
+							|| patchImplementation.equals(PatchImplementation.COMPOST))
+						{
+							isHarvestable = true;
+						}
+						else
+						{
+							isHarvestable = prediction.getStage() > 0;
+						}
+					}
 
+					anyHarvestable |= isHarvestable;
+					allHarvestable &= isHarvestable;
 				}
 			}
+			allHarvestable &= !allEmpty;
 
 			final SummaryState state;
 			final long completionTime;
@@ -498,6 +538,7 @@ public class FarmingTracker
 				completionTime = extremumCompletionTime;
 			}
 			summaries.put(tab.getKey(), state);
+			harvestable.put(tab.getKey(), config.preferSoonest() ? anyHarvestable : allHarvestable);
 			completionTimes.put(tab.getKey(), completionTime);
 		}
 	}

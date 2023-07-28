@@ -43,6 +43,16 @@ public interface TimeTrackingReminderConfig extends Config {
         return "Ready";
     }
 
+	@ConfigItem(
+		keyName = "onlyShowHarvestable",
+		name = "Only show harvestable",
+		description = "Only show when farming crops when they are harvestable or ready for check-health.",
+		position = 3
+	)
+	default boolean onlyHarvestable() {
+		return false;
+	}
+
     // -- Miscellaneous infoboxes ---
 
     @ConfigItem(
