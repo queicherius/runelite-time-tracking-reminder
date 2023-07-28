@@ -23,15 +23,15 @@ public interface TimeTrackingReminderConfig extends Config {
 
     // --- Generic plugin options ---
 
-    @ConfigItem(
-            keyName = "showininstances",
-            name = "Show in instances",
-            description = "Show/hide infoboxes in instances (such as raids).",
-            position = 1
-    )
-    default boolean showInInstances() {
-        return true;
-    }
+	@ConfigItem(
+		keyName = "showininstances",
+		name = "Show in instances",
+		description = "Show/hide infoboxes in instances (such as raids).",
+		position = 1
+	)
+	default boolean showInInstances() {
+		return true;
+	}
 
     @ConfigItem(
             keyName = "customOverlayMessage",
@@ -233,14 +233,25 @@ public interface TimeTrackingReminderConfig extends Config {
         return true;
     }
 
-    @ConfigItem(
-            keyName = "crystalpatch",
-            name = "Crystal patch",
-            description = "Show an infobox when your crystal patch is ready.",
-            section = farmingPatchesSection,
-            position = 213
-    )
-    default boolean crystalPatch() {
-        return true;
-    }
+	@ConfigItem(
+		keyName = "crystalpatch",
+		name = "Crystal patch",
+		description = "Show an infobox when your crystal patch is ready.",
+		section = farmingPatchesSection,
+		position = 213
+	)
+	default boolean crystalPatch() {
+		return true;
+	}
+
+	@ConfigItem(
+		keyName = "allotmentpatches",
+		name = "Allotment patches",
+		description = "Show an infobox when your allotment patches is ready.",
+		section = farmingPatchesSection,
+		position = 214
+	)
+	default boolean allotmentPatches() {
+		return true;
+	}
 }

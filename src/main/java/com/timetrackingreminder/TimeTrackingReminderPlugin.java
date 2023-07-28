@@ -140,6 +140,15 @@ public class TimeTrackingReminderPlugin extends Plugin
 				config,
 				infoBoxManager,
 				itemManager,
+				"Your allotment patches are ready.",
+				1965, // Cabbage
+				() -> config.allotmentPatches() && showInfoboxInInstance() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.ALLOTMENT) : farmingTracker.getSummary(Tab.ALLOTMENT) != SummaryState.IN_PROGRESS)
+			),
+			new TimeTrackingReminderGroup(
+				this,
+				config,
+				infoBoxManager,
+				itemManager,
 				"Your tree patches are ready.",
 				1515, // Yew logs
 				() -> config.treePatches() && showInfoboxInInstance() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.TREE) : farmingTracker.getSummary(Tab.TREE) != SummaryState.IN_PROGRESS)
