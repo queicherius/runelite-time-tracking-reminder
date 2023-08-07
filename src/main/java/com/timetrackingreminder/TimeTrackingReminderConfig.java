@@ -43,6 +43,16 @@ public interface TimeTrackingReminderConfig extends Config {
         return "Ready";
     }
 
+    @ConfigItem(
+            keyName = "onlyShowHarvestable",
+            name = "Only show harvestable",
+            description = "Only show when farming crops are harvestable or ready for check-health.",
+            position = 3
+    )
+    default boolean onlyHarvestable() {
+        return false;
+    }
+
     // -- Miscellaneous infoboxes ---
 
     @ConfigItem(
@@ -231,6 +241,17 @@ public interface TimeTrackingReminderConfig extends Config {
             position = 213
     )
     default boolean crystalPatch() {
+        return true;
+    }
+
+    @ConfigItem(
+            keyName = "allotmentpatches",
+            name = "Allotment patches",
+            description = "Show an infobox when your allotment patches are ready.",
+            section = farmingPatchesSection,
+            position = 214
+    )
+    default boolean allotmentPatches() {
         return true;
     }
 }
