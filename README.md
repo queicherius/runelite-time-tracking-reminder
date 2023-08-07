@@ -26,6 +26,7 @@ Current supported infoboxes, can be individually enabled and disabled:
   - Cactus patches
   - Mushroom patch
   - Belladonna patch
+  - Allotment patches
 
 ## Configuration
 
