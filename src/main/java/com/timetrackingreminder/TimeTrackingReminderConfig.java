@@ -46,7 +46,7 @@ public interface TimeTrackingReminderConfig extends Config {
     @ConfigItem(
             keyName = "onlyShowHarvestable",
             name = "Only show harvestable",
-            description = "Only show when farming crops when they are harvestable or ready for check-health.",
+            description = "Only show when farming crops are harvestable or ready for check-health.",
             position = 3
     )
     default boolean onlyHarvestable() {
@@ -247,7 +247,7 @@ public interface TimeTrackingReminderConfig extends Config {
     @ConfigItem(
             keyName = "allotmentpatches",
             name = "Allotment patches",
-            description = "Show an infobox when your allotment patches is ready.",
+            description = "Show an infobox when your allotment patches are ready.",
             section = farmingPatchesSection,
             position = 214
     )
