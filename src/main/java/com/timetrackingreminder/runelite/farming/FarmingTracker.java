@@ -58,7 +58,6 @@ import net.runelite.client.util.Text;
 
 @Slf4j
 @RequiredArgsConstructor(
-
 	onConstructor = @__({@Inject})
 )
 public class FarmingTracker
