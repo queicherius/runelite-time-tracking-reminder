@@ -278,7 +278,11 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         itemManager,
                         "Your Crystal patch is ready.",
                         23962, // Crystal shard
-                        () -> config.crystalPatch() && showInfoboxInInstance() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.CRYSTAL) : farmingTracker.getSummary(Tab.CRYSTAL) != SummaryState.IN_PROGRESS)
+                        () -> config.crystalPatch() && showInfoboxInInstance() && (config.onlyHarvestable() ? 
+                                farmingTracker.getHarvestable(Tab.CRYSTAL) :
+                                (farmingTracker.getSummary(Tab.CRYSTAL) != SummaryState.IN_PROGRESS && 
+                                        farmingTracker.getSummary(Tab.CRYSTAL) != SummaryState.EMPTY)
+                        )
                 )
         };
     }
