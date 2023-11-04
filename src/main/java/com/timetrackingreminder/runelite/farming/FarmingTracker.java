@@ -58,6 +58,7 @@ import net.runelite.client.util.Text;
 
 @Slf4j
 @RequiredArgsConstructor(
+	
 	onConstructor = @__({@Inject})
 )
 public class FarmingTracker
@@ -109,15 +110,6 @@ public class FarmingTracker
 		{
 			String autoweed = Integer.toString(client.getVarbitValue(Varbits.AUTOWEED));
 			if (!autoweed.equals(configManager.getRSProfileConfiguration(TimeTrackingConfig.CONFIG_GROUP, TimeTrackingConfig.AUTOWEED)))
-			{
-				// configManager.setRSProfileConfiguration call removed. This code path should never be executed, but just in case.
-				changed = true;
-			}
-		}
-
-		{
-			boolean botanist = client.getVarbitValue(Varbits.LEAGUE_RELIC_5) == 1;
-			if (!Boolean.valueOf(botanist).equals(configManager.getRSProfileConfiguration(TimeTrackingConfig.CONFIG_GROUP, TimeTrackingConfig.BOTANIST, Boolean.class)))
 			{
 				// configManager.setRSProfileConfiguration call removed. This code path should never be executed, but just in case.
 				changed = true;
@@ -300,9 +292,6 @@ public class FarmingTracker
 		boolean autoweed = Integer.toString(Autoweed.ON.ordinal())
 			.equals(configManager.getConfiguration(TimeTrackingConfig.CONFIG_GROUP, profile, TimeTrackingConfig.AUTOWEED));
 
-		boolean botanist = Boolean.TRUE
-			.equals(configManager.getConfiguration(TimeTrackingConfig.CONFIG_GROUP, profile, TimeTrackingConfig.BOTANIST, Boolean.class));
-
 		String key = patch.configKey();
 		String storedValue = configManager.getConfiguration(TimeTrackingConfig.CONFIG_GROUP, profile, key);
 
@@ -349,11 +338,6 @@ public class FarmingTracker
 			stage = 0;
 			stages = 1;
 			tickrate = 0;
-		}
-
-		if (botanist)
-		{
-			tickrate /= 5;
 		}
 
 		long doneEstimate = 0;

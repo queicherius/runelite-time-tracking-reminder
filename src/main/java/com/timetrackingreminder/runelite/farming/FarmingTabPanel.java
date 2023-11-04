@@ -165,9 +165,7 @@ public class FarmingTabPanel extends TabContentPanel
 
 			if (img != null)
 			{
-				Runnable r = () -> panel.setOverlayIconImage(img);
-				img.onLoaded(r);
-				r.run();
+				img.onLoaded(() -> panel.setOverlayIconImage(img));
 			}
 			else
 			{
