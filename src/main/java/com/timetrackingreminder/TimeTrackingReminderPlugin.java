@@ -206,7 +206,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         itemManager,
                         "Your giant compost bin is ready.",
                         21483, // Ultracompost
-                        () -> config.giantCompostBin() && showInfoboxInInstance() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.GIANT_COMPOST) : farmingTracker.getSummary(Tab.GIANT_COMPOST) != SummaryState.IN_PROGRESS)
+                        () -> config.giantCompostBin() && showInfoboxInInstance() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.BIG_COMPOST) : farmingTracker.getSummary(Tab.BIG_COMPOST) != SummaryState.IN_PROGRESS)
                 ),
                 new TimeTrackingReminderGroup(
                         this,

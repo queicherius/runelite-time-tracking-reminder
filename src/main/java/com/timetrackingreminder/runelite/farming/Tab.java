@@ -21,7 +21,7 @@ public enum Tab {
     SPECIAL("Special Patches", ItemID.MUSHROOM),
     MUSHROOM("Mushroom Patch", ItemID.MUSHROOM),
     BELLADONNA("Belladonna Patch", ItemID.CAVE_NIGHTSHADE),
-    GIANT_COMPOST("Giant Compost Bin", ItemID.ULTRACOMPOST),
+    BIG_COMPOST("Giant Compost Bin", ItemID.ULTRACOMPOST),
     SEAWEED("Seaweed Patches", ItemID.GIANT_SEAWEED),
     CALQUAT("Calquat Patch", ItemID.CALQUAT_FRUIT),
     HARDWOOD("Hardwood Patches", ItemID.TEAK_LOGS),

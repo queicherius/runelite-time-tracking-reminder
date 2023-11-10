@@ -2678,7 +2678,7 @@ public enum PatchImplementation
 				return null;
 			}
 		},
-	BIG_COMPOST(Tab.SPECIAL, "Big Compost Bin", true)
+	BIG_COMPOST(Tab.BIG_COMPOST, "Big Compost Bin", true)
 		{
 			@Override
 			PatchState forVarbitValue(int value)
