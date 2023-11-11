@@ -34,10 +34,20 @@ public interface TimeTrackingReminderConfig extends Config {
     }
 
     @ConfigItem(
+            keyName = "groupBoxestogether",
+            name = "Group Boxes Together",
+            description = "Will show only one box and list the reminders when hovered",
+            position = 2
+    )
+    default boolean groupBoxesTogether() {
+        return false;
+    }
+
+    @ConfigItem(
             keyName = "customOverlayMessage",
             name = "Custom Overlay Message",
             description = "Use a custom overlay message instead of the default 'Ready'",
-            position = 2
+            position = 3
     )
     default String customMessage() {
         return "Ready";
@@ -47,7 +57,7 @@ public interface TimeTrackingReminderConfig extends Config {
             keyName = "onlyShowHarvestable",
             name = "Only show harvestable",
             description = "Only show when farming crops are harvestable or ready for check-health.",
-            position = 3
+            position = 4
     )
     default boolean onlyHarvestable() {
         return false;
