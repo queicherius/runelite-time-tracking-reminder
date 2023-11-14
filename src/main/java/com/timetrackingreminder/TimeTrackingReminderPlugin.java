@@ -4,10 +4,11 @@ import com.google.inject.Inject;
 import com.google.inject.Provides;
 import com.timetrackingreminder.runelite.farming.*;
 import com.timetrackingreminder.runelite.hunter.*;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
-import net.runelite.api.Varbits;
+import net.runelite.api.ItemID;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.GameTick;
 import net.runelite.client.Notifier;
@@ -20,8 +21,6 @@ import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.plugins.timetracking.SummaryState;
 import net.runelite.client.plugins.timetracking.TimeTrackingConfig;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
-
-import java.time.Instant;
 
 @Slf4j
 @PluginDescriptor(
@@ -51,7 +50,9 @@ public class TimeTrackingReminderPlugin extends Plugin {
     private FarmingTracker farmingTracker;
     private FarmingContractManager farmingContractManager;
 
-    private TimeTrackingReminderGroup[] reminderGroups;
+    @Getter
+    private TimeTrackingReminderInfoBox[] reminderInfoBoxes;
+    private TimeTrackingReminderGroupInfoBox groupInfoBox;
 
     @Provides
     TimeTrackingReminderConfig provideConfig(ConfigManager configManager) {
@@ -111,189 +112,181 @@ public class TimeTrackingReminderPlugin extends Plugin {
     }
 
     private void initializeReminderGroups() {
-        reminderGroups = new TimeTrackingReminderGroup[]{
-                new TimeTrackingReminderGroup(
+        reminderInfoBoxes = new TimeTrackingReminderInfoBox[] {
+                new TimeTrackingReminderInfoBox(
                         this,
                         config,
-                        infoBoxManager,
-                        itemManager,
+                        "bird houses",
                         "Your bird houses are ready.",
-                        21515, // Oak bird house
-                        () -> config.birdHouses() && showInfoboxInInstance() && birdHouseTracker.getSummary() != SummaryState.IN_PROGRESS
+                        itemManager.getImage(ItemID.OAK_BIRD_HOUSE),
+                        () -> config.birdHouses() && birdHouseTracker.getSummary() != SummaryState.IN_PROGRESS
                 ),
-                new TimeTrackingReminderGroup(
+                new TimeTrackingReminderInfoBox(
                         this,
                         config,
-                        infoBoxManager,
-                        itemManager,
+                        "herb patches",
                         "Your herb patches are ready.",
-                        207, // Grimy ranarr weed
-                        () -> config.herbPatches() && showInfoboxInInstance() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.HERB) : farmingTracker.getSummary(Tab.HERB) != SummaryState.IN_PROGRESS)
+                        itemManager.getImage(ItemID.GRIMY_RANARR_WEED),
+                        () -> config.herbPatches() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.HERB) : farmingTracker.getSummary(Tab.HERB) != SummaryState.IN_PROGRESS)
                 ),
-                new TimeTrackingReminderGroup(
+                new TimeTrackingReminderInfoBox(
                         this,
                         config,
-                        infoBoxManager,
-                        itemManager,
+                        "allotment patches",
                         "Your allotment patches are ready.",
-                        1965, // Cabbage
-                        () -> config.allotmentPatches() && showInfoboxInInstance() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.ALLOTMENT) : farmingTracker.getSummary(Tab.ALLOTMENT) != SummaryState.IN_PROGRESS)
+                        itemManager.getImage(ItemID.CABBAGE),
+                        () -> config.allotmentPatches() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.ALLOTMENT) : farmingTracker.getSummary(Tab.ALLOTMENT) != SummaryState.IN_PROGRESS)
                 ),
-                new TimeTrackingReminderGroup(
+                new TimeTrackingReminderInfoBox(
                         this,
                         config,
-                        infoBoxManager,
-                        itemManager,
+                        "tree patches",
                         "Your tree patches are ready.",
-                        1515, // Yew logs
-                        () -> config.treePatches() && showInfoboxInInstance() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.TREE) : farmingTracker.getSummary(Tab.TREE) != SummaryState.IN_PROGRESS)
+                        itemManager.getImage(ItemID.YEW_LOGS),
+                        () -> config.treePatches() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.TREE) : farmingTracker.getSummary(Tab.TREE) != SummaryState.IN_PROGRESS)
                 ),
-                new TimeTrackingReminderGroup(
+                new TimeTrackingReminderInfoBox(
                         this,
                         config,
-                        infoBoxManager,
-                        itemManager,
+                        "fruit tree patches",
                         "Your fruit tree patches are ready.",
-                        2114, // Pineapple
-                        () -> config.fruitTreePatches() && showInfoboxInInstance() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.FRUIT_TREE) : farmingTracker.getSummary(Tab.FRUIT_TREE) != SummaryState.IN_PROGRESS)
+                        itemManager.getImage(ItemID.PINEAPPLE),
+                        () -> config.fruitTreePatches() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.FRUIT_TREE) : farmingTracker.getSummary(Tab.FRUIT_TREE) != SummaryState.IN_PROGRESS)
                 ),
-                new TimeTrackingReminderGroup(
+                new TimeTrackingReminderInfoBox(
                         this,
                         config,
-                        infoBoxManager,
-                        itemManager,
+                        "seaweed patches",
                         "Your seaweed patches are ready.",
-                        21504, // Giant seaweed
-                        () -> config.seaweedPatches() && showInfoboxInInstance() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.SEAWEED) : farmingTracker.getSummary(Tab.SEAWEED) != SummaryState.IN_PROGRESS)
+                        itemManager.getImage(ItemID.GIANT_SEAWEED),
+                        () -> config.seaweedPatches() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.SEAWEED) : farmingTracker.getSummary(Tab.SEAWEED) != SummaryState.IN_PROGRESS)
                 ),
-                new TimeTrackingReminderGroup(
+                new TimeTrackingReminderInfoBox(
                         this,
                         config,
-                        infoBoxManager,
-                        itemManager,
+                        "bush patches",
                         "Your bush patches are ready.",
-                        239, // White berries
-                        () -> config.bushPatches() && showInfoboxInInstance() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.BUSH) : farmingTracker.getSummary(Tab.BUSH) != SummaryState.IN_PROGRESS)
+                        itemManager.getImage(ItemID.WHITE_BERRIES),
+                        () -> config.bushPatches() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.BUSH) : farmingTracker.getSummary(Tab.BUSH) != SummaryState.IN_PROGRESS)
                 ),
-                new TimeTrackingReminderGroup(
+                new TimeTrackingReminderInfoBox(
                         this,
                         config,
-                        infoBoxManager,
-                        itemManager,
+                        "farming contract",
                         "Your farming contract is ready.",
-                        22993, // Seed pack
+                        itemManager.getImage(ItemID.SEED_PACK),
                         () -> {
                             boolean isInProgress = farmingContractManager.getSummary() == SummaryState.IN_PROGRESS;
                             boolean isOccupiedWrongSeed = farmingContractManager.getSummary() == SummaryState.OCCUPIED && farmingContractManager.getContractCropState() == null;
                             boolean farmingContractReady = !isInProgress && !isOccupiedWrongSeed;
 
-                            return config.farmingContract() && showInfoboxInInstance() && farmingContractReady;
+                            return config.farmingContract() && farmingContractReady;
                         }
                 ),
-                new TimeTrackingReminderGroup(
+                new TimeTrackingReminderInfoBox(
                         this,
                         config,
-                        infoBoxManager,
-                        itemManager,
+                        "Hespori patch",
                         "Your Hespori patch is ready.",
-                        20661, // Tangleroot
-                        () -> config.hespori() && showInfoboxInInstance() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.HESPORI) : farmingTracker.getSummary(Tab.HESPORI) != SummaryState.IN_PROGRESS)
+                        itemManager.getImage(ItemID.TANGLEROOT),
+                        () -> config.hespori() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.HESPORI) : farmingTracker.getSummary(Tab.HESPORI) != SummaryState.IN_PROGRESS)
                 ),
-                new TimeTrackingReminderGroup(
+                new TimeTrackingReminderInfoBox(
                         this,
                         config,
-                        infoBoxManager,
-                        itemManager,
+                        "giant compost bin",
                         "Your giant compost bin is ready.",
-                        21483, // Ultracompost
-                        () -> config.giantCompostBin() && showInfoboxInInstance() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.BIG_COMPOST) : farmingTracker.getSummary(Tab.BIG_COMPOST) != SummaryState.IN_PROGRESS)
+                        itemManager.getImage(ItemID.ULTRACOMPOST),
+                        () -> config.giantCompostBin() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.BIG_COMPOST) : farmingTracker.getSummary(Tab.BIG_COMPOST) != SummaryState.IN_PROGRESS)
                 ),
-                new TimeTrackingReminderGroup(
+                new TimeTrackingReminderInfoBox(
                         this,
                         config,
-                        infoBoxManager,
-                        itemManager,
+                        "calquat patch",
                         "Your calquat patch is ready.",
-                        5980, // Calquat fruit
-                        () -> config.calquatPatch() && showInfoboxInInstance() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.CALQUAT) : farmingTracker.getSummary(Tab.CALQUAT) != SummaryState.IN_PROGRESS)
+                        itemManager.getImage(ItemID.CALQUAT_FRUIT),
+                        () -> config.calquatPatch() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.CALQUAT) : farmingTracker.getSummary(Tab.CALQUAT) != SummaryState.IN_PROGRESS)
                 ),
-                new TimeTrackingReminderGroup(
+                new TimeTrackingReminderInfoBox(
                         this,
                         config,
-                        infoBoxManager,
-                        itemManager,
+                        "hardwood patches",
                         "Your hardwood patches are ready.",
-                        6333, // Teak logs
-                        () -> config.hardwoodPatches() && showInfoboxInInstance() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.HARDWOOD) : farmingTracker.getSummary(Tab.HARDWOOD) != SummaryState.IN_PROGRESS)
+                        itemManager.getImage(ItemID.TEAK_LOGS),
+                        () -> config.hardwoodPatches() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.HARDWOOD) : farmingTracker.getSummary(Tab.HARDWOOD) != SummaryState.IN_PROGRESS)
                 ),
-                new TimeTrackingReminderGroup(
+                new TimeTrackingReminderInfoBox(
                         this,
                         config,
-                        infoBoxManager,
-                        itemManager,
+                        "hops patches",
                         "Your hops patches are ready.",
-                        6006, // Barley
-                        () -> config.hopsPatches() && showInfoboxInInstance() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.HOPS) : farmingTracker.getSummary(Tab.HOPS) != SummaryState.IN_PROGRESS)
+                        itemManager.getImage(ItemID.BARLEY),
+                        () -> config.hopsPatches() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.HOPS) : farmingTracker.getSummary(Tab.HOPS) != SummaryState.IN_PROGRESS)
                 ),
-                new TimeTrackingReminderGroup(
+                new TimeTrackingReminderInfoBox(
                         this,
                         config,
-                        infoBoxManager,
-                        itemManager,
+                        "cactus patches",
                         "Your cactus patches are ready.",
-                        3138, // Potato cactus
-                        () -> config.cactusPatches() && showInfoboxInInstance() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.CACTUS) : farmingTracker.getSummary(Tab.CACTUS) != SummaryState.IN_PROGRESS)
+                        itemManager.getImage(ItemID.POTATO_CACTUS),
+                        () -> config.cactusPatches() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.CACTUS) : farmingTracker.getSummary(Tab.CACTUS) != SummaryState.IN_PROGRESS)
                 ),
-                new TimeTrackingReminderGroup(
+                new TimeTrackingReminderInfoBox(
                         this,
                         config,
-                        infoBoxManager,
-                        itemManager,
+                        "redwood patch",
                         "Your redwood patch is ready.",
-                        19669, // Redwood log
-                        () -> config.redwoodPatch() && showInfoboxInInstance() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.REDWOOD) : farmingTracker.getSummary(Tab.REDWOOD) != SummaryState.IN_PROGRESS)
+                        itemManager.getImage(ItemID.REDWOOD_LOGS),
+                        () -> config.redwoodPatch() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.REDWOOD) : farmingTracker.getSummary(Tab.REDWOOD) != SummaryState.IN_PROGRESS)
                 ),
-                new TimeTrackingReminderGroup(
+                new TimeTrackingReminderInfoBox(
                         this,
                         config,
-                        infoBoxManager,
-                        itemManager,
+                        "mushroom patch",
                         "Your mushroom patch is ready.",
-                        6004, // Mushroom
-                        () -> config.mushroomPatch() && showInfoboxInInstance() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.MUSHROOM) : farmingTracker.getSummary(Tab.MUSHROOM) != SummaryState.IN_PROGRESS)
+                        itemManager.getImage(ItemID.MUSHROOM),
+                        () -> config.mushroomPatch() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.MUSHROOM) : farmingTracker.getSummary(Tab.MUSHROOM) != SummaryState.IN_PROGRESS)
                 ),
-                new TimeTrackingReminderGroup(
+                new TimeTrackingReminderInfoBox(
                         this,
                         config,
-                        infoBoxManager,
-                        itemManager,
+                        "belladonna patch",
                         "Your belladonna patch is ready.",
-                        27790, // Nightshade
-                        () -> config.belladonnaPatch() && showInfoboxInInstance() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.BELLADONNA) : farmingTracker.getSummary(Tab.BELLADONNA) != SummaryState.IN_PROGRESS)
+                        itemManager.getImage(ItemID.NIGHTSHADE),
+                        () -> config.belladonnaPatch() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.BELLADONNA) : farmingTracker.getSummary(Tab.BELLADONNA) != SummaryState.IN_PROGRESS)
                 ),
-                new TimeTrackingReminderGroup(
+                new TimeTrackingReminderInfoBox(
                         this,
                         config,
-                        infoBoxManager,
-                        itemManager,
+                        "Crystal patch",
                         "Your Crystal patch is ready.",
-                        23962, // Crystal shard
-                        () -> config.crystalPatch() && showInfoboxInInstance() && (config.onlyHarvestable() ? 
+                        itemManager.getImage(ItemID.CRYSTAL_SHARD),
+                        () -> config.crystalPatch() && (config.onlyHarvestable() ?
                                 farmingTracker.getHarvestable(Tab.CRYSTAL) :
                                 (farmingTracker.getSummary(Tab.CRYSTAL) != SummaryState.IN_PROGRESS && 
                                         farmingTracker.getSummary(Tab.CRYSTAL) != SummaryState.EMPTY)
                         )
                 )
         };
+        for (TimeTrackingReminderInfoBox infoBox : reminderInfoBoxes) {
+            infoBoxManager.addInfoBox(infoBox);
+        }
+
+        groupInfoBox = new TimeTrackingReminderGroupInfoBox(
+                    this,
+                    config,
+                    itemManager.getImage(ItemID.WATCH));
+        infoBoxManager.addInfoBox(groupInfoBox);
     }
 
     @Override
     protected void shutDown() throws Exception {
         log.info("Time Tracking Reminder stopped!");
 
-        for (TimeTrackingReminderGroup reminderGroup : reminderGroups) {
-            reminderGroup.hideInfoBox();
+        for (TimeTrackingReminderInfoBox infoBox : reminderInfoBoxes) {
+            infoBoxManager.removeInfoBox(infoBox);
         }
+        infoBoxManager.removeInfoBox(groupInfoBox);
     }
 
     @Subscribe
@@ -327,13 +320,9 @@ public class TimeTrackingReminderPlugin extends Plugin {
         birdHouseTracker.updateCompletionTime();
         farmingTracker.updateCompletionTime();
         farmingContractManager.handleContractState();
-
-        for (TimeTrackingReminderGroup reminderGroup : reminderGroups) {
-            reminderGroup.onGameTick();
-        }
     }
 
-    private boolean showInfoboxInInstance() {
+    public boolean showInfoboxInInstance() {
         if (!config.showInInstances() && client.isInInstancedRegion()) {
             return false;
         }
