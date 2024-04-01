@@ -264,4 +264,15 @@ public interface TimeTrackingReminderConfig extends Config {
     default boolean allotmentPatches() {
         return true;
     }
+
+    @ConfigItem(
+            keyName = "animapatch",
+            name = "Anima patch",
+            description = "Show an infobox when your anima patch is ready.",
+            section = farmingPatchesSection,
+            position = 216
+    )
+    default boolean animaPatch() {
+        return true;
+    }
 }

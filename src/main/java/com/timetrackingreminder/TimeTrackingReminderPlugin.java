@@ -258,12 +258,20 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 new TimeTrackingReminderInfoBox(
                         this,
                         config,
+                        "Anima patch",
+                        "Your anima patch is ready.",
+                        itemManager.getImage(ItemID.ANIMAINFUSED_BARK),
+                        () -> config.animaPatch() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.ANIMA) : farmingTracker.getSummary(Tab.ANIMA) != SummaryState.IN_PROGRESS)
+                ),
+                new TimeTrackingReminderInfoBox(
+                        this,
+                        config,
                         "Crystal patch",
                         "Your Crystal patch is ready.",
                         itemManager.getImage(ItemID.CRYSTAL_SHARD),
                         () -> config.crystalPatch() && (config.onlyHarvestable() ?
                                 farmingTracker.getHarvestable(Tab.CRYSTAL) :
-                                (farmingTracker.getSummary(Tab.CRYSTAL) != SummaryState.IN_PROGRESS && 
+                                (farmingTracker.getSummary(Tab.CRYSTAL) != SummaryState.IN_PROGRESS &&
                                         farmingTracker.getSummary(Tab.CRYSTAL) != SummaryState.EMPTY)
                         )
                 )
