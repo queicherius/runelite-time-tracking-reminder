@@ -140,6 +140,14 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 new TimeTrackingReminderInfoBox(
                         this,
                         config,
+                        "flower patches",
+                        "Your flower patches are ready.",
+                        itemManager.getImage(ItemID.RED_FLOWERS),
+                        () -> config.flowerPatches() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.FLOWER) : farmingTracker.getSummary(Tab.FLOWER) != SummaryState.IN_PROGRESS)
+                ),
+                new TimeTrackingReminderInfoBox(
+                        this,
+                        config,
                         "tree patches",
                         "Your tree patches are ready.",
                         itemManager.getImage(ItemID.YEW_LOGS),

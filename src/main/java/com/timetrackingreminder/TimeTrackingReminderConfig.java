@@ -264,4 +264,15 @@ public interface TimeTrackingReminderConfig extends Config {
     default boolean allotmentPatches() {
         return true;
     }
+
+    @ConfigItem(
+            keyName = "flowerpatches",
+            name = "Flower patches",
+            description = "Show an infobox when your flower patches are ready.",
+            section = farmingPatchesSection,
+            position = 215
+    )
+    default boolean flowerPatches() {
+        return true;
+    }
 }
