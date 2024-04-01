@@ -100,6 +100,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 compostTracker,
                 paymentTracker
         );
+        farmingTracker.setIgnoreFarmingGuild(config.ignoreFarmingGuild());
 
         farmingContractManager = new FarmingContractManager(
                 client,
@@ -302,11 +303,13 @@ public class TimeTrackingReminderPlugin extends Plugin {
 
     @Subscribe
     public void onConfigChanged(ConfigChanged event) {
-        if (!event.getGroup().equals(TimeTrackingConfig.CONFIG_GROUP)) {
+        String group = event.getGroup();
+        if (!group.equals(TimeTrackingConfig.CONFIG_GROUP) && !group.equals(TimeTrackingReminderConfig.CONFIG_GROUP)) {
             return;
         }
 
         birdHouseTracker.loadFromConfig();
+        farmingTracker.setIgnoreFarmingGuild(config.ignoreFarmingGuild());
         farmingTracker.loadCompletionTimes();
         farmingContractManager.loadContractFromConfig();
     }
