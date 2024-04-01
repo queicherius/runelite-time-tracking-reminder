@@ -268,7 +268,7 @@ public interface TimeTrackingReminderConfig extends Config {
     @ConfigItem(
             keyName = "animapatch",
             name = "Anima patch",
-            description = "Show an infobox when your anima patch is ready.",
+            description = "Show an infobox when your anima patch is ready to be replaced.",
             section = farmingPatchesSection,
             position = 216
     )

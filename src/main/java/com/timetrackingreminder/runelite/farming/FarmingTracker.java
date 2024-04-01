@@ -582,7 +582,7 @@ public class FarmingTracker
 		return customizedTabData.entrySet();
 	}
 
-	// Build or own copy of FarmingWorld's Tab->FarmingPatch map to allow customizations
+	// Build our own copy of FarmingWorld's Tab->FarmingPatch map to allow customizations
 	private Map<Tab, Set<FarmingPatch>> buildCustomTabData() {
 		Map<Tab, Set<FarmingPatch>> customTabData = new HashMap<>();
 

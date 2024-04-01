@@ -259,9 +259,9 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         this,
                         config,
                         "Anima patch",
-                        "Your anima patch is ready.",
+                        "Your anima patch is ready for replacement.",
                         itemManager.getImage(ItemID.ANIMAINFUSED_BARK),
-                        () -> config.animaPatch() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.ANIMA) : farmingTracker.getSummary(Tab.ANIMA) != SummaryState.IN_PROGRESS)
+                        () -> config.animaPatch() && farmingTracker.getSummary(Tab.ANIMA) != SummaryState.IN_PROGRESS
                 ),
                 new TimeTrackingReminderInfoBox(
                         this,
