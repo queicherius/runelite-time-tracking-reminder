@@ -7,6 +7,8 @@ import net.runelite.client.config.ConfigSection;
 
 @ConfigGroup("timetrackingreminder")
 public interface TimeTrackingReminderConfig extends Config {
+    String CONFIG_GROUP = "timetrackingreminder";
+
     @ConfigSection(
             name = "Miscellaneous",
             description = "Settings for miscellaneous infoboxes",
@@ -61,6 +63,16 @@ public interface TimeTrackingReminderConfig extends Config {
     )
     default boolean onlyHarvestable() {
         return false;
+    }
+
+    @ConfigItem(
+            keyName = "ignorefarmingguild",
+            name = "Ignore Farming Guild",
+            description = "Ignore patches in the farming guild when determining what to show.",
+            position = 5
+    )
+    default boolean ignoreFarmingGuild() {
+        return true;
     }
 
     // -- Miscellaneous infoboxes ---
@@ -262,6 +274,17 @@ public interface TimeTrackingReminderConfig extends Config {
             position = 214
     )
     default boolean allotmentPatches() {
+        return true;
+    }
+
+    @ConfigItem(
+            keyName = "flowerpatches",
+            name = "Flower patches",
+            description = "Show an infobox when your flower patches are ready.",
+            section = farmingPatchesSection,
+            position = 215
+    )
+    default boolean flowerPatches() {
         return true;
     }
 

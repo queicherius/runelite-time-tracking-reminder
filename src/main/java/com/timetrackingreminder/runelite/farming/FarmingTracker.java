@@ -29,23 +29,14 @@ package com.timetrackingreminder.runelite.farming;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.inject.Singleton;
 import java.time.Instant;
-import java.util.Collection;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-import java.util.HashSet;
+import java.util.*;
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.Client;
-import net.runelite.api.GameState;
-import net.runelite.api.Varbits;
-import net.runelite.api.WidgetNode;
+import net.runelite.api.*;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.widgets.WidgetModalMode;
 import net.runelite.client.Notifier;
@@ -64,6 +55,19 @@ import net.runelite.client.util.Text;
 )
 public class FarmingTracker
 {
+	private final int FARMING_GUILD_REGION_ID = 4922;
+
+	// Categories of patches that exist both within and outside the farming guild, thus effected by the ignore flag
+	private final Set<Tab> FARMING_GUILD_EFFECTED_TABS = new HashSet<Tab>(Arrays.asList(
+			Tab.ALLOTMENT,
+			Tab.FLOWER,
+			Tab.HERB,
+			Tab.TREE,
+			Tab.FRUIT_TREE,
+			Tab.BUSH,
+			Tab.CACTUS
+	));
+
 	private final Client client;
 	private final ItemManager itemManager;
 	private final ConfigManager configManager;
@@ -88,6 +92,9 @@ public class FarmingTracker
 	private boolean newRegionLoaded;
 	private Collection<FarmingRegion> lastRegions;
 	private boolean firstNotifyCheck = true;
+
+	@Setter
+	private boolean ignoreFarmingGuild = false;
 
 	public FarmingTabPanel createTabPanel(Tab tab, FarmingContractManager farmingContractManager)
 	{
@@ -445,6 +452,10 @@ public class FarmingTracker
 
 			for (FarmingPatch patch : tab.getValue())
 			{
+				if (shouldSkipFarmingGuildPatch(tab.getKey(), patch)) {
+					continue;
+				}
+
 				PatchPrediction prediction = predictPatch(patch);
 				if (prediction == null || prediction.getProduce().getItemID() < 0)
 				{
@@ -471,7 +482,7 @@ public class FarmingTracker
 					{
 						isHarvestable = prediction.getStage() == (prediction.getStages() - 1);
 					}
-					else if (prediction.getCropState() == CropState.HARVESTABLE)
+					else if (prediction.getCropState() == CropState.HARVESTABLE || prediction.getCropState() == CropState.DEAD)
 					{
 						PatchImplementation patchImplementation = prediction.getProduce().getPatchImplementation();
 						if (patchImplementation.equals(PatchImplementation.BUSH)
@@ -689,5 +700,11 @@ public class FarmingTracker
 			.append('.');
 
 		notifier.notify(stringBuilder.toString());
+	}
+
+	private boolean shouldSkipFarmingGuildPatch(Tab tab, FarmingPatch patch) {
+		boolean isFarmingGuildEffectedTab = FARMING_GUILD_EFFECTED_TABS.contains(tab);
+		boolean isFarmingGuildPatch = patch.getRegion().getRegionID() == FARMING_GUILD_REGION_ID;
+		return ignoreFarmingGuild && isFarmingGuildEffectedTab && isFarmingGuildPatch;
 	}
 }

@@ -102,6 +102,7 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 compostTracker,
                 paymentTracker
         );
+        farmingTracker.setIgnoreFarmingGuild(config.ignoreFarmingGuild());
 
         farmingContractManager = new FarmingContractManager(
                 client,
@@ -138,6 +139,14 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         "Your allotment patches are ready.",
                         itemManager.getImage(ItemID.CABBAGE),
                         () -> config.allotmentPatches() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.ALLOTMENT) : farmingTracker.getSummary(Tab.ALLOTMENT) != SummaryState.IN_PROGRESS)
+                ),
+                new TimeTrackingReminderInfoBox(
+                        this,
+                        config,
+                        "flower patches",
+                        "Your flower patches are ready.",
+                        itemManager.getImage(ItemID.RED_FLOWERS),
+                        () -> config.flowerPatches() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.FLOWER) : farmingTracker.getSummary(Tab.FLOWER) != SummaryState.IN_PROGRESS)
                 ),
                 new TimeTrackingReminderInfoBox(
                         this,
@@ -314,11 +323,13 @@ public class TimeTrackingReminderPlugin extends Plugin {
 
     @Subscribe
     public void onConfigChanged(ConfigChanged event) {
-        if (!event.getGroup().equals(TimeTrackingConfig.CONFIG_GROUP)) {
+        String group = event.getGroup();
+        if (!group.equals(TimeTrackingConfig.CONFIG_GROUP) && !group.equals(TimeTrackingReminderConfig.CONFIG_GROUP)) {
             return;
         }
 
         birdHouseTracker.loadFromConfig();
+        farmingTracker.setIgnoreFarmingGuild(config.ignoreFarmingGuild());
         farmingTracker.loadCompletionTimes();
         farmingContractManager.loadContractFromConfig();
     }
