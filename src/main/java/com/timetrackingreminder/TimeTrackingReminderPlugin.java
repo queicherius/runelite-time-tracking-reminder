@@ -22,6 +22,8 @@ import net.runelite.client.plugins.timetracking.SummaryState;
 import net.runelite.client.plugins.timetracking.TimeTrackingConfig;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 
+import java.awt.*;
+
 @Slf4j
 @PluginDescriptor(
         name = "Time Tracking Reminder",
@@ -261,7 +263,9 @@ public class TimeTrackingReminderPlugin extends Plugin {
                         "Anima patch",
                         "Your anima patch is ready for replacement.",
                         itemManager.getImage(ItemID.ANIMAINFUSED_BARK),
-                        () -> config.animaPatch() && farmingTracker.getSummary(Tab.ANIMA) != SummaryState.IN_PROGRESS
+                        () -> config.animaPatch() && farmingTracker.getSummary(Tab.ANIMA) != SummaryState.IN_PROGRESS,
+                        "Dead",
+                        Color.RED
                 ),
                 new TimeTrackingReminderInfoBox(
                         this,
