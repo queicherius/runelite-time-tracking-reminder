@@ -15,6 +15,8 @@ class TimeTrackingReminderInfoBox extends InfoBox {
     private final BooleanSupplier shouldShowInfoBox;
     @Getter
     private final String shortName;
+    private String overrideMessage;
+    private Color overrideColor;
 
     TimeTrackingReminderInfoBox(
             TimeTrackingReminderPlugin plugin,
@@ -32,6 +34,21 @@ class TimeTrackingReminderInfoBox extends InfoBox {
         this.shouldShowInfoBox = shouldShowInfoBox;
     }
 
+    TimeTrackingReminderInfoBox(
+            TimeTrackingReminderPlugin plugin,
+            TimeTrackingReminderConfig config,
+            String shortName,
+            String tooltip,
+            BufferedImage image,
+            BooleanSupplier shouldShowInfoBox,
+            String overrideMessage,
+            Color overrideColor
+    ) {
+        this(plugin, config, shortName, tooltip, image, shouldShowInfoBox);
+        this.overrideMessage = overrideMessage;
+        this.overrideColor = overrideColor;
+    }
+
     @Override
     public String getName() {
         String id = tooltip.toLowerCase().replaceAll("\\W+", "_");
@@ -40,12 +57,12 @@ class TimeTrackingReminderInfoBox extends InfoBox {
 
     @Override
     public String getText() {
-        return config.customMessage();
+        return overrideMessage != null ? overrideMessage : config.customMessage();
     }
 
     @Override
     public Color getTextColor() {
-        return Color.GREEN;
+        return overrideColor != null ? overrideColor : Color.GREEN;
     }
 
     @Override

@@ -22,6 +22,8 @@ import net.runelite.client.plugins.timetracking.SummaryState;
 import net.runelite.client.plugins.timetracking.TimeTrackingConfig;
 import net.runelite.client.ui.overlay.infobox.InfoBoxManager;
 
+import java.awt.*;
+
 @Slf4j
 @PluginDescriptor(
         name = "Time Tracking Reminder",
@@ -267,12 +269,22 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 new TimeTrackingReminderInfoBox(
                         this,
                         config,
+                        "Anima patch",
+                        "Your anima patch is ready for replacement.",
+                        itemManager.getImage(ItemID.ANIMAINFUSED_BARK),
+                        () -> config.animaPatch() && farmingTracker.getSummary(Tab.ANIMA) != SummaryState.IN_PROGRESS,
+                        "Dead",
+                        Color.RED
+                ),
+                new TimeTrackingReminderInfoBox(
+                        this,
+                        config,
                         "Crystal patch",
                         "Your Crystal patch is ready.",
                         itemManager.getImage(ItemID.CRYSTAL_SHARD),
                         () -> config.crystalPatch() && (config.onlyHarvestable() ?
                                 farmingTracker.getHarvestable(Tab.CRYSTAL) :
-                                (farmingTracker.getSummary(Tab.CRYSTAL) != SummaryState.IN_PROGRESS && 
+                                (farmingTracker.getSummary(Tab.CRYSTAL) != SummaryState.IN_PROGRESS &&
                                         farmingTracker.getSummary(Tab.CRYSTAL) != SummaryState.EMPTY)
                         )
                 )

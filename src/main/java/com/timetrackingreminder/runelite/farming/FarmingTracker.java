@@ -87,6 +87,8 @@ public class FarmingTracker
 	private final Map<Tab, Long> completionTimes = new EnumMap<>(Tab.class);
 	Map<ProfilePatch, Boolean> wasNotified = new HashMap<>();
 
+	private Map<Tab, Set<FarmingPatch>> customizedTabData = null;
+
 	private boolean newRegionLoaded;
 	private Collection<FarmingRegion> lastRegions;
 	private boolean firstNotifyCheck = true;
@@ -440,7 +442,7 @@ public class FarmingTracker
 	 */
 	public void updateCompletionTime()
 	{
-		for (Map.Entry<Tab, Set<FarmingPatch>> tab : farmingWorld.getTabs().entrySet())
+		for (Map.Entry<Tab, Set<FarmingPatch>> tab : getTabData())
 		{
 			long extremumCompletionTime = config.preferSoonest() ? Long.MAX_VALUE : 0;
 			boolean allUnknown = true;
@@ -548,7 +550,7 @@ public class FarmingTracker
 			Integer offsetPrecisionMins = configManager.getConfiguration(TimeTrackingConfig.CONFIG_GROUP, profile.getKey(), TimeTrackingConfig.FARM_TICK_OFFSET_PRECISION, int.class);
 			Integer offsetTimeMins = configManager.getConfiguration(TimeTrackingConfig.CONFIG_GROUP, profile.getKey(), TimeTrackingConfig.FARM_TICK_OFFSET, int.class);
 
-			for (Map.Entry<Tab, Set<FarmingPatch>> tab : farmingWorld.getTabs().entrySet())
+			for (Map.Entry<Tab, Set<FarmingPatch>> tab : getTabData())
 			{
 				for (FarmingPatch patch : tab.getValue())
 				{
@@ -582,6 +584,39 @@ public class FarmingTracker
 			}
 		}
 		firstNotifyCheck = false;
+	}
+
+	private Set<Map.Entry<Tab, Set<FarmingPatch>>> getTabData() {
+		if (customizedTabData == null) {
+			customizedTabData = buildCustomTabData();
+		}
+		return customizedTabData.entrySet();
+	}
+
+	// Build our own copy of FarmingWorld's Tab->FarmingPatch map to allow customizations
+	private Map<Tab, Set<FarmingPatch>> buildCustomTabData() {
+		Map<Tab, Set<FarmingPatch>> customTabData = new HashMap<>();
+
+		Map<Tab, Set<FarmingPatch>> vanillaTabData = farmingWorld.getTabs();
+		for (Tab defaultTab : vanillaTabData.keySet()) {
+			for (FarmingPatch patch : vanillaTabData.get(defaultTab)) {
+				Tab tab = determineTabForPatch(patch, defaultTab);
+				{
+					Set<FarmingPatch> values = customTabData.getOrDefault(tab, new HashSet<>());
+					values.add(patch);
+					customTabData.put(tab, values);
+				}
+			}
+		}
+
+		return customTabData;
+	}
+
+	private Tab determineTabForPatch(FarmingPatch patch, Tab defaultTab) {
+		if (patch.getImplementation() == PatchImplementation.ANIMA) {
+			return Tab.ANIMA;
+		}
+		return defaultTab;
 	}
 
 	@VisibleForTesting

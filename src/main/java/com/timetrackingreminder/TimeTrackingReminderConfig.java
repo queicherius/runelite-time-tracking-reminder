@@ -287,4 +287,15 @@ public interface TimeTrackingReminderConfig extends Config {
     default boolean flowerPatches() {
         return true;
     }
+
+    @ConfigItem(
+            keyName = "animapatch",
+            name = "Anima patch",
+            description = "Show an infobox when your anima patch is ready to be replaced.",
+            section = farmingPatchesSection,
+            position = 216
+    )
+    default boolean animaPatch() {
+        return true;
+    }
 }

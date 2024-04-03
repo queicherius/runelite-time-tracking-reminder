@@ -29,7 +29,11 @@ public enum Tab {
     CACTUS("Cactus Patches", ItemID.POTATO_CACTUS),
     HESPORI("Hespori Patch", ItemID.TANGLEROOT),
     CRYSTAL("Crystal Patch", ItemID.CRYSTAL_SHARD),
-    TIME_OFFSET("Farming Tick Offset", ItemID.WATERING_CAN);
+    TIME_OFFSET("Farming Tick Offset", ItemID.WATERING_CAN),
+
+    // Custom Tabs
+    ANIMA("Anima Patch", ItemID.ANIMAINFUSED_BARK)
+    ;
 
     public static final Tab[] FARMING_TABS = {HERB, TREE, FRUIT_TREE, SPECIAL, FLOWER, ALLOTMENT, BUSH, GRAPE, HOPS, CRYSTAL};
 
