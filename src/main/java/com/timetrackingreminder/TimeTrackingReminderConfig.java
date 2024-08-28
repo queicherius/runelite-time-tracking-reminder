@@ -157,6 +157,17 @@ public interface TimeTrackingReminderConfig extends Config {
     }
 
     @ConfigItem(
+            keyName = "celastrusPatch",
+            name = "Celastrus patch",
+            description = "Show an infobox when your celastrus patch is ready.",
+            section = farmingPatchesSection,
+            position = 204
+    )
+    default boolean celastrusPatch() {
+        return true;
+    }
+
+    @ConfigItem(
             keyName = "hardwoodpatches",
             name = "Hardwood patches",
             description = "Show an infobox when your hardwood patches are ready.",

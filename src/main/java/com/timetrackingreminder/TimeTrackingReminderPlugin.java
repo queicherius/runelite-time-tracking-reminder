@@ -221,6 +221,14 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 new TimeTrackingReminderInfoBox(
                         this,
                         config,
+                        "celastrus patch",
+                        "Your celastrus patch is ready.",
+                        itemManager.getImage(ItemID.CELASTRUS_BARK),
+                        () -> config.celastrusPatch() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.CELASTRUS) : farmingTracker.getSummary(Tab.CELASTRUS) != SummaryState.IN_PROGRESS)
+                ),
+                new TimeTrackingReminderInfoBox(
+                        this,
+                        config,
                         "hardwood patches",
                         "Your hardwood patches are ready.",
                         itemManager.getImage(ItemID.TEAK_LOGS),
