@@ -2494,7 +2494,7 @@ public enum PatchImplementation
 				return null;
 			}
 		},
-	CELASTRUS(Tab.FRUIT_TREE, "Celastrus", true)
+	CELASTRUS(Tab.CELASTRUS, "Celastrus", true)
 		{
 			@Override
 			PatchState forVarbitValue(int value)
