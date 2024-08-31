@@ -24,7 +24,7 @@ public enum Tab {
     BIG_COMPOST("Giant Compost Bin", ItemID.ULTRACOMPOST),
     SEAWEED("Seaweed Patches", ItemID.GIANT_SEAWEED),
     CALQUAT("Calquat Patch", ItemID.CALQUAT_FRUIT),
-    CELASTRUS("Celastrus Patch", ItemID.CELASTRUS_BARK),
+    CELASTRUS("Celastrus Patch", ItemID.BATTLESTAFF),
     HARDWOOD("Hardwood Patches", ItemID.TEAK_LOGS),
     REDWOOD("Redwood Patch", ItemID.REDWOOD_LOGS),
     CACTUS("Cactus Patches", ItemID.POTATO_CACTUS),
