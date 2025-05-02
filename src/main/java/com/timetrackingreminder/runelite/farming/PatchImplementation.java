@@ -564,12 +564,12 @@ public enum PatchImplementation
 				if (value >= 60 && value <= 63)
 				{
 					// Herbs[Inspect,Guide] 8139,8140,8141,8142
-					return new PatchState(Produce.HUASCA, CropState.GROWING, 63 - value);
+					return new PatchState(Produce.HUASCA, CropState.GROWING, value - 60);
 				}
 				if (value >= 64 && value <= 66)
 				{
 					// Herbs[Pick,Inspect,Guide] 8143,8143,8143
-					return new PatchState(Produce.HUASCA, CropState.HARVESTABLE, value - 64);
+					return new PatchState(Produce.HUASCA, CropState.HARVESTABLE, 66 - value);
 				}
 				if (value >= 68 && value <= 71)
 				{
