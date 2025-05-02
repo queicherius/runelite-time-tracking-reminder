@@ -90,6 +90,7 @@ public enum Produce
 	LANTADYME("Lantadyme", PatchImplementation.HERB, ItemID.LANTADYME, 20, 5, 0, 3),
 	DWARF_WEED("Dwarf weed", PatchImplementation.HERB, ItemID.DWARF_WEED, 20, 5, 0, 3),
 	TORSTOL("Torstol", PatchImplementation.HERB, ItemID.TORSTOL, 20, 5, 0, 3),
+	HUASCA("Huasca", PatchImplementation.HERB, ItemID.HUASCA, 20, 5, 0, 3),
 	GOUTWEED("Goutweed", PatchImplementation.HERB, ItemID.GOUTWEED, 20, 5, 0, 2),
 	ANYHERB("Any herb", PatchImplementation.HERB, ItemID.GUAM_LEAF, 20, 5, 0, 3),
 
