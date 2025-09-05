@@ -18,7 +18,7 @@ Current supported infoboxes, can be individually enabled and disabled:
   - Fruit tree patches
   - Celastrus patch
   - Hardwood patches
-  - Calquat patch
+  - Calquat patches
   - Redwood patch
   - Crystal tree patch
   - Seaweed patches

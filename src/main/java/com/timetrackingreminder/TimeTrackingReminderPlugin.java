@@ -213,10 +213,10 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 new TimeTrackingReminderInfoBox(
                         this,
                         config,
-                        "calquat patch",
-                        "Your calquat patch is ready.",
+                        "calquat patches",
+                        "Your calquat patches are ready.",
                         itemManager.getImage(ItemID.CALQUAT_FRUIT),
-                        () -> config.calquatPatch() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.CALQUAT) : farmingTracker.getSummary(Tab.CALQUAT) != SummaryState.IN_PROGRESS)
+                        () -> config.calquatPatches() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.CALQUAT) : farmingTracker.getSummary(Tab.CALQUAT) != SummaryState.IN_PROGRESS)
                 ),
                 new TimeTrackingReminderInfoBox(
                         this,
