@@ -6,6 +6,8 @@ const RUNELITE_PLUGIN_PATH =
   '../runelite/runelite-client/src/main/java/net/runelite/client/plugins/timetracking'
 const RUNELITE_COPY_PATH = 'src/main/java/com/timetrackingreminder/runelite/'
 
+const IGNORED_FILES = ['FarmingTracker.java']
+
 function patchCopiedFiles(search, replace) {
   const files = getDirectoryFiles(RUNELITE_COPY_PATH)
 
@@ -34,7 +36,10 @@ fs.mkdirpSync(`${RUNELITE_COPY_PATH}/hunter/`, { recursive: true })
 fs.mkdirpSync(`${RUNELITE_COPY_PATH}/farming/`, { recursive: true })
 
 console.log('Copying files')
-const copyOptions = { overwrite: true }
+const copyOptions = {
+  overwrite: true,
+  filter: (src) => !IGNORED_FILES.includes(path.basename(src)),
+}
 fs.copySync(`${RUNELITE_PLUGIN_PATH}/hunter/`, `${RUNELITE_COPY_PATH}/hunter/`, copyOptions)
 fs.copySync(`${RUNELITE_PLUGIN_PATH}/farming/`, `${RUNELITE_COPY_PATH}/farming/`, copyOptions)
 
@@ -81,16 +86,16 @@ patchCopiedFiles(
 console.log('Patching files: Update patch implementation')
 patchCopiedFiles('HESPORI(Tab.SPECIAL,', 'HESPORI(Tab.HESPORI,')
 patchCopiedFiles('HARDWOOD_TREE(Tab.TREE,', 'HARDWOOD_TREE(Tab.HARDWOOD,')
-patchCopiedFiles('REDWOOD(Tab.TREE,','REDWOOD(Tab.REDWOOD,')
-patchCopiedFiles('SPIRIT_TREE(Tab.TREE, ','SPIRIT_TREE(Tab.SPECIAL, ')
-patchCopiedFiles('CACTUS(Tab.SPECIAL, ','CACTUS(Tab.CACTUS, ')
-patchCopiedFiles('SEAWEED(Tab.SPECIAL,','SEAWEED(Tab.SEAWEED,')
-patchCopiedFiles('CALQUAT(Tab.FRUIT_TREE,','CALQUAT(Tab.CALQUAT,')
-patchCopiedFiles('CELASTRUS(Tab.FRUIT_TREE,','CELASTRUS(Tab.CELASTRUS,')
-patchCopiedFiles('CRYSTAL_TREE(Tab.FRUIT_TREE, ','CRYSTAL_TREE(Tab.CRYSTAL, ')
-patchCopiedFiles('BIG_COMPOST(Tab.SPECIAL,','BIG_COMPOST(Tab.BIG_COMPOST,')
-patchCopiedFiles('BELLADONNA(Tab.SPECIAL,','BELLADONNA(Tab.BELLADONNA,')
-patchCopiedFiles('MUSHROOM(Tab.SPECIAL,','MUSHROOM(Tab.MUSHROOM,')
+patchCopiedFiles('REDWOOD(Tab.TREE,', 'REDWOOD(Tab.REDWOOD,')
+patchCopiedFiles('SPIRIT_TREE(Tab.TREE, ', 'SPIRIT_TREE(Tab.SPECIAL, ')
+patchCopiedFiles('CACTUS(Tab.SPECIAL, ', 'CACTUS(Tab.CACTUS, ')
+patchCopiedFiles('SEAWEED(Tab.SPECIAL,', 'SEAWEED(Tab.SEAWEED,')
+patchCopiedFiles('CALQUAT(Tab.FRUIT_TREE,', 'CALQUAT(Tab.CALQUAT,')
+patchCopiedFiles('CELASTRUS(Tab.FRUIT_TREE,', 'CELASTRUS(Tab.CELASTRUS,')
+patchCopiedFiles('CRYSTAL_TREE(Tab.FRUIT_TREE, ', 'CRYSTAL_TREE(Tab.CRYSTAL, ')
+patchCopiedFiles('BIG_COMPOST(Tab.SPECIAL,', 'BIG_COMPOST(Tab.BIG_COMPOST,')
+patchCopiedFiles('BELLADONNA(Tab.SPECIAL,', 'BELLADONNA(Tab.BELLADONNA,')
+patchCopiedFiles('MUSHROOM(Tab.SPECIAL,', 'MUSHROOM(Tab.MUSHROOM,')
 
 console.log('Patching files: Remove config write calls')
 patchCopiedFiles(
@@ -99,7 +104,7 @@ patchCopiedFiles(
 )
 
 console.log('Patching files: Add auto-generation comment')
-patchCopiedFiles(
-  '/*\n * Copyright',
-  '// THIS FILE WAS AUTOMATICALLY GENERATED. DO NOT EDIT IT MANUALLY. SEE README.\n\n/*\n * Copyright'
-)
+const GENERATED_COMMENT =
+  '// THIS FILE WAS AUTOMATICALLY GENERATED. DO NOT EDIT IT MANUALLY. SEE README.\n\n'
+patchCopiedFiles('/*\n * Copyright', GENERATED_COMMENT + '/*\n * Copyright')
+patchCopiedFiles(GENERATED_COMMENT + GENERATED_COMMENT, GENERATED_COMMENT)

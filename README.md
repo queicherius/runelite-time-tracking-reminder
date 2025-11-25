@@ -35,3 +35,8 @@ This plugin inherits the "Prefer soonest completion" setting of the "Time Tracki
 
 - **Checked:** Show an infobox when *any* patches of a specific type are ready
 - **Unchecked:** Show an infobox when *all* patches of a specific type are ready
+
+## Contributing
+
+This plugin is partially generated out of RuneLite sources.
+Please check out the newest RuneLite tag, and run `update.js`. Don't make any changes to files in the `/runelite` folder directly.
