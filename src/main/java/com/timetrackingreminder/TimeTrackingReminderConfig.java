@@ -179,13 +179,13 @@ public interface TimeTrackingReminderConfig extends Config {
     }
 
     @ConfigItem(
-            keyName = "calquatpatch",
-            name = "Calquat patch",
-            description = "Show an infobox when your calquat patch is ready.",
+            keyName = "calquatpatches",
+            name = "Calquat patches",
+            description = "Show an infobox when your calquat patches are ready.",
             section = farmingPatchesSection,
             position = 205
     )
-    default boolean calquatPatch() {
+    default boolean calquatPatches() {
         return true;
     }
 
