@@ -167,6 +167,14 @@ public class TimeTrackingReminderPlugin extends Plugin {
                 new TimeTrackingReminderInfoBox(
                         this,
                         config,
+                        "coral patches",
+                        "Your coral patches are ready.",
+                        itemManager.getImage(ItemID.UMBRAL_CORAL),
+                        () -> config.coralPatches() && (config.onlyHarvestable() ? farmingTracker.getHarvestable(Tab.CORAL) : farmingTracker.getSummary(Tab.CORAL) != SummaryState.IN_PROGRESS)
+                ),
+                new TimeTrackingReminderInfoBox(
+                        this,
+                        config,
                         "seaweed patches",
                         "Your seaweed patches are ready.",
                         itemManager.getImage(ItemID.GIANT_SEAWEED),
