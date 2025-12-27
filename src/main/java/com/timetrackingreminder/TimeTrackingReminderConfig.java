@@ -309,4 +309,13 @@ public interface TimeTrackingReminderConfig extends Config {
     default boolean animaPatch() {
         return true;
     }
+
+    @ConfigItem(
+            keyName = "coralpatches",
+            name = "Coral patches",
+            description = "Show an infobox when your coral patches are ready.",
+            section = farmingPatchesSection,
+            position = 217
+    )
+    default boolean coralPatches() { return true; }
 }

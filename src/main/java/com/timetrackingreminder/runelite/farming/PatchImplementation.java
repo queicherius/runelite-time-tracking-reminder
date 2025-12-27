@@ -2543,7 +2543,7 @@ public enum PatchImplementation
 				return null;
 			}
 		},
-	CORAL(Tab.SPECIAL, "Coral", false)
+	CORAL(Tab.CORAL, "Coral", false)
 		{
 			@Override
 			PatchState forVarbitValue(int value)

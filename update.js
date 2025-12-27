@@ -96,6 +96,7 @@ patchCopiedFiles('CRYSTAL_TREE(Tab.FRUIT_TREE, ', 'CRYSTAL_TREE(Tab.CRYSTAL, ')
 patchCopiedFiles('BIG_COMPOST(Tab.SPECIAL,', 'BIG_COMPOST(Tab.BIG_COMPOST,')
 patchCopiedFiles('BELLADONNA(Tab.SPECIAL,', 'BELLADONNA(Tab.BELLADONNA,')
 patchCopiedFiles('MUSHROOM(Tab.SPECIAL,', 'MUSHROOM(Tab.MUSHROOM,')
+patchCopiedFiles('CORAL(Tab.SPECIAL,', 'CORAL(Tab.CORAL,')
 
 console.log('Patching files: Remove config write calls')
 patchCopiedFiles(
