@@ -318,4 +318,13 @@ public interface TimeTrackingReminderConfig extends Config {
             position = 217
     )
     default boolean coralPatches() { return true; }
+
+    @ConfigItem(
+            keyName = "grapepatches",
+            name = "Grape patches",
+            description = "Show an infobox when your grape patches are ready.",
+            section = farmingPatchesSection,
+            position = 218
+    )
+    default boolean grapePatches() { return true; }
 }
